@@ -1,8 +1,10 @@
 package com.app.parkingmate.event;
 
 import com.app.parkingmate.domain.VO.CouponVO;
+import com.app.parkingmate.domain.VO.CouponlistVO;
 import com.app.parkingmate.domain.VO.EventVO;
 import com.app.parkingmate.mapper.CouponMapper;
+import com.app.parkingmate.mapper.CouponlistMapper;
 import com.app.parkingmate.mapper.EventMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.Date;
+import java.util.List;
 
 
 @SpringBootTest
@@ -20,6 +23,9 @@ public class test {
 
     @Autowired
     private CouponMapper couponMapper;
+
+    @Autowired
+    private CouponlistMapper couponlistMapper;
 
     @Test
     public void insertTest(){
@@ -97,6 +103,22 @@ public class test {
         couponVO.setCouponStatus(1);
 
         couponMapper.updateStatus(couponVO);
+    }
+
+    @Test
+    public void selectByStatus(){
+        couponMapper.selectByCouponStatus();
+    }
+
+    @Test
+    public void insertCouponTest(){
+        List insertList = couponMapper.selectByCouponStatus();
+        CouponlistVO couponlistVO = new CouponlistVO();
+        couponlistVO.setUserId(3);
+        for (int i = 0; i < insertList.size(); i++ ){
+            couponlistVO.setCouponId((Integer) insertList.get(i));
+            couponlistMapper.insert(couponlistVO);
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package com.app.parkingmate.service;
 
+import com.app.parkingmate.domain.DTO.CouponDTO;
 import com.app.parkingmate.domain.VO.CouponlistVO;
 import com.app.parkingmate.repository.CouponlistDAO;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,11 @@ public class CouponlistServiceImpl implements CouponlistService {
     @Override
     public List<CouponlistVO> list(Integer userId) {
         return couponlistDAO.list(userId);
+    }
+
+    @Override
+    public List<CouponDTO> listWithCoupon(Integer userId) {
+        return couponlistDAO.listWithCoupon(userId);
     }
 
     @Override

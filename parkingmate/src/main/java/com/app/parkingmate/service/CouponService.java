@@ -20,4 +20,9 @@ public interface CouponService {
 
     //    쿠폰 status 수정
     public void updateStatus(CouponVO couponVO);
+
+    public List<CouponVO> selectByStatus();
+
+    //    회원가입시 쿠폰 발급
+    public void signUpCoupon(Integer userId);
 }

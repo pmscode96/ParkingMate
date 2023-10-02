@@ -17,6 +17,10 @@
         WHERE ID = #{id}
     </select>
 
+    <select id="selectByCouponStatus" resultType="Integer">
+        SELECT ID FROM TBL_COUPON WHERE COUPON_STATUS = 0
+    </select>
+
     <update id="update">
         UPDATE TBL_COUPON
         SET COUPON_NAME = #{couponName}, COUPON_CONTENT = #{couponContent}, COUPON_DISCOUNT_PERCENT = #{couponDiscountPercent}, COUPON_END_DATE = #{couponEndDate}, UPDATE_DATE = TO_DATE(CURRENT_DATE)

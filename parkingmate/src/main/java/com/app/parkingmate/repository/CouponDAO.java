@@ -29,4 +29,6 @@ public class CouponDAO {
     //    쿠폰 status 수정
     public void updateStatus(CouponVO couponVO){couponMapper.updateStatus(couponVO);}
 
+    public List<CouponVO> listByStatus(){return couponMapper.selectByCouponStatus();}
+
 }

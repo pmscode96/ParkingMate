@@ -11,7 +11,7 @@ import java.util.Date;
 public class UserVO {
 //    회원 고유 id
 //    not null
-    private Integer UserId;
+    private Integer id;
 //    회원 닉네임
 //    not null
     private String UserNickName;

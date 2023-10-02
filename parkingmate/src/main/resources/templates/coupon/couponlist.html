@@ -73,14 +73,14 @@
                                 <dt class="hidden-text">카테고리</dt>
                                 <dd class="parkingmate-coupon-type">이벤트</dd>
                                 <dt class="hidden-text">쿠폰명</dt>
-                                <dd class="parkingmate-coupon-title" th:text="${coupon.couponName}"></dd>
+                                <dd class="parkingmate-coupon-title" th:text="*{couponName}"></dd>
                                 <dt class="hidden-text">할인 정보</dt>
                                 <dd class="parkingmate-coupon-amount">
-                                  <span th:text="${coupon.couponDiscountPercent} + '%'"></span>
+                                  <span th:text="*{couponDiscountPercent} + '%'"></span>
                                 </dd>
                                 <dt class="hidden-text">사용 기간</dt>
                                 <dd>
-                                  <p th:text="|${#dates.format(coupon.couponEndDate, 'yyyy-MM-dd')} 까지 사용 가능|"></p>
+                                  <p th:text="|*{#dates.format(couponEndDate, 'yyyy-MM-dd')} 까지 사용 가능|"></p>
                                 </dd>
                               </dl>
                               <button class="parkingmate-downloadItem-more">
@@ -94,11 +94,11 @@
                                     <tbody>
                                     <tr>
                                       <th scope="row">발급기간</th>
-                                      <td th:text="|${#dates.format(coupon.couponEndDate, 'yyyy-MM-dd')}  까지|"></td>
+                                      <td th:text="|*{#dates.format(couponEndDate, 'yyyy-MM-dd')}  까지|"></td>
                                     </tr>
                                     <tr>
                                       <th scope="row">사용조건</th>
-                                      <td th:text="${coupon.couponUseCondition}"></td>
+                                      <td th:text="*{couponUseCondition}"></td>
                                     </tr>
                                     </tbody>
                                   </table>
@@ -106,7 +106,7 @@
                               </div>
                             </div>
                             <form th:action="@{/coupon/couponlist}"  method="post">
-                              <input type="hidden" name="id" th:value="${coupon.id}">
+                              <input type="hidden" name="id" th:value="*{id}">
                               <button class="parkingmate-coupon-download-button" >
                                 <span>
                                   <span class="parkingmate-button-children">

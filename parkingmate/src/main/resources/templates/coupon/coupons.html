@@ -72,22 +72,23 @@
                 </div>
                 <div class="parkingmate-coupon-list-container-container">
                   <div class="parkingmate-coupon-list-item">
-                    <th:block th:each="couponlist:${couponlists}" th:object="${couponlist}">
+                    <th:block th:each="coupon:${coupons}" th:object="${coupon}">
                       <div class="parkingmate-coupon-list-item-container">
                       <p class="parkingmate-coupon-list-item-campaign">스토어</p>
                       <div class="parkingmate-coupon-item-container">
                         <dl>
                           <dd class="parkingmate-discount-rate">
-                            <span class="parkingmate-discount-rate-text" th:text="${coupon.couponDiscountPercent} + '%'"></span>
+                            <span class="parkingmate-discount-rate-text" th:text="*{couponDiscountPercent} + '%'"></span>
                           </dd>
-                          <dd class="parkingmate-coupon-dd-text">스토어 8월 보너스 10% 쿠폰</dd>
+                          <dd class="parkingmate-coupon-dd-text" th:text="*{couponContent}"></dd>
                           <dd>
                             <div class="parkingmate-coupon-dd-text-container">
                               <table>
                                 <tbody>
                                   <tr>
                                     <th scope="row">유효기간</th>
-                                    <td>2023.08.28 23시 59분</td>
+                                    <td th:text="*{#dates.format(couponEndDate, 'yyyy.MM.dd HH시 mm분')}">2023.08.28 23시 59분</td>
+
                                   </tr>
                                   <tr>
                                     <th scope="row">사용조건</th>

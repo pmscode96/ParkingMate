@@ -32,8 +32,7 @@ public class CouponController {
 
     @GetMapping("coupons")
     public void goToJoinCoupons(Model model){
-        model.addAttribute("coupons", couponService.list());
-        model.addAttribute("couponlists", couponlistService.list(1));
+        model.addAttribute("coupons", couponlistService.listWithCoupon(1));
 
     }
 
