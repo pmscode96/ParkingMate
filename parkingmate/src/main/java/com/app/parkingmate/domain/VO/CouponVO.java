@@ -35,7 +35,13 @@ public class CouponVO {
 //    쿠폰 코드
 //     not null
 //    500자
-    private String couponCode;
+
+    private String CouponCode;
+//    쿠폰 상태
+//    기본 값 : 0
+//    옵션 : 0 - 사용 가능, 1 - 사용 불가
+    private Integer CouponStatus;
+
 //    생성 날짜
     private LocalDateTime createDate;
 //    업데이트 날짜
@@ -47,5 +53,6 @@ public class CouponVO {
 //    이벤트 테이블의 이벤트 고유 id
 //     not null
     private Integer eventId;
+
 
 }

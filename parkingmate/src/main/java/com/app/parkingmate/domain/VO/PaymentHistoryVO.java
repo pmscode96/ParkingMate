@@ -18,10 +18,10 @@ public class PaymentHistoryVO {
 //    결제 취소 일
     private Date PaymentHistoryCancelDate;
 //    결제 상태
-//    기본 값 : 신용 카드 결제
-//    옵션 : 신용 카드, 네이버 페이, 카카오 페이
+//    기본 값 : 0
+//    옵션 : 0 - 신용 카드, 1 - 네이버 페이, 2 - 카카오 페이
 //    not null
-    private String PaymentHistoryStatus;
+    private Integer PaymentHistoryStatus;
 //    생성 날짜
     private LocalDateTime CreateDate;
 //    업데이트 날짜

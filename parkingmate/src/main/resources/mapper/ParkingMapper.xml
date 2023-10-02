@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.parkingmate.mapper.ParkingMapper">
+    <select id="select" resultType="parkingVO">
+        SELECT ID, PARKING_ADDRESS, PARKING_CATEGORY, PARKING_NAME, PARKING_CONTENT, PARKING_GRADE, PARKING_PRICE, PARKING_SPACE_NUMBER, PARKING_USE_COUNT,PARKING_DIBS_STATUS
+        FROM TBL_PARKING
 
+    </select>
+
+<!--    <insert id="insert">-->
+<!--        INSERT INTO TBL_PARKING(ID)-->
+<!--    </insert>-->
+
+<!--    <select id="select" resultType="parkingVO">-->
+<!--        SELECT ID, PARKING_ADDRESS, PARKING_CATEGORY, PARKING_NAME-->
+<!--        FROM TBL_PARKING-->
+<!--        WHERE PARKING_ADDRESS LIKE '%' || #{ParkingAddress, jdbcType=VARCHAR} || '%'-->
+<!--    </select>-->
 </mapper>

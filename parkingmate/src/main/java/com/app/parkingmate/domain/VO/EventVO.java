@@ -14,9 +14,11 @@ public class EventVO {
     private Integer id;
 //    이벤트 상태
 //    not null
-//    기본 값 : 진행 중
-//    옵션 : 진행 중, 종료, 예정
-    private String eventStatus;
+
+//    기본 값 : 0
+//    옵션 : 0 - 진행 중, 1- 종료,  2 - 예정
+    private Integer eventStatus;
+
 //    이벤트 제목
 //    not null
     private String eventTitle;
@@ -35,5 +37,6 @@ public class EventVO {
     private LocalDateTime createDate;
 //    업데이트 날짜
     private LocalDateTime updateDate;
+
 
 }

@@ -65,14 +65,18 @@
 <!--            </div>-->
 <!--          </div>-->
           <div class="parkingmate-SignUpFinish">
-            <button class="parkingmate-back-button">
-              <span>
-                <span class="parkingmate-button-children">
-                  이전 화면으로 돌아가기
+<!--            th:action="@{/login/sign-up-complete}" method="post"-->
+
+              <button type="button" class="parkingmate-back-button" value="history.back()" onclick="history_back()">
+                <span>
+                  <span class="parkingmate-button-children">
+                    이전 화면으로 돌아가기
+                  </span>
                 </span>
-              </span>
-            </button>
-            <a href="/main/main-page-test" class="parkingmate-home-button">
+              </button>
+
+
+            <a th:href="@{/}" href="/main/main-page-test" class="parkingmate-home-button">
               <span>
                 <span class="parkingmate-button-children">
                   홈 화면으로 바로가기
@@ -85,4 +89,15 @@
     </main>
   </div>
 </body>
+  <script>
+    // const button = document.querySelector(".parkingmate-back-button");
+    // const form = document.querySelector(".form");
+    // button.addEventListener("click", (e) => {
+    //   form.submit();
+    // })
+
+    function history_back() {
+      history.back();
+    }
+  </script>
 </html>

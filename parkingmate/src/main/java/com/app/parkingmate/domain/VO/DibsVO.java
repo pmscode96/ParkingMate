@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Component
 @Data
-public class ChoiceVO {
+public class DibsVO {
 //    찜 고유 id
 //     not null
     private Integer ChoiceId;
@@ -15,15 +15,15 @@ public class ChoiceVO {
 //    도시
 //    도시 : (시), (구) 카테고리
 //    500자
-    private  String ChoiceCategory;
+    private  String DibsCategory;
 //   찜 기간
-    private Integer Choice_Period;
+    private Integer DibsPeriod;
 //    재판매 요청
-//    기본 값 : false
-//    Ture : 해당 찜 재판매 요청
-//    False : 해당 찜 재판매 요청 x
+//    기본 값 : 0
+//   1 - Ture : 해당 찜 재판매 요청
+//   0 - False : 해당 찜 재판매 요청 x
 //     not null
-    private Boolean ReChoiceRequest;
+    private Integer ReSaleRequest;
 //    생성 날짜
     private Date CreateDate;
 //    업데이트 날짜

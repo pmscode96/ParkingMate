@@ -22,10 +22,10 @@ public class CarInfoVO {
 //     not null
     private Date CarRegisterDate;
 //    차량 등록 상태
-//    기본 값 : 등록 중
-//    옵션 : 등록, 취소, 알 수 없음
+//    기본 값 : 0
+//    옵션 : 0 - 등록, 1 - 취소, 2 - 알 수 없음
 //     not null
-    private String CarRegisterStatus;
+    private Integer CarRegisterStatus;
 //    생성 날짜
     private LocalDateTime CreateDate;
 //    업데이트 날짜

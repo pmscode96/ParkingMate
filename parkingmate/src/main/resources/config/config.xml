@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0/EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <settings>
+        <setting name="jdbcTypeForNull" value="NULL"/>
+    </settings>
     <typeAliases>
 
         <typeAlias type="com.app.parkingmate.domain.DTO.CarInfoDTO" alias="carInfoDTO" />
@@ -16,7 +19,7 @@
 
         <!--    VO-->
         <typeAlias type="com.app.parkingmate.domain.VO.CarInfoVO" alias="carInfoVO" />
-        <typeAlias type="com.app.parkingmate.domain.VO.ChoiceVO" alias="choiceVO" />
+        <typeAlias type="com.app.parkingmate.domain.VO.DibsVO" alias="choiceVO" />
         <typeAlias type="com.app.parkingmate.domain.VO.CouponVO" alias="couponVO" />
         <typeAlias type="com.app.parkingmate.domain.VO.CouponlistVO" alias="couponlistVO" />
         <typeAlias type="com.app.parkingmate.domain.VO.EventVO" alias="eventVO" />

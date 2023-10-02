@@ -23,9 +23,12 @@ public class ReservationVO {
 //    not null
     private String ReservationNumber;
 //    예약 상태
-//    기본 값 : 결제 중
+//    기본 값 : 0
+//    옵션 : 0 - 결제 중
+//          1 - 결제 완료 
+//          2 - 결제 취소 
 //    not null
-    private String ReservationStatus;
+    private Integer ReservationStatus;
 //    생성 날짜
     private LocalDateTime CreateDate;
 //    업데이트 날짜

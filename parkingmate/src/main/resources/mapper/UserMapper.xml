@@ -2,4 +2,67 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.parkingmate.mapper.UserMapper">
 
+<!--    <insert id="insert">-->
+<!--        INSERT INTO TBL_USER(ID, USER_NAME, USER_PASSWORD, USER_EMAIL, USER_NICKNAME, USER_START_DATE)-->
+<!--        VALUES (SEQ_USER.NEXTVAL, #{UserName}, #{UserPassword}, #{UserEmail}, #{UserNickName}, #{UserStartDate})-->
+<!--    </insert>-->
+
+    <insert id="insert">
+        <choose>
+            <when test="UserPassword == null">
+                INSERT INTO TBL_USER(ID, USER_NICKNAME, USER_SNS_LOGIN_STATUS, KAKAO_EMAIL, USER_PROFILE)
+                VALUES(SEQ_USER.NEXTVAL, #{UserNickName}, #{UserSnsLoginStatus}, #{KakaoEmail}, #{UserProfile})
+            </when>
+            <otherwise>
+                INSERT INTO TBL_USER(ID, USER_EMAIL, USER_PASSWORD, USER_NAME, USER_SNS_LOGIN_STATUS)
+                VALUES(SEQ_USER.NEXTVAL, #{UserEmail}, #{UserPassword}, #{UserName}, #{UserSnsLoginStatus})
+            </otherwise>
+        </choose>
+    </insert>
+
+    <select id="select" resultType="userVO">
+        SELECT ID, USER_NICKNAME, USER_NAME, USER_PASSWORD, USER_EMAIL, USER_PHONE_NUMBER, USER_START_DATE, USER_PROFILE
+        FROM TBL_USER
+        WHERE USER_EMAIL = #{UserEmail}
+    </select>
+
+    <select id="selectMember" resultType="userVO">
+        SELECT ID, USER_NICKNAME, USER_NAME, USER_PASSWORD, USER_EMAIL, USER_PHONE_NUMBER, USER_PROFILE, USER_SNS_LOGIN_STATUS, KAKAO_EMAIL, USER_PROFILE_NAME, USER_PROFILE_PATH
+        FROM TBL_USER
+        WHERE ID = #{Id}
+    </select>
+
+
+    <select id="kakaoSelect" resultType="userVO">
+        SELECT ID, USER_NICKNAME, USER_NAME, USER_PASSWORD, USER_EMAIL, USER_PHONE_NUMBER, USER_PROFILE, USER_SNS_LOGIN_STATUS, KAKAO_EMAIL, USER_PROFILE_NAME, USER_PROFILE_PATH
+        FROM TBL_USER
+        WHERE KAKAO_EMAIL = #{KakaoEmail}
+    </select>
+
+
+    <select id="selectLogin" resultType="userVO">
+        SELECT ID, USER_NICKNAME, USER_NAME, USER_PASSWORD, USER_EMAIL, USER_PHONE_NUMBER, USER_PROFILE, USER_SNS_LOGIN_STATUS, KAKAO_EMAIL, USER_PROFILE_NAME, USER_PROFILE_PATH
+        FROM TBL_USER
+        WHERE USER_EMAIL = #{UserEmail} AND USER_PASSWORD = #{UserPassword}
+    </select>
+
+
+    <update id="updateKaKaoProfile">
+        UPDATE TBL_USER
+        SET USER_PROFILE = #{UserProfile}
+        WHERE KAKAO_EMAIL = #{KakaoEmail}
+    </update>
+
+
+    <update id="updateBySync">
+        UPDATE TBL_USER
+        SET KAKAO_EMAIL = #{KakaoEmail}, USER_PROFILE = #{UserProfile}, USER_SNS_LOGIN_STATUS = 1
+        WHERE ID = #{Id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM TBL_USER
+        WHERE ID = #{Id}
+    </delete>
+
 </mapper>

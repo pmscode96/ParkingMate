@@ -14,10 +14,10 @@ public class UseHistoryVO {
 //    not null
     private Integer UseHistoryId;
 //    이용내역 카테고리
-//    기본 값 : 이용 중
-//    옵션 : 이용 중, 이용 완료, 취소
+//    기본 값 : 0
+//    옵션 : 0 - 이용 중, 1 - 이용 완료, 2 - 취소
 //    not null
-    private String UseHistoryCategory;
+    private Integer UseHistoryCategory;
 //    이용내역 제목
 //    1000자
 //    not null
