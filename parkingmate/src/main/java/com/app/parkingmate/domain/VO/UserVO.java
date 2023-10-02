@@ -3,15 +3,19 @@ package com.app.parkingmate.domain.VO;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
 
 @Component
 @Data
-public class UserVO {
+public class UserVO implements Serializable{
 //    회원 고유 id
 //    not null
-    private Long UserId;
+
+//    private Integer UserId;
+    private Integer Id;
+
 //    회원 닉네임
 //    not null
     private String UserNickName;
@@ -56,5 +60,11 @@ public class UserVO {
     private LocalDateTime CreateDate;
 //    업데이트 날짜
     private LocalDateTime UpdateDate;
+
+    private String KakaoEmail;
+
+    private String UserProfileName;
+
+    private String UserProfilePath;
 
 }

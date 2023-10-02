@@ -56,37 +56,57 @@
               </div>
             </div>
             <div class="form-change"></div>
-            <div class="account-container login-form">
-              <h3 class="signup-title">이메일 간편가입</h3>
-              <div class="email-container">
-                <form>
-                  <div class="email-field">
-                    <label class="email-field-label">이메일</label>
-                    <div class="email-input">
-                      <div class="email-input-field">
-                        <input type="email" placeholder="이메일 계정" class="input-input input-em" aria-invalid="false"/>
-                      </div>
-                      <button class="button-primmary">
+<!--            <form   >-->
+              <div class="account-container login-form">
+                <h3 class="signup-title">이메일 간편가입</h3>
+<!--                <div class="email-container">-->
+<!--                  <form>-->
+<!--                    <div class="email-field">-->
+<!--                      <label class="email-field-label">이메일</label>-->
+<!--                      <div class="email-input">-->
+<!--                        <div class="email-input-field" >-->
+<!--                          <input th:field="*{UserEmail}" type="text" placeholder="이메일 계정" class="input-input input-em" aria-invalid="false"/>-->
+<!--                        </div>-->
+<!--                        <button class="button-primmary">-->
+<!--                        <span>-->
+<!--                          <span class="button-children">인증하기</span>-->
+<!--                        </span>-->
+<!--                        </button>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </form>-->
+<!--                </div>-->
+                <form name="f1" th:action="@{/login/sign-up}" method="post" th:object="${userVO}">
+
+                  <div class="email-container">
+<!--                    <form>-->
+                      <div class="email-field">
+                        <label class="email-field-label">이메일</label>
+                        <div class="email-input">
+                          <div class="email-input-field" >
+                              <input th:field="*{UserEmail}" type="email" placeholder="이메일 계정" class="input-input input-em" aria-invalid="false"/>
+                          </div>
+                          <button class="button-primmary">
                         <span>
                           <span class="button-children">인증하기</span>
                         </span>
-                      </button>
+                          </button>
+                        </div>
+                      </div>
+<!--                    </form>-->
+                  </div>
+
+                  <div class="textfield">
+                    <label>이름</label>
+                    <div class="textfield-field" >
+                      <input th:field="*{UserName}" placeholder="이름 입력" type="text" class="input-input input-name" aria-invalid="false"/>
                     </div>
                   </div>
-                </form>
-              </div>
-              <form>
-                <div class="textfield">
-                  <label>이름</label>
-                  <div class="textfield-field">
-                    <input placeholder="이름 입력" type="text" class="input-input input-name" aria-invalid="false"/>
-                  </div>
-                </div>
-                <div class="textfield">
-                  <label>비밀번호</label>
-                  <div class="textfield-field">
-                    <input name="password" disabled="" placeholder="비밀번호 입력" type="password" class="input-input input-password" aria-invalid="false"/>
-                    <button class="hide-button" type="button">
+                  <div class="textfield">
+                    <label>비밀번호</label>
+                    <div class="textfield-field" >
+                      <input th:field="*{UserPassword}" name="password" placeholder="비밀번호 입력" type="password" class="input-input input-password" aria-invalid="false"/>
+                      <button class="hide-button" type="button">
                       <span>
                         <span class="button-children">
                           <svg viewBox="0 0 48 48" class="withIcon_icon" aria-hidden="true" style="width: 46px; height: 46px">
@@ -94,14 +114,14 @@
                           </svg>
                         </span>
                       </span>
-                    </button>
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div class="textfield2">
-                  <label></label>
-                  <div class="textfield-field">
-                    <input name="verifyPassword" disabled="" placeholder="비밀번호 확인" type="password" class="input-input input-password" aria-invalid="false"/>
-                    <button class="hide-button" type="button">
+                  <div class="textfield2">
+                    <label></label>
+                    <div class="textfield-field">
+                      <input placeholder="비밀번호 확인" type="password" class="input-input input-password" aria-invalid="false"/>
+                      <button class="hide-button" type="button">
                       <span>
                         <span class="button-children">
                           <svg viewBox="0 0 48 48" focusable="false" role="presentation" class="withIcon_icon" aria-hidden="true" style="width: 46px; height: 46px">
@@ -109,26 +129,27 @@
                           </svg>
                         </span>
                       </span>
-                    </button>
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div class="checkbox-container">
-                  <label class="checkbox all-check-label">
-                    <input name="FullAgreement" data-testid="full-agreement-checkbox" type="checkbox" class="Checkbox_input fullAgreement">
+                  <div class="checkbox-container">
+                    <label class="checkbox all-check-label">
+<!--                      name="FullAgreement"-->
+                      <input data-testid="full-agreement-checkbox" type="checkbox" class="Checkbox_input fullAgreement">
                       <span class="Checkbox_icon all-check" aria-hidden="true">
                         <svg viewBox="0 0 16 2" focusable="false" role="presentation" class="withIcon_icon Checkbox_removeIcon" aria-hidden="true"><path fill-rule="evenodd" d="M0 0h16v2H0z"></path></svg>
                         <svg viewBox="0 0 48 48" focusable="false" role="presentation" class="withIcon_icon Checkbox_checkIcon" aria-hidden="true"><path d="M18 39.6L4.8 26.4l3.36-3.36L18 32.76l21.84-21.72 3.36 3.36z"></path></svg>
                       </span>
-                    <span class="Checkbox_content"></span>
-                  </label>
-                  <label class="signup-allcheck">
-                    <p class="signup-allcheck-label">전체동의</p>
-                    <p class="signup-allcheck-text">
-                      회원·서비스(필수), 스타트업찾기 서비스 (선택),
-                      이벤트·혜택알림 동의(선택), 만 14세 이상(필수)
-                    </p>
-                  </label>
-                  <button class="button-text" type="button">
+                      <span class="Checkbox_content"></span>
+                    </label>
+                    <label class="signup-allcheck">
+                      <p class="signup-allcheck-label">전체동의</p>
+                      <p class="signup-allcheck-text">
+                        회원·서비스(필수), 스타트업찾기 서비스 (선택),
+                        이벤트·혜택알림 동의(선택), 만 14세 이상(필수)
+                      </p>
+                    </label>
+                    <button class="button-text" type="button">
                     <span>
                       <span class="button-children">
                         <svg viewBox="0 0 32 32" focusable="false" role="presentation" class="withIcon_icon" aria-hidden="true">
@@ -136,16 +157,107 @@
                         </svg>
                       </span>
                     </span>
+                    </button>
+                  </div>
+                  <div></div>
+                  <button type="button" class="last-button" style="cursor: pointer">
+                    <span>
+                      <span class="button-children">완료</span>
+                    </span>
                   </button>
-                </div>
-                <div></div>
-                <button class="last-button">
-                  <span>
-                    <span class="button-children">완료</span>
-                  </span>
-                </button>
-              </form>
-            </div>
+                </form>
+              </div>
+<!--            </form>-->
+<!--            <div class="account-container login-form">-->
+<!--              <h3 class="signup-title">이메일 간편가입</h3>-->
+<!--              <div class="email-container">-->
+<!--                <form>-->
+<!--                  <div class="email-field">-->
+<!--                    <label class="email-field-label">이메일</label>-->
+<!--                    <div class="email-input">-->
+<!--                      <div class="email-input-field">-->
+<!--                        <input type="email" placeholder="이메일 계정" class="input-input input-em" aria-invalid="false"/>-->
+<!--                      </div>-->
+<!--                      <button class="button-primmary">-->
+<!--                        <span>-->
+<!--                          <span class="button-children">인증하기</span>-->
+<!--                        </span>-->
+<!--                      </button>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </form>-->
+<!--              </div>-->
+<!--              <form>-->
+<!--                <div class="textfield">-->
+<!--                  <label>이름</label>-->
+<!--                  <div class="textfield-field">-->
+<!--                    <input placeholder="이름 입력" type="text" class="input-input input-name" aria-invalid="false"/>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="textfield">-->
+<!--                  <label>비밀번호</label>-->
+<!--                  <div class="textfield-field">-->
+<!--                    <input name="password" disabled="" placeholder="비밀번호 입력" type="password" class="input-input input-password" aria-invalid="false"/>-->
+<!--                    <button class="hide-button" type="button">-->
+<!--                      <span>-->
+<!--                        <span class="button-children">-->
+<!--                          <svg viewBox="0 0 48 48" class="withIcon_icon" aria-hidden="true" style="width: 46px; height: 46px">-->
+<!--                            <path d="M23.589 7.895l.411.001c10.56 0 20.16 6.504 23.34 15.78l.132.432-.144.396c-3.216 9.168-12.816 15.6-23.328 15.6A24.84 24.84 0 0 1 .684 24.492l-.168-.432.156-.42A24.804 24.804 0 0 1 24 7.896zM24 14.46a9.6 9.6 0 1 0 0 19.2 9.6 9.6 0 0 0 0-19.2zm0 4.14a5.4 5.4 0 1 1 0 10.8 5.4 5.4 0 0 1 0-10.8z"></path>-->
+<!--                          </svg>-->
+<!--                        </span>-->
+<!--                      </span>-->
+<!--                    </button>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="textfield2">-->
+<!--                  <label></label>-->
+<!--                  <div class="textfield-field">-->
+<!--                    <input name="verifyPassword" disabled="" placeholder="비밀번호 확인" type="password" class="input-input input-password" aria-invalid="false"/>-->
+<!--                    <button class="hide-button" type="button">-->
+<!--                      <span>-->
+<!--                        <span class="button-children">-->
+<!--                          <svg viewBox="0 0 48 48" focusable="false" role="presentation" class="withIcon_icon" aria-hidden="true" style="width: 46px; height: 46px">-->
+<!--                            <path d="M23.589 7.895l.411.001c10.56 0 20.16 6.504 23.34 15.78l.132.432-.144.396c-3.216 9.168-12.816 15.6-23.328 15.6A24.84 24.84 0 0 1 .684 24.492l-.168-.432.156-.42A24.804 24.804 0 0 1 24 7.896zM24 14.46a9.6 9.6 0 1 0 0 19.2 9.6 9.6 0 0 0 0-19.2zm0 4.14a5.4 5.4 0 1 1 0 10.8 5.4 5.4 0 0 1 0-10.8z"></path>-->
+<!--                          </svg>-->
+<!--                        </span>-->
+<!--                      </span>-->
+<!--                    </button>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="checkbox-container">-->
+<!--                  <label class="checkbox all-check-label">-->
+<!--                    <input name="FullAgreement" data-testid="full-agreement-checkbox" type="checkbox" class="Checkbox_input fullAgreement">-->
+<!--                      <span class="Checkbox_icon all-check" aria-hidden="true">-->
+<!--                        <svg viewBox="0 0 16 2" focusable="false" role="presentation" class="withIcon_icon Checkbox_removeIcon" aria-hidden="true"><path fill-rule="evenodd" d="M0 0h16v2H0z"></path></svg>-->
+<!--                        <svg viewBox="0 0 48 48" focusable="false" role="presentation" class="withIcon_icon Checkbox_checkIcon" aria-hidden="true"><path d="M18 39.6L4.8 26.4l3.36-3.36L18 32.76l21.84-21.72 3.36 3.36z"></path></svg>-->
+<!--                      </span>-->
+<!--                    <span class="Checkbox_content"></span>-->
+<!--                  </label>-->
+<!--                  <label class="signup-allcheck">-->
+<!--                    <p class="signup-allcheck-label">전체동의</p>-->
+<!--                    <p class="signup-allcheck-text">-->
+<!--                      회원·서비스(필수), 스타트업찾기 서비스 (선택),-->
+<!--                      이벤트·혜택알림 동의(선택), 만 14세 이상(필수)-->
+<!--                    </p>-->
+<!--                  </label>-->
+<!--                  <button class="button-text" type="button">-->
+<!--                    <span>-->
+<!--                      <span class="button-children">-->
+<!--                        <svg viewBox="0 0 32 32" focusable="false" role="presentation" class="withIcon_icon" aria-hidden="true">-->
+<!--                          <path d="M16 22.4L5.6 12l1.12-1.12L16 20.16l9.28-9.28L26.4 12 16 22.4z"></path>-->
+<!--                        </svg>-->
+<!--                      </span>-->
+<!--                    </span>-->
+<!--                  </button>-->
+<!--                </div>-->
+<!--                <div></div>-->
+<!--                <button class="last-button">-->
+<!--                  <span>-->
+<!--                    <span class="button-children">완료</span>-->
+<!--                  </span>-->
+<!--                </button>-->
+<!--              </form>-->
+<!--            </div>-->
           </div>
         </div>
       </main>
@@ -274,4 +386,49 @@
     </div>
   </body>
   <script type="text/javascript" src="/js/login/signUp.js"></script>
+  <script>
+      const email = document.querySelector(".input-input input-em");
+      const button1 = document.querySelector(".button-primmary");
+      const d = document.querySelector(".email-input-field");
+      const dis = document.querySelector(".input-input input-password");
+
+      const c = document.querySelector(".textfield-field");
+      d.addEventListener("click", (e) => {
+        button1.style.backgroundColor = 'black';
+        button1.style.cursor = 'pointer';
+      })
+
+
+
+
+      const button2 = document.querySelector('#container-mobile form[name=f1] .last-button');
+      const form = document.querySelector("#container-mobile form[name=f1]");
+      const inputs = document.querySelectorAll("form[name=f1] input");
+      button2.addEventListener("click", (e) => {
+        // e.target.backgroundColor = 'red';
+        for(inp of inputs){
+          if(!inp.value) {
+            return;
+          }
+        }
+        form.submit();
+      })
+
+
+      // function bt(){
+      //
+      //   form.submit();
+      // }
+      //
+      // button2.addEventListener("click", (e) => {
+      //   button2.style.backgroundColor = 'red';
+      //   alert("메세지");
+      //   // for(inp of inputs){
+      //   //   if(!inp.value) {
+      //   //     return;
+      //   //   }
+      //   // }
+      // })
+
+  </script>
 </html>

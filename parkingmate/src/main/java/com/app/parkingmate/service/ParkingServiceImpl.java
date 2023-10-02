@@ -13,6 +13,7 @@ import java.util.List;
 @Slf4j
 public class ParkingServiceImpl implements ParkingService {
     private final ParkingDAO parkingDAO;
+
     @Override
     public List<ParkingVO> getParking(ParkingVO parkingVO) {
 

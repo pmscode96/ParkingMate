@@ -22,7 +22,6 @@ public class MainController {
 
      @GetMapping("/")
     public String goToHome(Model model){
-
          List<ParkingVO> checkParkingName = parkingService.getParking(parkingVO);
          ArrayList<String> list = new ArrayList<>();
 //         parkingService.getParking(parkingVO).stream().map(ParkingVO::toString).forEach(parkings ->list.add(parkings));
