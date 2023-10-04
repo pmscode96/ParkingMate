@@ -277,6 +277,22 @@
 }
 
 
+.parkingmate-footer{
+  background: #fff;
+  padding-top: 120px;
+  color: #212121;
+  font-size: 12px;
+  position: relative;
+}
+
+@supports (padding-bottom: env(safe-area-inset-bottom)){
+  .parkingmate-footer {
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+  }
+}
+
 .parkingmate-footer-button{
   display: flex;
   position: fixed;

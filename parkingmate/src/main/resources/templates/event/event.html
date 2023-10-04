@@ -9,6 +9,7 @@
   <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="/css/fragment/header.css" />
   <link rel="stylesheet" href="/css/fragment/footer.css" />
+  <link rel="stylesheet" href="/css/coupon/coupons.css" />
 </head>
 <body>
   <div id="parkingmate_page-container">
@@ -24,106 +25,28 @@
     <div class="parkingmate_ui-tabs"></div>
     <div class="parkingmate_board-main">
       <ul>
-        <li>
-          <a href="event-detail" class="parkingmate_article">
-            <em class="parkingmate_status closed">진행 중</em>
-            <div class="parkingmate_info">
-              <h3 class="parkingmate_title">[이벤트] 친구초대하고 3,000포인트 받자 </h3>
-              <span class="parkingmate_author">ParkingMate</span>
-              <span class="parkingmate_created-at">2023.08.23</span>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href="event-detail" class="parkingmate_article">
-            <em class="parkingmate_status closed">진행 중</em>
-            <div class="parkingmate_info">
-              <h3 class="parkingmate_title">[이벤트] 지금 회원가입하면? 할인쿠폰 3종 즉시 발급!</h3>
-              <span class="parkingmate_author">ParkingMate</span>
-              <span class="parkingmate_created-at">2023.08.29</span>
-            </div>
-          </a>
-        </li>  
-        <li>
-          <a href="event-detail" class="parkingmate_article">
-            <em class="parkingmate_status closed">진행 중</em>
-            <div class="parkingmate_info">
-              <h3 class="parkingmate_title">[이벤트] 친구초대하고 3,000포인트 받자 </h3>
-              <span class="parkingmate_author">ParkingMate</span>
-              <span class="parkingmate_created-at">2023.08.23</span>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href="event-detail" class="parkingmate_article">
-            <em class="parkingmate_status closed">진행 중</em>
-            <div class="parkingmate_info">
-              <h3 class="parkingmate_title">[이벤트] 지금 회원가입하면? 할인쿠폰 3종 즉시 발급!</h3>
-              <span class="parkingmate_author">ParkingMate</span>
-              <span class="parkingmate_created-at">2023.08.29</span>
-            </div>
-          </a>
-        </li>  
-        <li>
-          <a href="event-detail" class="parkingmate_article">
-            <em class="parkingmate_status closed">진행 중</em>
-            <div class="parkingmate_info">
-              <h3 class="parkingmate_title">[이벤트] 친구초대하고 3,000포인트 받자 </h3>
-              <span class="parkingmate_author">ParkingMate</span>
-              <span class="parkingmate_created-at">2023.08.23</span>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href="event-detail" class="parkingmate_article">
-            <em class="parkingmate_status closed">진행 중</em>
-            <div class="parkingmate_info">
-              <h3 class="parkingmate_title">[이벤트] 지금 회원가입하면? 할인쿠폰 3종 즉시 발급!</h3>
-              <span class="parkingmate_author">ParkingMate</span>
-              <span class="parkingmate_created-at">2023.08.29</span>
-            </div>
-          </a>
-        </li>  
-        <li>
-          <a href="event-detail" class="parkingmate_article">
-            <em class="parkingmate_status closed">진행 중</em>
-            <div class="parkingmate_info">
-              <h3 class="parkingmate_title">[이벤트] 친구초대하고 3,000포인트 받자 </h3>
-              <span class="parkingmate_author">ParkingMate</span>
-              <span class="parkingmate_created-at">2023.08.23</span>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href="event-detail" class="parkingmate_article">
-            <em class="parkingmate_status closed">진행 중</em>
-            <div class="parkingmate_info">
-              <h3 class="parkingmate_title">[이벤트] 지금 회원가입하면? 할인쿠폰 3종 즉시 발급!</h3>
-              <span class="parkingmate_author">ParkingMate</span>
-              <span class="parkingmate_created-at">2023.08.29</span>
-            </div>
-          </a>
-        </li>  
-        <li>
-          <a href="event-detail" class="parkingmate_article">
-            <em class="parkingmate_status closed">진행 중</em>
-            <div class="parkingmate_info">
-              <h3 class="parkingmate_title">[이벤트] 친구초대하고 3,000포인트 받자 </h3>
-              <span class="parkingmate_author">ParkingMate</span>
-              <span class="parkingmate_created-at">2023.08.23</span>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href="event-detail" class="parkingmate_article">
-            <em class="parkingmate_status closed">진행 중</em>
-            <div class="parkingmate_info">
-              <h3 class="parkingmate_title">[이벤트] 지금 회원가입하면? 할인쿠폰 3종 즉시 발급!</h3>
-              <span class="parkingmate_author">ParkingMate</span>
-              <span class="parkingmate_created-at">2023.08.29</span>
-            </div>
-          </a>
-        </li>  
+<!--        th 블록-->
+        <th:block th:if="${#lists.size(events) != 0}">
+          <th:block th:each="event:${events}" th:object="${event}">
+          <li>
+            <form class="goToEventDetail" th:action="@{/event/event}" method="post">
+              <input type="hidden" name="id" th:value="*{id}" >
+            </form>
+            <a  class="parkingmate_article"  onclick="eventSubmit()">
+              <em class="parkingmate_status closed">진행 중</em>
+              <div class="parkingmate_info">
+                <h3 class="parkingmate_title" th:text="*{eventTitle}"></h3>
+                <span class="parkingmate_author">ParkingMate</span>
+                <span class="parkingmate_created-at" th:text=" *{#temporals.format(createDate, 'yyyy-MM-dd')}"></span>
+              </div>
+            </a>
+          </li>
+          </th:block>
+        </th:block>
+<!--        <th:block th:unless="${#lists.size(posts) != 0}">-->
+<!--          <h1>게시글이 없습니다.</h1>-->
+<!--        </th:block>-->
+<!--        -->
       </ul>
     </div>
     <div class="parkingmate_board-footer">
@@ -155,7 +78,7 @@
             </select>
           </div>
           <div class="parkingmate_field">
-            <label class="parkingmate_text-hidden" for="">검색창</label>
+            <label class="parkingmate_text-hidden">검색창</label>
             <input id="searchTextInBoard" name="searchTextInBoard" class="parkingmate_search-form" type="text" value="">
             <button class="parkingmate_btn-search dense" type="submit">검색</button>
           </div>
@@ -170,9 +93,23 @@
       </div>
     </div>
     <div aria-hidden="true" style="position: relative; left: 0px; bottom: 48px; width: 100%;"></div>
+    <th:block th:replace="~{fragment/footer :: footer}"></th:block>
   </main>
-  <th:block th:replace="~{fragment/footer :: footer}"></th:block>
 </body>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="/js/event/event.js"></script>
+<script>
+  let ids = document.querySelectorAll('.goToEventDetail');
+  let buttons = document.querySelectorAll('.parkingmate_article')
+
+  for (let i = 0; i < buttons.length; i++) {
+
+    let button = buttons.item(i);
+    let id = ids.item(i);
+
+    button.addEventListener("click", e =>{
+      id.submit();
+    })
+  }
+</script>
 </html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.parkingmate.mapper.CouponlistMapper">
+    <insert id="insert">
+        INSERT INTO TBL_COUPONLIST (ID, COUPON_ID, USER_ID )
+        VALUES (SEQ_COUPONLIST.NEXTVAL, #{couponId}, #{userId})
+    </insert>
+
+    <select id="selectAll" resultType="Integer">
+        SELECT ID, COUPON_ID, USER_ID
+        FROM TBL_COUPONLIST
+        WHERE USER_ID = #{userId}
+    </select>
+
+    <select id="selectEnabled" resultType="CouponDTO">
+        SELECT LI.ID, COUPON_NAME, COUPON_CONTENT, COUPON_DISCOUNT_PERCENT, COUPON_START_DATE, COUPON_END_DATE, COUPON_USE_CONDITION, COUPON_CODE, LI.COUPON_STATUS, EVENT_ID, LI.COUPON_ID
+        FROM TBL_COUPONLIST LI JOIN HR.TBL_COUPON TC ON TC.ID = LI.COUPON_ID
+        WHERE LI.COUPON_STATUS = 1 AND LI.USER_ID = #{userId}
+    </select>
+
+    <update id="updateStatus">
+        UPDATE TBL_COUPONLIST
+        SET COUPON_STATUS = #{couponStatus}
+        WHERE ID = #{id}
+    </update>
+
+    <select id="selectMyCoupon" resultType="CouponDTO">
+        SELECT LI.ID, COUPON_NAME, COUPON_CONTENT, COUPON_DISCOUNT_PERCENT, COUPON_START_DATE, COUPON_END_DATE, COUPON_USE_CONDITION, COUPON_CODE, LI.COUPON_STATUS, EVENT_ID, LI.COUPON_ID
+        FROM TBL_COUPONLIST LI JOIN HR.TBL_COUPON TC ON TC.ID = LI.COUPON_ID
+        WHERE LI.USER_ID = #{userId}
+    </select>
+</mapper>

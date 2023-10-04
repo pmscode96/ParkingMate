@@ -100,4 +100,8 @@ public class MyPageController {
 
     @GetMapping("usersettings-mobile")
     public void goToUserSettingMobile(){;}
+
+
+
+
 }

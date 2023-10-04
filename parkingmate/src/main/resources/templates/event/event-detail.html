@@ -10,6 +10,7 @@
   <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="/css/fragment/header.css" />
   <link rel="stylesheet" href="/css/fragment/footer.css" />
+  <link rel="stylesheet" href="/css/coupon/coupons.css" />
 </head>
 <body>
   <div id="parkingmate_page-container">
@@ -30,16 +31,19 @@
       <div id="parkingmate_pBoardWrap">
         <div class="parkingmate_pboard-wrap">
           <div class="parkingmate_pboard-detail-content">
-            <div class="parkingmate_article-top">
-              <p class="parkingmate_title">[이벤트] 친구초대하고 3,000포인트 받자</p>
-              <div class="parkingmate_info">
-                <em class="parkingmate_user-img" style="background-image: url(favicon.png);"></em>
-                <span class="parkingmate_user-info">
-                  파킹메이트
-                  <br>2023.08.23
-                </span>
-              </div>
-            </div>
+            <!--        th 블록-->
+              <th:block th:object="${event}">
+                <div class="parkingmate_article-top">
+                  <p class="parkingmate_title" th:text="${session.event.eventTitle}"></p>
+                  <div class="parkingmate_info">
+                    <em class="parkingmate_user-img" style="background-image: url(/images/favicon.png);"></em>
+                    <span class="parkingmate_user-info">파킹메이트<br>2023.08.23</span>
+                    <span th:text="${session.event.eventContent}"></span>
+                  </div>
+                </div>
+              </th:block>
+            <!--        </th:block>-->
+
             <div class="parkingmate_inner-contents">
               <img src="event01.jpg" alt="">
             </div>
@@ -64,7 +68,8 @@
                 <em>이벤트</em>
                  말머리의 다른 게시글
               </p>
-              <div class="parkingmate_pboard-list">
+              <th:block th:object="${event}">
+                <div class="parkingmate_pboard-list">
                 <ul>
                   <li>
                     <a href="">
@@ -81,6 +86,7 @@
                   </li>
                 </ul>
               </div>
+              </th:block>
             </div>
             <div class="parkingmate_pboard-detail-btn-wrap">
               <a class="parkingmate button" href="event" onclick="">목록으로 돌아가기</a>

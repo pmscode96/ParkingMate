@@ -85,7 +85,9 @@
                   <div class="MyParkingMateSupporterProfile_supporterInfo_3zJwW">
                     <!-- 프로필 이미지 -->
                     <div class="MyParkingMateSupporterProfile_profileImage_11ISs">
-                      <button type="button" class="MyParkingMateSupporterProfile_detailProfile_JoIEU" aria-label="프로필 상세 보기" data-event="profile" style="background-image: url(&quot;https://static.wadiz.kr/assets/icon/profile-icon-6.png&quot;);"></button>
+                      <button type="button" class="MyParkingMateSupporterProfile_detailProfile_JoIEU" aria-label="프로필 상세 보기" data-event="profile" style="background-image: url(&quot;https://static.wadiz.kr/assets/icon/profile-icon-6.png&quot;);">
+                        <img th:src="${session.user.UserProfile}">
+                      </button>
                       <!-- 프로필 이미지의 펜 이미지 -->
                       <button type="button" class="MyParkingMateSupporterProfile_editProfile_1Zcs_" data-event="profile_edit" aria-label="프로필 편집하기">
                         <svg viewBox="0 0 32 32" focusable="false" role="presentation" class="withIcon_icon_3VTbq" aria-hidden="true">
@@ -113,6 +115,12 @@
                         </dd>
                       </dl>
                     </div>
+
+                    <a style="width: 50px; height: 20px" th:if="${session.user.kakaoEmail eq null}" href="https://kauth.kakao.com/oauth/authorize?client_id=1fd38d790204d58dbce4c9b70a0f5013&redirect_uri=http://localhost:10000/kakao/login&response_type=code">
+                      <img style="width: 50px; height: 20px; z-index: 500" src="../../static/images/kakao_login_medium_narrow.png" alt="">
+                    </a>
+
+
                   </div>
                   <!-- ::after -->
                 </div>
@@ -302,11 +310,15 @@
                             </span>
                             네이버로 로그인 중
                           </p>
-                          <button class="Button_button_2FuOU Button_md_46Ai- Button_block_1-g8w" type="button">
+
+                          <a href="/login/logout">
+                            <button class="Button_button_2FuOU Button_md_46Ai- Button_block_1-g8w" type="button">
                             <span>
                               <span class="Button_children_ilFun">로그아웃</span>
                             </span>
-                          </button>
+                            </button>
+                          </a>
+
                         </div>
                       </div>
                     </div>
@@ -320,7 +332,9 @@
     </main>
   </div>
 </body>
-<script>
+<script th:inline="javascript">
+  const user = [[${session.user}]];
+
   // 마이페이지 아이콘 클릭 시
   const mypageicon = document.querySelector("#main-app > div.web-header > div > header > div > ul > li:nth-child(5)");
   const linkMyPage = 'mypageMobile.html';

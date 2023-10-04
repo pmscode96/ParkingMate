@@ -1,5 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.parkingmate.mapper.CouponMapper">
+    <insert id="insert">
+        <selectKey keyProperty="id" order="BEFORE" resultType="Integer">
+            SELECT SEQ_COUPON.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO TBL_COUPON (ID, COUPON_NAME, COUPON_CONTENT, COUPON_DISCOUNT_PERCENT, COUPON_START_DATE, COUPON_END_DATE, COUPON_USE_CONDITION, COUPON_CODE, COUPON_STATUS, CREATE_DATE, UPDATE_DATE, EVENT_ID)
+        VALUES (SEQ_COUPON.NEXTVAL, #{couponName}, #{couponContent}, #{couponDiscountPercent},#{couponStartDate}, #{couponEndDate}, #{couponUseCondition}, #{couponCode}, 0 , CURRENT_DATE,CURRENT_DATE , #{eventId})
+    </insert>
 
+    <select id="selectAll" resultType="CouponVO">
+        SELECT ID, COUPON_NAME, COUPON_CONTENT, COUPON_DISCOUNT_PERCENT, COUPON_START_DATE, COUPON_END_DATE, COUPON_USE_CONDITION, COUPON_CODE,COUPON_STATUS, EVENT_ID
+        FROM TBL_COUPON
+    </select>
+
+    <select id="select" resultType="CouponVO">
+        SELECT ID, COUPON_NAME, COUPON_CONTENT, COUPON_DISCOUNT_PERCENT, COUPON_START_DATE, COUPON_END_DATE, COUPON_USE_CONDITION, COUPON_CODE,COUPON_STATUS, EVENT_ID
+        FROM TBL_COUPON
+        WHERE ID = #{id}
+    </select>
+
+    <select id="selectByCouponStatus" resultType="Integer">
+        SELECT ID FROM TBL_COUPON WHERE COUPON_STATUS = 0
+    </select>
+
+    <update id="update">
+        UPDATE TBL_COUPON
+        SET COUPON_NAME = #{couponName}, COUPON_CONTENT = #{couponContent}, COUPON_DISCOUNT_PERCENT = #{couponDiscountPercent}, COUPON_END_DATE = #{couponEndDate}, UPDATE_DATE = TO_DATE(CURRENT_DATE)
+        WHERE ID = #{id}
+    </update>
+
+    <update id="updateStatus">
+        UPDATE TBL_COUPON
+        SET COUPON_STATUS = #{couponStatus} , UPDATE_DATE = TO_DATE(CURRENT_DATE)
+        WHERE ID = #{id}
+    </update>
 </mapper>

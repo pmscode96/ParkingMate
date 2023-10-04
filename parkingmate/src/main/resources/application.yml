@@ -10,7 +10,7 @@ server:
 #    username: hr
 #    password: hr
 
-#MyBatis
+#JDBC
 spring:
   datasource:
     hikari:
@@ -18,3 +18,4 @@ spring:
       jdbc-url: jdbc:oracle:thin:@3.38.149.245:1521:XE
       username: hr
       password: hr
+

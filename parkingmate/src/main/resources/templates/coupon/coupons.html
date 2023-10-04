@@ -42,12 +42,12 @@
               <ul>
                 <li>
                   <a href="coupons" class="parkingmate-coupon-header-link link-active">
-                    나의 쿠폰<em>2</em>
+                    나의 쿠폰<em th:text="${#lists.size(enabledList)}"></em>
                   </a>
                 </li>
                 <li>
                   <a href="couponlist" class="parkingmate-coupon-header-link">
-                    쿠폰존<em>3</em>
+                    쿠폰존<em th:text="${#lists.size(coupons)}"></em>
                   </a>
                 </li>
               </ul>
@@ -57,7 +57,7 @@
             <div class="parkingmate-coupon-wrapper">
               <div class="parkingmate-myCoupon-header">
                 <strong class="parkingmate-coupon-title">
-                  현재 사용가능 쿠폰 <span>2장</span>
+                  현재 사용가능 쿠폰 <span th:text="|${#lists.size(enabledList)}장|"></span>
                 </strong>
                 <p>
                   현재 사용가능한 쿠폰 내역 입니다.<br>
@@ -72,25 +72,26 @@
                 </div>
                 <div class="parkingmate-coupon-list-container-container">
                   <div class="parkingmate-coupon-list-item">
-                    <div class="parkingmate-coupon-list-item-container">
-                      <p class="parkingmate-coupon-list-item-campaign">스토어</p>
+                    <th:block th:each="coupon:${enabledList}" th:object="${coupon}">
+                      <div class="parkingmate-coupon-list-item-container">
+<!--                      <p class="parkingmate-coupon-list-item-campaign">스토어</p>-->
                       <div class="parkingmate-coupon-item-container">
                         <dl>
                           <dd class="parkingmate-discount-rate">
-                            <span class="parkingmate-discount-rate-text">10%</span>
+                            <span class="parkingmate-discount-rate-text" th:text="*{couponDiscountPercent} + '%'"></span>
                           </dd>
-                          <dd class="parkingmate-coupon-dd-text">스토어 8월 보너스 10% 쿠폰</dd>
+                          <dd class="parkingmate-coupon-dd-text" th:text="*{couponContent}"></dd>
                           <dd>
                             <div class="parkingmate-coupon-dd-text-container">
                               <table>
                                 <tbody>
                                   <tr>
                                     <th scope="row">유효기간</th>
-                                    <td>2023.08.28 23시 59분</td>
+                                    <td th:text="*{#dates.format(couponEndDate, 'yyyy.MM.dd')}"></td>
                                   </tr>
                                   <tr>
                                     <th scope="row">사용조건</th>
-                                    <td>60,000원 이상 상품 구매 시<br>최대 50,000원 할인 가능</td>
+                                    <td th:text="*{couponUseCondition}"></td>
                                   </tr>
                                 </tbody>
                               </table>
@@ -99,41 +100,7 @@
                         </dl>
                       </div>
                     </div>
-                    <div class="parkingmate-coupon-list-item-container">
-                      <p class="parkingmate-coupon-list-item-campaign">스토어</p>
-                      <div class="parkingmate-coupon-item-container">
-                        <dl>
-                          <dd class="parkingmate-discount-rate">
-                            <span class="parkingmate-discount-rate-text">7,000원</span>
-                          </dd>
-                          <dd class="parkingmate-coupon-dd-text">스토어 가을의발견 7천원 쿠폰</dd>
-                          <dd>
-                            <div class="parkingmate-coupon-dd-text-container">
-                              <table>
-                                <tbody>
-                                  <tr>
-                                    <th scope="row">유효기간</th>
-                                    <td>2023.08.31 23시 59분</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">사용조건</th>
-                                    <td>100,000원 이상 상품 구매 시
-                                  </tr>
-<!--                                  <tr>-->
-<!--                                    <th scope="row">적용대상</th>-->
-<!--                                    <td>-->
-<!--                                      <p>-->
-<!--                                        <a href="" class="parkingmate-coupon-dd-link">가을의 발견<svg viewBox="0 0 24 24" fill="none" focusable="false" role="presentation" class="parkingmate-coupon-dd-link-svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.924 2.576l-.848.848L15.65 12l-8.575 8.576.848.848L17.35 12 7.924 2.576z"></path></svg></a>-->
-<!--                                      </p>-->
-<!--                                    </td>-->
-<!--                                  </tr>-->
-                                </tbody>
-                              </table>
-                            </div>
-                          </dd>
-                        </dl>
-                      </div>
-                    </div>
+                    </th:block>
                   </div>
                 </div>
               </div>
