@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.User;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -63,4 +64,7 @@ public class UserDAO {
 ////        Optional<UserVO> member = userMapper.select(Id);
 //        return userMapper.select(Id);
 //    };
+
+//    회원 전체 선택
+    public List<UserVO> selectAllUser(){return userMapper.selectAll();}
 }

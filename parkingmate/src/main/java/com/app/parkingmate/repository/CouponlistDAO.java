@@ -28,4 +28,7 @@ public class CouponlistDAO {
     //    쿠폰 status 수정
     public void updateStatus(CouponlistVO couponlistVO){couponlistMapper.updateStatus(couponlistVO);}
 
+//    활성화된 쿠폰 리스트
+    public List<CouponDTO> enabledList(Integer userId){return couponlistMapper.selectEnabled(userId);}
+
 }

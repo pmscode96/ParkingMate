@@ -54,6 +54,7 @@ public class LoginController {
         log.info(userVO.toString());
         userService.join(userVO, null);
 
+
         return new RedirectView("/login/sign-up-complete");
     }
 

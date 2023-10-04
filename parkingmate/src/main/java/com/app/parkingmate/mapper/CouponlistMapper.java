@@ -21,4 +21,7 @@ public interface CouponlistMapper {
 //    쿠폰 리스트 join 쿠폰
     public List<CouponDTO> selectMyCoupon(Integer userId);
 
+//    활성화된 쿠폰 리스트
+    public List<CouponDTO> selectEnabled(Integer userId);
+
 }

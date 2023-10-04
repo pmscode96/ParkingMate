@@ -31,4 +31,9 @@ public class CouponlistServiceImpl implements CouponlistService {
     public void updateStatus(CouponlistVO couponlistVO) {
         couponlistDAO.updateStatus(couponlistVO);
     }
+
+    @Override
+    public List<CouponDTO> enabledList(Integer userId) {
+        return couponlistDAO.enabledList(userId);
+    }
 }

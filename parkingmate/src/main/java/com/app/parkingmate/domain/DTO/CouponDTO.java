@@ -12,6 +12,13 @@ public class CouponDTO {
 //    쿠폰 고유 id
 //     not null
     private Integer couponId;
+    //    쿠폰 list 고유 id
+//     not null
+    private Integer id;
+//    쿠폰리스트 status
+//    not null default 0
+    private int couponStatus;
+
 //    쿠폰 명
 //     not null
     private String couponName;

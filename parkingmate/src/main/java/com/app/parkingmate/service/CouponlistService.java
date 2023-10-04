@@ -20,5 +20,8 @@ public interface CouponlistService {
     //    쿠폰 status 수정
     public void updateStatus(CouponlistVO couponlistVO);
 
+//    활성화된 쿠폰 리스트
+    public List<CouponDTO> enabledList(Integer userId);
+
 
 }

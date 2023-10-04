@@ -2,6 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.parkingmate.mapper.CouponMapper">
     <insert id="insert">
+        <selectKey keyProperty="id" order="BEFORE" resultType="Integer">
+            SELECT SEQ_COUPON.NEXTVAL FROM DUAL
+        </selectKey>
         INSERT INTO TBL_COUPON (ID, COUPON_NAME, COUPON_CONTENT, COUPON_DISCOUNT_PERCENT, COUPON_START_DATE, COUPON_END_DATE, COUPON_USE_CONDITION, COUPON_CODE, COUPON_STATUS, CREATE_DATE, UPDATE_DATE, EVENT_ID)
         VALUES (SEQ_COUPON.NEXTVAL, #{couponName}, #{couponContent}, #{couponDiscountPercent},#{couponStartDate}, #{couponEndDate}, #{couponUseCondition}, #{couponCode}, 0 , CURRENT_DATE,CURRENT_DATE , #{eventId})
     </insert>
