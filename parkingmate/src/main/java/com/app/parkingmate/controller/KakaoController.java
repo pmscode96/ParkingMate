@@ -28,6 +28,7 @@ public class KakaoController {
         String token = kakaoService.getKaKaoAccessToken(code);
         Optional<UserVO> foundInfo = kakaoService.getKaKaoInfo(token);
 
+        log.info(foundInfo.toString());
         if (foundInfo.isPresent()){
             if(session.getAttribute("user") != null){
                 Id = ((UserVO)session.getAttribute("user")).getId();

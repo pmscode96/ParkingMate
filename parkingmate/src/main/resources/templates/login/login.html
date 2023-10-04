@@ -85,7 +85,7 @@
     </main>
   </div>
 </body>
-  <script>
+  <script th:inline="javascript">
     const button = document.querySelector(".parkingmate-signInForm button");
     const form = document.querySelector(".parkingmate-signInForm");
     const inputs = document.querySelectorAll(".parkingmate-signInForm input");
@@ -93,10 +93,16 @@
     button.addEventListener("click", (e) => {
       for(inp of inputs){
         if(!inp.value){
+          alert("아이디 또는 비밀번호를 입력해주세요.")
           return;
         }
       }
       form.submit();
     })
+
+    const loginCheck = [[${loginCheck}]];
+    if(loginCheck === false){
+      alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+    }
   </script>
 </html>

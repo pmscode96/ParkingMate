@@ -56,21 +56,21 @@
           <h2 class="parkingmate-account-title">로그인</h2>
           <section aria-labelledby="emailLogin">
             <h3 class="parkingmate-bline-text">email 로그인</h3>
-            <form class="parkingmate-signInForm">
+            <form class="parkingmate-signInForm" th:action="@{/}" method="post" th:object="${userVO}">
               <div class="parkingmate-signInForm-field" data-test-id="emailField">
                 <label class="parkingmate-bline-text">이메일</label>
-                <input type="email" class="parkingmate-input input-email" placeholder="이메일 입력" title="이메일 입력">
+                <input th:field="*{UserEmail}" type="email" class="parkingmate-input input-email" placeholder="이메일 입력" title="이메일 입력">
               </div>
               <div class="parkingmate-signInForm-field" data-test-id="passwordField">
                 <label class="parkingmate-bline-text">비밀번호</label>
-                <input type="password" class="parkingmate-input input-password" placeholder="비밀번호 입력" title="비밀번호 입력">
+                <input th:field="*{UserPassword}" type="password" class="parkingmate-input input-password" placeholder="비밀번호 입력" title="비밀번호 입력">
               </div>
               <div class="parkingmate-login-action">
                 <p class="parkingmate-forgot">
                   <a href="/login/find-id">로그인 정보를 잊으셨나요?</a>
                 </p>
               </div>
-              <button class="parkingmate-button parkingmate-login-button" type="submit">
+              <button class="parkingmate-button parkingmate-login-button" type="button">
                   <span>
                     <span class="parkingmate-button-children">로그인</span>
                   </span>
@@ -80,14 +80,18 @@
           <section aria-labelledby="SNSLogin">
             <h3 class="parkingmate-bline-text">SNS 로그인</h3>
             <div>
-              <button class="parkingmate-button parkingmate-kakao-button" aria-label="카카오로 인증하기">
+
+              <a href="https://kauth.kakao.com/oauth/authorize?client_id=1fd38d790204d58dbce4c9b70a0f5013&redirect_uri=http://localhost:10000/kakao/login&response_type=code">
+                <button class="parkingmate-button parkingmate-kakao-button" aria-label="카카오로 인증하기">
                   <span>
                     <span class="parkingmate-button-children">
                       <svg viewBox="0 0 32 32" focusable="false" role="presentation" class="parkingmate-kakao-button-svg" aria-hidden="true"><path d="M16 4.64c-6.96 0-12.64 4.48-12.64 10.08 0 3.52 2.32 6.64 5.76 8.48l-.96 4.96 5.44-3.6 2.4.16c6.96 0 12.64-4.48 12.64-10.08S22.96 4.56 16 4.64z"></path></svg>
                       카카오로 시작하기
                     </span>
                   </span>
-              </button>
+                </button>
+              </a>
+
             </div>
           </section>
           <div class="parkingmate-signUpMessage">
@@ -582,6 +586,33 @@ function displayMarker(place) {
     // 키워드로 장소를 검색합니다
     ps.keywordSearch(SearchVal, placesSearchCB);
 
+  })
+
+  // const button = document.querySelector(".parkingmate-signInForm button");
+  // const form = document.querySelector(".parkingmate-signInForm");
+  // const inputs = document.querySelectorAll(".parkingmate-signInForm input");
+  //
+  // button.addEventListener("click", (e) => {
+  //   for(inp of inputs){
+  //     if(!inp.value){
+  //       return;
+  //     }
+  //   }
+  //   form.submit();
+  // })
+</script>
+<script>
+  const button = document.querySelector(".parkingmate-signInForm button");
+  const form = document.querySelector(".parkingmate-signInForm");
+  const inputs = document.querySelectorAll(".parkingmate-signInForm input");
+
+  button.addEventListener("click", (e) => {
+    for(inp of inputs){
+      if(!inp.value){
+        return;
+      }
+    }
+    form.submit();
   })
 </script>
 <script type="text/javascript" src="/js/main-page/modal.js"></script>
