@@ -8,6 +8,7 @@ import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -106,4 +107,10 @@ public class UserServiceImpl implements UserService {
     public void updateKakaoProfile(UserVO userVO) {
         userDAO.updateByKakaoProfile(userVO);
     }
+
+    @Override
+    public List<UserVO> selectAllUser() {
+        return userDAO.selectAllUser();
+    }
 }
+

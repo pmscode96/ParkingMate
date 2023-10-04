@@ -65,4 +65,8 @@
         WHERE ID = #{Id}
     </delete>
 
+    <select id="selectAll" resultType="userVO">
+        SELECT ID FROM TBL_USER
+    </select>
+
 </mapper>

@@ -17,4 +17,6 @@ public class CouponlistVO {
 
     private int userId;
 
+    private int couponStatus;
+
 }

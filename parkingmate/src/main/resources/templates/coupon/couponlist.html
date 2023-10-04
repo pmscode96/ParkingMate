@@ -43,7 +43,7 @@
               <ul>
                 <li>
                   <a href="coupons" class="parkingmate-coupon-header-link">
-                    나의 쿠폰<em>2</em>
+                    나의 쿠폰<em class="myCouponCount" th:text="${#lists.size(enabledList)}"></em>
                   </a>
                 </li>
                 <li>
@@ -63,9 +63,8 @@
                 <div class="parkingmate-listContainer">
                   <!-- 쿠폰한칸 -->
                   <th:block th:each="coupon:${coupons}" th:object="${coupon}">
-                    <th:blcok th:each="couponlist:${couponlists}">
                       <!-- 발급 안받은 쿠폰 -->
-                      <th:block th:if="${coupon.id == couponlist.couponId}">
+                      <th:block th:if="${coupon.couponStatus != 1}">
                         <div class="parkingmate-coupon-item">
                           <div class="parkingmate-coupon-item-container">
                             <div class="parkingmate-coupon-item-content">
@@ -73,14 +72,14 @@
                                 <dt class="hidden-text">카테고리</dt>
                                 <dd class="parkingmate-coupon-type">이벤트</dd>
                                 <dt class="hidden-text">쿠폰명</dt>
-                                <dd class="parkingmate-coupon-title" th:text="${coupon.couponName}"></dd>
+                                <dd class="parkingmate-coupon-title" th:text="*{couponName}"></dd>
                                 <dt class="hidden-text">할인 정보</dt>
                                 <dd class="parkingmate-coupon-amount">
-                                  <span th:text="${coupon.couponDiscountPercent} + '%'"></span>
+                                  <span th:text="*{couponDiscountPercent} + '%'"></span>
                                 </dd>
                                 <dt class="hidden-text">사용 기간</dt>
                                 <dd>
-                                  <p th:text="|${#dates.format(coupon.couponEndDate, 'yyyy-MM-dd')} 까지 사용 가능|"></p>
+                                  <p th:text="|*{#dates.format(couponEndDate, 'yyyy-MM-dd')} 까지 사용 가능|"></p>
                                 </dd>
                               </dl>
                               <button class="parkingmate-downloadItem-more">
@@ -94,20 +93,20 @@
                                     <tbody>
                                     <tr>
                                       <th scope="row">발급기간</th>
-                                      <td th:text="|${#dates.format(coupon.couponEndDate, 'yyyy-MM-dd')}  까지|"></td>
+                                      <td th:text="|*{#dates.format(couponEndDate, 'yyyy-MM-dd')}  까지|"></td>
                                     </tr>
                                     <tr>
                                       <th scope="row">사용조건</th>
-                                      <td th:text="${coupon.couponUseCondition}"></td>
+                                      <td th:text="*{couponUseCondition}"></td>
                                     </tr>
                                     </tbody>
                                   </table>
                                 </div>
                               </div>
                             </div>
-                            <form th:action="@{/coupon/couponlist}"  method="post">
-                              <input type="hidden" name="id" th:value="${coupon.id}">
+<!--                            <form th:action="@{/coupon/couponlist}"  method="post">-->
                               <button class="parkingmate-coupon-download-button" >
+                                <input type="hidden" name="couponlistId" th:value="*{id}" class="couponId">
                                 <span>
                                   <span class="parkingmate-button-children">
                                     <svg viewBox="0 0 48 48" focusable="false" role="presentation" class="parkingmate-button-children-svg" aria-hidden="true"><path d="M40.8 43.2H7.2v-2.4h33.6v2.4zm-5.28-22.08L25.2 31.44V4.8h-2.4v26.64L12.48 21.12 10.8 22.8 24 36l13.2-13.2-1.68-1.68z"></path></svg>
@@ -115,12 +114,12 @@
                                   </span>
                                 </span>
                               </button>
-                            </form>
+<!--                            </form>-->
                           </div>
                         </div>
                       </th:block>
                       <!-- 쿠폰 발급 완료 -->
-                      <th:block th:unless="${coupon.id == couponlist.couponId}">
+                      <th:block th:unless="${coupon.couponStatus != 1}">
                         <div class="parkingmate-coupon-item">
                           <div class="parkingmate-coupon-item-container">
                             <div class="parkingmate-coupon-item-content">
@@ -128,14 +127,14 @@
                                 <dt class="hidden-text">카테고리</dt>
                                 <dd class="parkingmate-coupon-type">이벤트</dd>
                                 <dt class="hidden-text">쿠폰명</dt>
-                                <dd class="parkingmate-coupon-title" th:text="${coupon.couponName}"></dd>
+                                <dd class="parkingmate-coupon-title" th:text="*{couponName}"></dd>
                                 <dt class="hidden-text">할인 정보</dt>
                                 <dd class="parkingmate-coupon-amount">
-                                  <span th:text="${coupon.couponDiscountPercent} + '%'"></span>
+                                  <span th:text="*{couponDiscountPercent} + '%'"></span>
                                 </dd>
                                 <dt class="hidden-text">사용 기간</dt>
                                 <dd>
-                                  <p th:text="|${#dates.format(coupon.couponEndDate, 'yyyy-MM-dd')} 까지 사용 가능|"></p>
+                                  <p th:text="|*{#dates.format(couponEndDate, 'yyyy-MM-dd')} 까지 사용 가능|"></p>
                                 </dd>
                               </dl>
                               <button class="parkingmate-downloadItem-more">
@@ -149,11 +148,11 @@
                                     <tbody>
                                     <tr>
                                       <th scope="row">발급기간</th>
-                                      <td th:text="|${#dates.format(coupon.couponEndDate, 'yyyy-MM-dd')} 까지|"></td>
+                                      <td th:text="|*{#dates.format(couponEndDate, 'yyyy-MM-dd')} 까지|"></td>
                                     </tr>
                                     <tr>
                                       <th scope="row">사용조건</th>
-                                      <td th:text="${coupon.couponUseCondition}"></td>
+                                      <td th:text="*{couponUseCondition}"></td>
                                     </tr>
                                     </tbody>
                                   </table>
@@ -169,8 +168,7 @@
                             </button>
                           </div>
                         </div>
-                        </th:block>
-                    </th:blcok>
+                      </th:block>
                   </th:block>
                 </div>
               </div>
@@ -183,4 +181,42 @@
   </div>
 </body>
 <script type="text/javascript" src="/js/coupon/couponlist.js"></script>
+<script>
+  // console.log("들어옴");
+  // var coupons = [[${coupons}]];
+  // console.log(coupons[0]);
+
+let button = document.querySelectorAll(".parkingmate-coupon-download-button");
+
+$(".parkingmate-coupon-download-button").on("click", function (){
+  let svgElement = $(this).find(".parkingmate-button-children-svg");
+  let num = $(".myCouponCount").text();
+  console.log(num);
+  // console.log($(this).find(".couponId").val());
+  let id = $(this).find(".couponId").val();
+  let btn = $(this);
+  $.ajax({
+    type : 'post', // 타입 (get, post, put 등등)
+    url : '/coupon/couponlist/ajax', // 요청할 서버url
+    contentType : "application/json",
+    data : JSON.stringify({ // 보낼 데이터 (Object , String, Array)
+      "couponlistId" : id
+    }),
+    success : function() { // 결과 성공 콜백함수
+      btn.removeClass('parkingmate-coupon-download-button');
+      btn.addClass('parkingmate-coupon-download-button-deadline');
+      btn.find(".parkingmate-coupon-label").text("발급 마감");
+      num = parseInt(num) + 1;
+      $(".myCouponCount").text(num);
+      svgElement.css("display", "none");
+    },
+    error : function(request, status, error) { // 결과 에러 콜백함수
+      console.log(error)
+    }
+  })
+
+})
+
+
+</script>
 </html>

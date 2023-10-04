@@ -2,6 +2,7 @@ package com.app.parkingmate.service;
 
 import com.app.parkingmate.domain.VO.UserVO;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
@@ -31,4 +32,7 @@ public interface UserService {
 
 //    전달받은 카카오프사로 업데이트
     public void updateKakaoProfile(UserVO userVO);
+
+//    회원 전체 선택
+    public List<UserVO> selectAllUser();
 }

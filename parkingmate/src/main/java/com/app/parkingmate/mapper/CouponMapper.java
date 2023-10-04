@@ -23,4 +23,6 @@ public interface CouponMapper {
 
 //    쿠폰 하나? 선택
     public Optional<CouponVO> select(Integer id);
+
+    public List<CouponVO> selectByCouponStatus();
 }

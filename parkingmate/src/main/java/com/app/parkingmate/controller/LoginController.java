@@ -67,6 +67,7 @@ public class LoginController {
             attributes.addFlashAttribute("passwordCheck", false);
             return new RedirectView("/login/sign-up");
         }
+
     }
 
     @GetMapping("sign-up-complete")

@@ -35,7 +35,7 @@ class ParkingmateApplicationTests {
 		parkingVO.setParkingAddress("서울 강남구 역삼동 825-20");
 //		parkingVO.setParkingCategory("강남구 서초동");
 
-		parkingService.getParking(parkingVO).map(ParkingVO::toString).ifPresent(log::info);
+//		parkingService.getParking(parkingVO).map(ParkingVO::toString).ifPresent(log::info);
 
 	}
 

@@ -9,7 +9,7 @@
     <select id="selectById" resultType="ReservationVO">
         SELECT RESERVATION_DATE, RESERVATION_REQUEST, RESERVATION_NUMBER, RESERVATION_STATUS
         FROM TBL_RESERVATION
-        WHERE ID = #{userId}
+        WHERE USER_ID = #{userId}
     </select>
 
     <update id="cancel">
