@@ -93,5 +93,10 @@ public class MainController {
         return "/main/main-page";
     }
 
+    @GetMapping("/main-page-test")
+    public String goToMaintest(){
+        return "/main/main-page-test";
+    }
+
 
 }
