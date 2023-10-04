@@ -345,58 +345,98 @@ function placesSearchCB (data, status, pagination) {
 }
 
 // 지도에 마커를 표시하는 함수입니다
+  var count12 = 0;
 function displayMarker(place) {
-    // 마커를 생성하고 지도에 표시합니다
-    var marker = new kakao.maps.Marker({
-        map: map,
-        position: new kakao.maps.LatLng(place.y, place.x) 
-    });
+  // console.log(place);
+  // 마커를 생성하고 지도에 표시합니다
+  var markers = new kakao.maps.Marker({
+    map: map,
+    position: new kakao.maps.LatLng(place.y, place.x)
+  });
 
-    // 마커에 클릭이벤트를 등록합니다
-    kakao.maps.event.addListener(marker, 'click', function() {
-        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
-        // footerPage.classList.add("open");
-        infowindow.open(map, marker);
-        footerPageTitle.textContent = place.place_name;
-        let placeNameLength = place.place_name.length;
-        console.log(placeNameLength);
-        footerPage.style.position = "absolute"
-        footerPage.style.top = "2px";
-        
-        // if(placeNameLength > 12){
-        //   footerPage.style.top = "27%";
-        // } else if(placeNameLength <= 12) {
-        //   footerPage.style.top = "30%";
-        // }
-        
-    });
+  // console.log(markers);
 
-    // 하단에서 위로 올라오는 페이지 삭제 함수
-    function handleDocumentClick(event) {
-      if (!footerPage.contains(event.target)) {
-        // footerPage.classList.remove("open"); // 클래스 삭제
-        // footerPage.style.position = "fixed"
-        // footerPage.style.top = "100%"
-        infowindow.close(map, marker);
-      }
+  const markerlocation = document.querySelector("#map > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(7)");
+  const markerlocationname = document.querySelector("#ParkingLocation1");
+  // #map > div > div > div > div:last-child
+  // 마커의 상위 개체
+
+  var allitems = document.querySelectorAll("#map > div:nth-child(1) > div > div:nth-child(6):last-child");
+
+  // for (var i = 0; i < 1; i++) {
+  //
+  //   allitems.addEventListener("click",click, false);
+  // }
+  allitems.forEach(function (allitem){
+      allitem.addEventListener("click",(e) => {
+        console.log(count12);
+        if (count12 === 0){
+          alert("click");
+        }
+
+
+      });
+  })
+  count12++; //카운트가 1만 증가되어야하는데 8이 증가함 아!! 카운트를 호출하는 부분에 넣어야함!!
+  //
+  // function click(e){
+  //  if(count == 0){
+  //    alert("click");
+  //  }
+  //
+  // }
+  // 마커에 클릭이벤트를 등록합니다
+  // markerlocation.addEventListener("click", (e) => {
+  //   console.log(e.target);
+  //
+  //   for (var i = 0; i < parkingsCount; i++) {
+  //
+  //     .forEach((element) => {
+  //       // console.log(element.innerHTML);
+  //     })
+  //     // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+  //     infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.ParkingName + '</div>');
+  //
+  //     break;
+  //
+  //
+  //   }
+  //
+  //   // footerPage.classList.add("open");
+  //   infowindow.open(map, markers);
+  //   footerPageTitle.textContent = place.ParkingName;
+  //   // let placeNameLength = place.place_name.length;
+  //   // console.log(placeNameLength);
+  //   footerPage.style.position = "absolute"
+  //   footerPage.style.top = "2px";
+  // });
+  // console.log("hihihi4");
+  // 하단에서 위로 올라오는 페이지 삭제 함수
+  function handleDocumentClick(event) {
+    if (!footerPage.contains(event.target)) {
+      // footerPage.classList.remove("open"); // 클래스 삭제
+      // footerPage.style.position = "fixed"
+      // footerPage.style.top = "100%"
+      infowindow.close(map, markers);
     }
+  }
 
-    // x 버튼 누를시 페이지 내려감
-    xBtn.addEventListener("click", function() {
-      footerPage.style.top = "100%"
-      setTimeout(() => {
-        footerPage.style.position = "fixed"
+  // console.log("hihihi5");
+  // x 버튼 누를시 페이지 내려감
+  xBtn.addEventListener("click", function () {
+    footerPage.style.top = "100%"
+    setTimeout(() => {
+      footerPage.style.position = "fixed"
 
-      }, 600);
-    })
+    }, 600);
+  })
+  // console.log("hihihi6");
+  document.addEventListener("click", handleDocumentClick);
+  // console.log("hihihi7");
 
-    document.addEventListener("click", handleDocumentClick);
 }
 
   // 주소로 장소 표시
-  // 장소 검색 객체를 생성합니다
-  var ps = new kakao.maps.services.Places();
   // 주소-좌표 변환 객체를 생성합니다
   var geocoder = new kakao.maps.services.Geocoder();
   // 검색할 장소 입력 박스
@@ -430,152 +470,86 @@ function displayMarker(place) {
     // String으로 형 변환하여 다시 ""안에 있는 부분을 key, value 값으로 분리 하기 위해 다시 split
     parkings[c] =  String(parkings[c]).split("=");
     parkings[c] =  String(parkings[c]).split(",");
-
-    // console.log(parkings[0].length);
     // key, value로 분리
-    // parkings[0][parkings[0][2]] = parkings[0][3];
-    // parkings[0].map().push(parkings[0][2],parkings[0][3]);
-    // console.log(parkings[0].ParkingAddress);
     var j = 1;
     var i = 0;
     var count = 0;
     for (var p in parkings[0]){
+      // key, value합해서 2개 2개가 1개의 count로 됨
       if(count > 14){
         break;
       }
-      // console.log(i);
-      // console.log(j);
-      // console.log("count : " +count);
+
       parkings[c][parkings[c][i]] = parkings[c][j];
       i+=2;
       j+=2;
       count++;
 
     }
+  } //여기까지가 key, value로 나눈 것!!
+  var k = 0;
+  // 주소로 좌표를 검색합니다
+  for (var i = 0; i<parkingsCount;) {
+    geocoder.addressSearch(parkings[i].ParkingAddress, function(result, status) {
+
+      // //   여기다가 작성해야되는데 parkings[i].ParkingAddress값이랑 SearchBox.value값을 가져오지 못함... 왜???
+      // }
+      // 정상적으로 검색이 완료됐으면
+      if (status === kakao.maps.services.Status.OK) {
+        // console.log(parkings[i].ParkingAddress);
+
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+        // console.log("result :" + coords);
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+          map: map,
+          position: coords
+        });
+        var parkingName1 = parkings[k].ParkingName;
+        var infoclick = document.querySelector("#ParkingLocation1");
+        // console.log(parkingName1);
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new kakao.maps.InfoWindow({
+          // i로 접근했을 때 ParkingName이 안나옴..... 숫자로 접근하면 나옴..., 이거랑 검색했을 때 검색 값이랑 매치되는 주차장 위치만 나와야함!!
+          content: ('<div id="ParkingLocation1"  style="width:150px;text-align:center;padding:6px 0;">' + parkingName1 + '</div>')
+        });
+
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+      }
+      k++;
+    });
+    i++;
   }
 
-  console.log(parkings[3].ParkingAddress, typeof parkings[3]);
-
-  // console.log(Object.values(String(parkings[0]).split("=")));
-  // parkings[0] = JSON.stringify(parkings[0]);
-  // parkings[0] =  parkings[0].replace("[","");
-  // parkings[0] =  parkings[0].replace("]","");
-  // parkings[0] = JSON.parse(parkings[0]);
-  // console.log(parkings[0], typeof parkings[0]);
-
-  // console.log(parkings[0], typeof parkings[0]);
-  // console.log(parkings[0]);
-  // console.log(Object.values(parkings).split(","));
-
-  // console.log(cutAddress[0]);
-  // console.log(cutAddress[1]);
-
-  // console.log(Object.values(parkings)[2]);
-
-  //   if(SearchBox.value){ //검색 결과가 있으면
-  //     console.log("test2");
-  //     for(var i = 0; i < parkingsCount; i++) {
-  //       // 검색 결과가 db내에 있는 구와 겹치니?
-  //
-  //       if (cutAddress[0].includes(SearchBox.value)) {
-  //         console.log("yes");
-  //       } else {
-  //         console.log("No");
-  //       }
-  //       // console.log(Object.values(parkings)[9]);
-  //       // DB의 주차장 주소에
-  //       // if(Object.values(parkings)[9].includes(SearchBox.value)){
-  //       //
-  //       // }
-  //     }
-  //   }
-  //
-  // // 주소로 좌표를 검색합니다
-  // geocoder.addressSearch(Object.values(parkings)[9], function(result, status) {
-  //   for(var i = 0; i < parkingsCount; i++){
-  //     // 검색 결과가 db내에 있는 구와 겹치니?
-  //     if (cutAddress[0].includes(SearchBox.value)) {
-  //       console.log("yes gu");
-  //       // 검색 결과가 db내에 있는 동과 겹치니?
-  //       if(cutAddress[1].includes(SearchBox.value)){
-  //         console.log("yes dong");
-  //         // 정상적으로 검색이 완료됐으면
-  //         if (status === kakao.maps.services.Status.OK) {
-  //
-  //           var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-  //
-  //           // 결과값으로 받은 위치를 마커로 표시합니다
-  //           var marker = new kakao.maps.Marker({
-  //             map: map,
-  //             position: coords
-  //           });
-  //
-  //           // 인포윈도우로 장소에 대한 설명을 표시합니다
-  //           var infowindow = new kakao.maps.InfoWindow({
-  //             content: '<div style="width:150px;text-align:center;padding:6px 0;">주차장</div>'
-  //           });
-  //           infowindow.open(map, marker);
-  //
-  //           // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-  //           map.setCenter(coords);
-  //         }
-  //       }
-  //     } else {
-  //       console.log("검색 결과가 없습니다");
-  //     }
-  //   }
-  //
-  // });
-
-
-
-
   // 키워드 검색 완료 시 호출되는 콜백함수 입니다
-  function placesSearchCB (data, status, pagination) {
+  function placesSearchCB (data, status, pagination,result) {
     if (status === kakao.maps.services.Status.OK) {
-      // console.log("test1");
 
       // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
       // LatLngBounds 객체에 좌표를 추가합니다
       var bounds = new kakao.maps.LatLngBounds();
-      // db내 행 갯수 카운트
-      // console.log(parkingsCount);
+      // console.log(bounds);
+      // console.log(SearchBox.value);
+      // console.log(data[0]);
+      for (var i=0; i<1; i++) {
 
-//       for(var i = 0; i < parkingsCount; i++){
-//         console.log("test2");
-// ``
-//       }
-
-      for (var i=0; i<data.length; i++) {
-
-        // console.log(data[i].address_name);
-        // console.log(Object.values(parkings)[2]); //카테고리
-        // console.log("---------------------------------------------");
-        // console.log(Object.values(parkings)[9]); //실 주소
-        // console.log("==============================================");
-
+        //사용자 검색 값이 존재하면
         if(SearchBox.value){
-          console.log("test3");
-          if(data[i].address_name.includes(Object.values(parkings)[9])){
-            console.log("존재!");
-            console.log(data[i].address_name); //카카오 데이터 값
-            console.log(SearchBox.value); //사용자가 입력한 값
-            console.log(Object.values(parkings)[2]);
-
-            displayMarker(data[i]);
-
+          for (var i=0; i<parkingsCount; i++){
+            // if(parkings[i].ParkingAddress.includes(SearchBox.value)){
+                displayMarker(parkings[i]);
+                // console.log(parkings[i]);
+            // }
           }
         }
+          bounds.extend(new kakao.maps.LatLng(data[0].y, data[0].x));
 
-
-        // console.log(data[i].address_name +','+ data[i].category_group_name+','+ data[i].place_name+','+data[i].x+','+data[i].y );
-        // console.log(data[i].category_group_name);
-        // console.log(data[i].place_name);
-        // console.log(data[i].x);
-        // console.log(data[i].y);
-        bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+        // bounds.extend(new kakao.maps.LatLng(result[0].y, result[0].x));
+        // console.log("parking : " + parkings[i].ParkingAddress);
       }
-
       // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
       map.setBounds(bounds);
     }
