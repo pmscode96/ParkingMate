@@ -43,7 +43,9 @@
                 </div>
               </div>
               <div>
-                <button class="button-kakao">
+
+                <a href="https://kauth.kakao.com/oauth/authorize?client_id=1fd38d790204d58dbce4c9b70a0f5013&redirect_uri=http://localhost:10000/kakao/login&response_type=code">
+                  <button class="button-kakao">
                   <span>
                     <span class="button-children">
                       <svg viewBox="0 0 32 32" focusable="false" role="presentation" class="withIcon_icon SNSButtonList_kakaoIcon__3y4jL" aria-hidden="true">
@@ -52,7 +54,9 @@
                       카카오로 시작하기
                     </span>
                   </span>
-                </button>
+                  </button>
+                </a>
+
               </div>
             </div>
             <div class="form-change"></div>
@@ -120,7 +124,7 @@
                   <div class="textfield2">
                     <label></label>
                     <div class="textfield-field">
-                      <input placeholder="비밀번호 확인" type="password" class="input-input input-password" aria-invalid="false"/>
+                      <input th:field="*{UserPasswordCheck}" placeholder="비밀번호 확인" type="password" class="input-input input-password" aria-invalid="false"/>
                       <button class="hide-button" type="button">
                       <span>
                         <span class="button-children">
@@ -386,7 +390,7 @@
     </div>
   </body>
   <script type="text/javascript" src="/js/login/signUp.js"></script>
-  <script>
+  <script th:inline="javascript">
       const email = document.querySelector(".input-input input-em");
       const button1 = document.querySelector(".button-primmary");
       const d = document.querySelector(".email-input-field");
@@ -408,12 +412,23 @@
         // e.target.backgroundColor = 'red';
         for(inp of inputs){
           if(!inp.value) {
+            alert("정보를 입력해주세요.")
             return;
           }
         }
         form.submit();
       })
 
+
+      const dualEmail = [[${dualEmail}]];
+      if(dualEmail === false){
+        alert("이미 존재하는 이메일입니다.");
+      }
+
+      const passwordCheck = [[${passwordCheck}]];
+      if(passwordCheck === false){
+        alert("비밀번호가 일치하지 않습니다.")
+      }
 
       // function bt(){
       //

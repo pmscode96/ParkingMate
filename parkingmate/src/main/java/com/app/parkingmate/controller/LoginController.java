@@ -35,8 +35,11 @@ public class LoginController {
         if(foundMember.isPresent()){
             session.setAttribute("user", foundMember.get());
             return new RedirectView("/mypage/mypage-mobile");
+        }else{
+            attributes.addFlashAttribute("loginCheck", false);
+            return new RedirectView("/login/login");
         }
-        return new RedirectView("/login/login");
+
     }
 
 
@@ -45,16 +48,25 @@ public class LoginController {
         ;}
 
     @PostMapping("sign-up")
-    public RedirectView signUp(UserVO userVO){
+    public RedirectView signUp(UserVO userVO, RedirectAttributes attributes){
 //        userVO.setUserNickName("iu");
 //        userVO.setUserPhoneNumber("010-2424-2424");
 //        userVO.setUserStartDate(new Date());
 //        userVO.setUserProfile("나는qwer");
 
-        log.info(userVO.toString());
-        userService.join(userVO, null);
-
-        return new RedirectView("/login/sign-up-complete");
+        Optional<UserVO> foundDualEmail = userService.getEmail(userVO.getUserEmail());
+        if(foundDualEmail.isPresent()){
+            attributes.addFlashAttribute("dualEmail", false);
+            return new RedirectView("/login/sign-up");
+        }else{
+            if(userVO.getUserPassword().equals(userVO.getUserPasswordCheck())){
+                userService.join(userVO, null);
+                log.info(userVO.toString());
+                return new RedirectView("/login/sign-up-complete");
+            }
+            attributes.addFlashAttribute("passwordCheck", false);
+            return new RedirectView("/login/sign-up");
+        }
     }
 
     @GetMapping("sign-up-complete")

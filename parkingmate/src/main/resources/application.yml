@@ -10,7 +10,7 @@ server:
 #    username: hr
 #    password: hr
 
-
+#JDBC
 spring:
   datasource:
     hikari:

@@ -33,7 +33,9 @@ public class UserServiceImpl implements UserService {
             Optional<UserVO> foundMember = getKakaoEmail(userVO.getKakaoEmail());
             if(Id != null){
                 userVO.setId(Id);
-                delete(foundMember.get().getId());
+                if(foundMember.isPresent()){
+                    delete(foundMember.get().getId());
+                }
                 updateBySync(userVO);
                 return;
             }
@@ -51,24 +53,27 @@ public class UserServiceImpl implements UserService {
             }
 
         }else{
-            Optional<UserVO> foundEmail = getEmail(userVO.getUserEmail());
-            if(foundEmail.isPresent()){
-                return;
-            }else{
-                userVO.setUserSnsLoginStatus(0);
-                userDAO.save(userVO);
-            }
+//            Optional<UserVO> foundEmail = getEmail(userVO.getUserEmail());
+//            log.info(foundEmail.toString());
+//            if(foundEmail.isPresent()){
+//                return;
+//            }else{
+//                userVO.setUserSnsLoginStatus(0);
+//                userDAO.save(userVO);
+//            }
+            userVO.setUserSnsLoginStatus(0);
+            userDAO.save(userVO);
         }
     }
 
 
 
-//    로그인
+    //    로그인
     public Optional<UserVO> login(UserVO userVO){
         return userDAO.login(userVO);
     }
 
-//    find-id, find-password
+    //    find-id, find-password
     @Override
     public Optional<UserVO> getEmail(String UserEmail) {
         return userDAO.findByEmail(UserEmail);
@@ -90,7 +95,7 @@ public class UserServiceImpl implements UserService {
         userDAO.updateBySync(userVO);
     }
 
-//    회원 삭제
+    //    회원 삭제
     public void delete(Integer Id){
         userDAO.delete(Id);
     }

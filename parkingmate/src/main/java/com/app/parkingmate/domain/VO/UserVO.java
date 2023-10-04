@@ -67,4 +67,6 @@ public class UserVO implements Serializable{
 
     private String UserProfilePath;
 
+    private String UserPasswordCheck;
+
 }
