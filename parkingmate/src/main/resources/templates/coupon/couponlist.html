@@ -118,8 +118,10 @@
                           </div>
                         </div>
                       </th:block>
+                  </th:block>
+                    <th:block th:each="coupon:${coupons}" th:object="${coupon}">
                       <!-- 쿠폰 발급 완료 -->
-                      <th:block th:unless="${coupon.couponStatus != 1}">
+                      <th:block th:if="${coupon.couponStatus == 1}">
                         <div class="parkingmate-coupon-item">
                           <div class="parkingmate-coupon-item-container">
                             <div class="parkingmate-coupon-item-content">

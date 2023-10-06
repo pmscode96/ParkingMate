@@ -1,6 +1,8 @@
 package com.app.parkingmate.controller;
 
 
+import com.app.parkingmate.domain.EventSearch;
+import com.app.parkingmate.domain.Pagination;
 import com.app.parkingmate.domain.VO.EventVO;
 import com.app.parkingmate.service.EventService;
 import lombok.RequiredArgsConstructor;
@@ -24,12 +26,15 @@ public class EventController {
     public final EventService eventService;
 
     @GetMapping("event")
-    public void goToJoinEventList(Model model){
-        model.addAttribute("events", eventService.list());
+    public void goToJoinEventList(Pagination pagination, EventSearch eventSearch, Model model){
+        pagination.setTotal(eventService.selectTotal(eventSearch));
+        pagination.progress();
+        model.addAttribute("pagination", pagination);
+        model.addAttribute("events", eventService.list(pagination));
     }
 
     @PostMapping("event")
-    public RedirectView goToJoinEventDetail(Integer id, HttpSession session){
+    public RedirectView goToJoinEventDetail(Integer id, HttpSession session, int page){
         Optional<EventVO> foundEvent = eventService.detail(id);
         if(foundEvent.isPresent()){
             session.setAttribute("event", foundEvent.get());

@@ -8,31 +8,43 @@ import com.app.parkingmate.repository.CouponDAO;
 import com.app.parkingmate.repository.CouponlistDAO;
 import com.app.parkingmate.repository.UserDAO;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class CouponServiceImpl implements CouponService {
     private final CouponDAO couponDAO;
     private final CouponlistDAO couponlistDAO;
     private final UserDAO userDAO;
     private final UserServiceImpl userService;
     private final UserMapper userMapper;
+
     @Override
     public void create(CouponVO couponVO) {
+        // 먼저 쿠폰을 저장
         couponDAO.save(couponVO);
-        CouponlistVO couponlistVO = new CouponlistVO();
 
-        couponlistVO.setCouponId(couponVO.getId());
-        List<UserVO> insertList = userService.selectAllUser();
-        for (int i =0; i < insertList.size(); i++) {
-            couponlistVO.setUserId(insertList.get(i).getId());
+        // 저장한 쿠폰의 ID를 가져옴
+        Integer couponId = couponVO.getId();
+
+        // 모든 사용자를 조회
+        List<UserVO> userList = userDAO.selectAllUser();
+
+        // 각 사용자에게 쿠폰을 할당
+        for (UserVO user : userList) {
+            CouponlistVO couponlistVO = new CouponlistVO();
+            couponlistVO.setCouponId(couponId);
+            couponlistVO.setUserId(user.getId());
+
+            // 쿠폰 목록을 저장
             couponlistDAO.save(couponlistVO);
         }
-
     }
 
     @Override

@@ -51,15 +51,15 @@
     </div>
     <div class="parkingmate_board-footer">
       <div class="parkingmate_pagination">
-        <button class="prev-page icon-chevron-left mobile-only" onclick="" disabled="">
+        <button class="prev-page icon-chevron-left mobile-only" onclick="">
           <span class="parkingmate_text-hidden">이전 목록</span>
         </button>
         <div class="parkingmate_page">
           <div class="mobile-only">
-            <span class="parkingmate_current-count">1</span>
+            <span class="parkingmate_current-count" th:text="${pagination.page}"></span>
             /
             <span class="parkingmate_total-count">
-              <span>2</span> 
+              <span th:text="${pagination.endPage}"></span>
               페이지
             </span>
           </div>
@@ -69,7 +69,7 @@
         </button>
       </div>
       <div class="parkingmate_search">
-        <form method="post" id="parkingmate_news-board-search">
+        <form method="post" id="parkingmate_news-board-eventSearch">
           <div class="parkingmate_filter-container">
             <select id="parkingmate_searchSelectInBoard" class="filter" name="">
               <option value="tc">제목+내용</option>
@@ -80,7 +80,7 @@
           <div class="parkingmate_field">
             <label class="parkingmate_text-hidden">검색창</label>
             <input id="searchTextInBoard" name="searchTextInBoard" class="parkingmate_search-form" type="text" value="">
-            <button class="parkingmate_btn-search dense" type="submit">검색</button>
+            <button class="parkingmate_btn-eventSearch dense" type="submit">검색</button>
           </div>
         </form>
         <form id="formSearch" name="formSearchBoard" action="/web/wboard/newsBoardList/2" method="post">
@@ -111,5 +111,20 @@
       id.submit();
     })
   }
+
+  $(function(){
+    if($('.parkingmate_current-count').text() !== 1){
+      $('.prev-page').attr('disabled', true);
+    }else{
+      $('.prev-page').attr('disabled', false);
+    }
+    if($('.parkingmate_current-count').text() !== $('parkingmate_total-count > span').text()){
+      $('.next-page').attr('disabled', false);
+    }else{
+      $('.next-page').attr('disabled', true);
+    }
+  });
+
+
 </script>
 </html>

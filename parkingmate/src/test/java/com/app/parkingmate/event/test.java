@@ -1,5 +1,7 @@
 package com.app.parkingmate.event;
 
+import com.app.parkingmate.domain.EventSearch;
+import com.app.parkingmate.domain.Pagination;
 import com.app.parkingmate.domain.VO.CouponVO;
 import com.app.parkingmate.domain.VO.CouponlistVO;
 import com.app.parkingmate.domain.VO.EventVO;
@@ -17,6 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Random;
 
 
 @SpringBootTest
@@ -42,13 +45,19 @@ public class test {
 
     @Test
     public void insertTest(){
-        EventVO eventVO = new EventVO();
-        eventVO.setEventContent("테스트 내용1");
-        eventVO.setEventTitle("테스트 제목1");
-//        eventVO.setEventStatus("0");
-        eventVO.setEventStartDate(Date.valueOf("2023-10-01"));
-        eventVO.setEventEndDate(Date.valueOf("2023-11-01"));
-        eventMapper.insert(eventVO);
+        Random random = new Random();
+        EventVO eventVO = null;
+        int idx = 0;
+        for (int i=0; i<30; i++){
+            eventVO = new EventVO();
+            idx = random.nextInt(30) + 1;
+            eventVO.setEventContent("테스트 내용" +idx);
+            eventVO.setEventTitle("테스트 제목" +idx);
+            eventVO.setEventStatus(0);
+            eventVO.setEventStartDate(Date.valueOf("2023-10-01"));
+            eventVO.setEventEndDate(Date.valueOf("2023-11-01"));
+            eventMapper.insert(eventVO);
+        }
     }
 
     @Test
@@ -76,8 +85,9 @@ public class test {
     }
 
     @Test
-    public void selectAllTest(){
-        eventMapper.selectAll().stream().map(EventVO::toString).forEach(log::info);
+    public void selectAllTest(Pagination pagination, EventSearch eventSearch){
+        pagination.setTotal(eventMapper.selectTotal(eventSearch));
+        eventMapper.selectAll(pagination).stream().map(EventVO::toString).forEach(log::info);
     }
 
     @Test
@@ -96,13 +106,13 @@ public class test {
     @Test
     public void couponInsertTest(){
         CouponVO couponVO = new CouponVO();
-        couponVO.setCouponName("가을맞이 쿠폰");
-        couponVO.setCouponContent("가을맞이 쿠폰");
+        couponVO.setCouponName("전체회원 들어가는지 테스트");
+        couponVO.setCouponContent("전체회원 들어가는지 테스트");
         couponVO.setCouponDiscountPercent(10);
         couponVO.setCouponStartDate(Date.valueOf("2023-10-01"));
         couponVO.setCouponEndDate(Date.valueOf("2023-11-01"));
-        couponVO.setCouponUseCondition("아무나");
-        couponVO.setCouponCode("4312-5555-6666");
+        couponVO.setCouponUseCondition("전체회원");
+        couponVO.setCouponCode("55555");
         couponVO.setEventId(41);
 
         couponService.create(couponVO);

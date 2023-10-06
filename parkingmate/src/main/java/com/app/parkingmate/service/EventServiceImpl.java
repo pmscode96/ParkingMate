@@ -1,5 +1,8 @@
 package com.app.parkingmate.service;
 
+import com.app.parkingmate.domain.EventSearch;
+import com.app.parkingmate.domain.EventSearchDTO;
+import com.app.parkingmate.domain.Pagination;
 import com.app.parkingmate.domain.VO.EventVO;
 import com.app.parkingmate.repository.EventDAO;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +22,13 @@ public class EventServiceImpl implements EventService {
 
 
     @Override
-    public List<EventVO> list() {
-        return eventDAO.list();
+    public List<EventVO> list(Pagination pagination) {
+        return eventDAO.list(pagination);
+    }
+
+    @Override
+    public int selectTotal(EventSearch eventSearch) {
+        return eventDAO.selectTotal(eventSearch);
     }
 
     @Override
@@ -36,5 +44,13 @@ public class EventServiceImpl implements EventService {
     @Override
     public void updateStatus(EventVO eventVO) {
         eventDAO.updateStatus(eventVO);
+    }
+
+    @Override
+    public EventSearchDTO searchEvent(EventSearch eventSearch) {
+        EventSearchDTO eventSearchDTO  = new EventSearchDTO();
+        eventSearchDTO.setFreeEvents(eventDAO.selectSearch(eventSearch));
+        eventSearchDTO.setFreeEventsTotalCount(eventDAO.selectTotal(eventSearch));
+        return eventSearchDTO;
     }
 }

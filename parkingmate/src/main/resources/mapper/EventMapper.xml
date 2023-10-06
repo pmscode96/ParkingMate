@@ -6,11 +6,6 @@
         VALUES(SEQ_EVENT.NEXTVAL, #{eventStatus}, #{eventTitle}, #{eventContent}, #{eventStartDate},#{eventEndDate},TO_DATE(CURRENT_DATE),TO_DATE(CURRENT_DATE))
     </insert>
 
-    <select id="selectAll" resultType="EventVO">
-        SELECT ID, EVENT_STATUS, EVENT_TITLE, EVENT_CONTENT, EVENT_START_DATE, EVENT_END_DATE, CREATE_DATE
-        FROM TBL_EVENT
-    </select>
-
     <select id="select" resultType="EventVO">
         SELECT ID, EVENT_STATUS, EVENT_TITLE, EVENT_CONTENT, EVENT_START_DATE, EVENT_END_DATE, CREATE_DATE
         FROM TBL_EVENT
@@ -28,4 +23,39 @@
         SET EVENT_STATUS = #{eventStatus} , UPDATE_DATE = TO_DATE(CURRENT_DATE)
         WHERE ID = #{id}
     </update>
+
+    <select id="selectAll" resultType="eventVO">
+        SELECT ID, EVENT_STATUS, EVENT_TITLE, EVENT_CONTENT, EVENT_START_DATE, EVENT_END_DATE, CREATE_DATE, UPDATE_DATE FROM
+            (
+                SELECT ROWNUM R, ID, EVENT_STATUS, EVENT_TITLE, EVENT_CONTENT, EVENT_START_DATE, EVENT_END_DATE, CREATE_DATE, UPDATE_DATE
+                FROM
+                    (
+                        SELECT ID, EVENT_STATUS, EVENT_TITLE, EVENT_CONTENT, EVENT_START_DATE, EVENT_END_DATE, CREATE_DATE, UPDATE_DATE
+                        FROM TBL_EVENT
+                        ORDER BY ID DESC
+                    ) P1
+    <![CDATA[
+                WHERE ROWNUM <= #{endRow}
+            ) P2
+        WHERE P2.R >= #{startRow}
+        ]]>
+    </select>
+
+    <select id="selectTotal" resultType="int">
+        SELECT COUNT(ID) FROM TBL_EVENT
+    </select>
+
+    <select id="selectSearch" resultType="eventVO">
+        SELECT ID, EVENT_STATUS, EVENT_TITLE, EVENT_CONTENT, EVENT_START_DATE, EVENT_END_DATE, CREATE_DATE, UPDATE_DATE
+        FROM
+            (
+                SELECT ID, EVENT_STATUS, EVENT_TITLE, EVENT_CONTENT, EVENT_START_DATE, EVENT_END_DATE, CREATE_DATE, UPDATE_DATE
+                FROM TBL_EVENT
+                WHERE EVENT_TITLE LIKE '%' || #{keyword} || '%' OR EVENT_CONTENT LIKE '%' || #{keyword} || '%'
+                ORDER BY ID DESC
+            )
+        <![CDATA[
+        WHERE ROWNUM <= 5
+        ]]>
+    </select>
 </mapper>
