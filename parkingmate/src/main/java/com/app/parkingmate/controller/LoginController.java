@@ -1,8 +1,12 @@
 package com.app.parkingmate.controller;
 
 
+import com.app.parkingmate.domain.VO.CouponVO;
+import com.app.parkingmate.domain.VO.CouponlistVO;
 import com.app.parkingmate.domain.VO.UserVO;
 import com.app.parkingmate.repository.UserDAO;
+import com.app.parkingmate.service.CouponService;
+import com.app.parkingmate.service.CouponlistService;
 import com.app.parkingmate.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +20,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -24,6 +29,8 @@ import java.util.Optional;
 @RequestMapping("/login/*")
 public class LoginController {
     private final UserService userService;
+    private final CouponService couponService;
+    private final CouponlistService couponlistService;
 
     @GetMapping("login")
     public void goToLoginForm(UserVO userVO){
@@ -62,6 +69,7 @@ public class LoginController {
             if(userVO.getUserPassword().equals(userVO.getUserPasswordCheck())){
                 userService.join(userVO, null);
                 log.info(userVO.toString());
+                couponService.signUpCoupon(userVO.getId());
                 return new RedirectView("/login/sign-up-complete");
             }
             attributes.addFlashAttribute("passwordCheck", false);

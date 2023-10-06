@@ -34,7 +34,7 @@
   <!-- 공유버튼 JS -->
   <script src="/js/getDirections/share.js"></script>
 
-  <script src="/js/getDirections/search-bx.js"></script>
+  <script src="/js/getDirections/eventSearch-bx.js"></script>
 
   <!-- 카카오 공유 API -->
   <!-- <script src="../js/kakao-share.js"></script> -->
@@ -440,9 +440,9 @@ function displayMarker(place) {
   // 주소-좌표 변환 객체를 생성합니다
   var geocoder = new kakao.maps.services.Geocoder();
   // 검색할 장소 입력 박스
-  var SearchBox = document.querySelector("body > div > div.search-all > div.search-bx.sb-2 > div.search-content-bx > input[type=text]");
+  var SearchBox = document.querySelector("body > div > div.eventSearch-all > div.eventSearch-bx.sb-2 > div.eventSearch-content-bx > input[type=text]");
   // 검색 버튼
-  var Searchicon = document.querySelector("body > div > div.search-all > div.search-bx.sb-2 > button");
+  var Searchicon = document.querySelector("body > div > div.eventSearch-all > div.eventSearch-bx.sb-2 > button");
   // db내부 객체 값
   var parkings = [[${parkings}]];
   // db내부 객체 총 수량

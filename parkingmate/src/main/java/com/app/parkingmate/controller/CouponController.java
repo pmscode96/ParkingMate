@@ -25,8 +25,8 @@ public class CouponController {
 
     @GetMapping("coupons")
     public void goToJoinCoupons(Model model){
-        model.addAttribute("coupons", couponlistService.listWithCoupon(1));
-        model.addAttribute("enabledList" , couponlistService.enabledList(1));
+        model.addAttribute("coupons", couponlistService.listWithCoupon(25));
+        model.addAttribute("enabledList" , couponlistService.enabledList(25));
 
     }
 
@@ -49,8 +49,8 @@ public class CouponController {
     @GetMapping("couponlist")
     public void goToJoinCouponList(Model model){
 //        model.addAttribute("coupons", couponService.list());
-        model.addAttribute("coupons", couponlistService.listWithCoupon(1));
-        model.addAttribute("enabledList" , couponlistService.enabledList(1));
+        model.addAttribute("coupons", couponlistService.listWithCoupon(25));
+        model.addAttribute("enabledList" , couponlistService.enabledList(25));
     }
 
 
@@ -64,7 +64,7 @@ public class CouponController {
         log.info(String.valueOf(couponlistId));
         CouponlistVO couponlistVO = new CouponlistVO();
         couponlistVO.setId(couponID);
-        couponlistVO.setUserId(1);
+        couponlistVO.setUserId(25);
         couponlistVO.setCouponStatus(1);
         couponlistService.updateStatus(couponlistVO);
     }
