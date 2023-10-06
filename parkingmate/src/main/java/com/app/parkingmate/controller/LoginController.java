@@ -117,9 +117,6 @@ public class LoginController {
     @GetMapping("logout")
     public RedirectView logout(HttpSession session){
         session.invalidate();
-        return new RedirectView("/login/login");
+        return new RedirectView("/mypage/mypage-mobile-logout");
     }
-
-
-
 }

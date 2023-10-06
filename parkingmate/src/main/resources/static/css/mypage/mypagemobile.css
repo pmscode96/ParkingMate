@@ -156,6 +156,15 @@ a, button{
   transform: scale(1);
   transition: transform .3s ease-out;
   fill: currentColor;
+  height: 18px;
+  margin-right: 4px;
+}
+
+.KakaoIndicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4px;
 }
 
 .ParkingMateMobile_text_2-voS{
@@ -321,6 +330,7 @@ button:not(:disabled){
   display: inline-block;
   border: 1px solid #dde2e6;
   border-radius: 50%;
+  overflow: hidden;
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: cover;
@@ -382,6 +392,15 @@ button {
   text-align: left;
   color: #495057;
   pointer-events: none;
+}
+
+.MyParkingMateSupporterProfile_textBox_3jsbN {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: #495057;
 }
 
 .MyParkingMateProfile_profileUser_2rCck .MyParkingMateSupporterProfile_icon_YWNgi{

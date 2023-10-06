@@ -13,7 +13,6 @@ public class UserVO implements Serializable{
 //    회원 고유 id
 //    not null
     private Integer Id;
-
 //    회원 닉네임
 //    not null
     private String UserNickName;
