@@ -30,6 +30,15 @@ public interface UserMapper {
 //    카카오 연동하기
     public void updateBySync(UserVO userVO);
 
+//    개인정보 변경 부문
+    public void updateUser(UserVO userVO);
+
+//    프로필 사진 업데이트
+    public void updateProfileImg(UserVO userVO);
+
+    // 프로필 사진 삭제(카카오톡 프로필 사진은 그대로 유지됨)
+    public void updateToDeleteProfileImg(Integer id);
+
 //    회원 삭제
     public void delete(Integer Id);
 

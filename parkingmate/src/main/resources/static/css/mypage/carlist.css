@@ -510,3 +510,110 @@ ul, li {
   font-weight: 700;
   color: #495057;
 }
+
+
+.SimpleCar_creditCar_2nvHf{
+  position: relative;
+  border: 1px solid #5cdede;
+  border-radius: 8px;
+  background-color: #e7f9f9;
+  padding: 77px 20px;
+}
+
+.SimpleCar_carName_1no5L{
+  display: flex;
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  align-items: center;
+  color: #495057;
+  line-height: 20px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.SimpleCar_carName_1no5L::before {
+  display: inline-block;
+  margin-right: 8px;
+  background: url("car_add.svg") no-repeat center/16px 16px;
+  width: 16px;
+  height: 16px;
+  content: "";
+}
+
+.SimpleCar_editButton_Q120P{
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background-color: rgba(0,0,0,0);
+  cursor: pointer;
+  padding: 24px;
+  color: #495057;
+  line-height: 20px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.SimpleCar_deleteIcon_1tC7k{
+  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+}
+
+.SimpleCar_carNumber_3fnJ{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 28px;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  color: #00b2b2;
+}
+
+.SimpleCar_carNumber_3fnJ- span {
+  margin: -15px 5px 0;
+  height: 7px;
+}
+
+.SimpleCar_createdAt_Alwbk{
+  line-height: 20px;
+  font-weight: 400;
+  display: block;
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  margin-top: 6px;
+  text-align: center;
+  color: #868e96;
+  font-size: 14px;
+}
+
+.SimpleCar_createdAt_Alwbk>span{
+  margin-left: 8px;
+  line-height: 28px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.SimpleCar_notice_3PRPU {
+  display: block;
+  margin-top: 12px;
+  padding: 0;
+}
+
+.SimpleCar_notice_3PRPU{
+  position: relative;
+}
+
+.SimpleCarInfo_noticeList_VXr7r{
+  line-height: 20px;
+  font-size: 14px;
+  font-weight: 400;
+  padding-left: 16px;
+  color: #495057;
+}

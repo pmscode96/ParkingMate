@@ -12,6 +12,7 @@ import com.app.parkingmate.mapper.EventMapper;
 import com.app.parkingmate.mapper.UserMapper;
 import com.app.parkingmate.service.CouponServiceImpl;
 import com.app.parkingmate.service.CouponlistService;
+import com.app.parkingmate.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,9 @@ public class test {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private CouponlistService couponlistService;
@@ -151,6 +155,26 @@ public class test {
         userMapper.selectAll().stream().map(UserVO::toString).forEach(log::info);
     }
 
+    @Test
+    public void updateProfileTest(){
+        UserVO userVO = new UserVO();
 
+        userVO.setUserNickName("nathan");
+        userVO.setUserEmail("cnh1234578@gmail.com");
+        userVO.setUserPhoneNumber("null");
+        userVO.setId(217);
+        userService.updateProfile(userVO);
+    }
 
+    @Test
+    public void updateProfileMapperTest(){
+        UserVO userVO = new UserVO();
+
+        userVO.setUserNickName("nathan");
+        userVO.setUserEmail("cnh1234578@gmail.com");
+        userVO.setUserPhoneNumber("null");
+        userVO.setId(217);
+
+        userMapper.updateUser(userVO);
+    }
 }

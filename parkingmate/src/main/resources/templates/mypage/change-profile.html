@@ -1,209 +1,788 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ParkingMate</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParkingMate</title>
 
-  <style>.async-hide { opacity: 0 !important} </style>
-  <style type="text/css" data-fbcssmodules="css:fb.css.base css:fb.css.dialog css:fb.css.iframewidget css:fb.css.customer_chat_plugin_iframe">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:'lucida grande', tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
-    .fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:'lucida grande', tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
-    .fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_dialog_advanced{border-radius:8px;padding:10px}.fb_dialog_content{background:#fff;color:#373737}.fb_dialog_close_icon{background:url(https://connect.facebook.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{left:5px;right:auto;top:5px}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://connect.facebook.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://connect.facebook.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://connect.facebook.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{height:100%;left:0;margin:0;overflow:visible;position:absolute;top:-10000px;transform:none;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://connect.facebook.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{background:none;height:auto;min-height:initial;min-width:initial;width:auto}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{clear:both;color:#fff;display:block;font-size:18px;padding-top:20px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .4);bottom:0;left:0;min-height:100%;position:absolute;right:0;top:0;width:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_mobile .fb_dialog_iframe{position:sticky;top:0}.fb_dialog_content .dialog_header{background:linear-gradient(from(#738aba), to(#2c4987));border-bottom:1px solid;border-color:#043b87;box-shadow:white 0 1px 1px -1px inset;color:#fff;font:bold 14px Helvetica, sans-serif;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:linear-gradient(from(#4267B2), to(#2a4887));background-clip:padding-box;border:1px solid #29487d;border-radius:3px;display:inline-block;line-height:18px;margin-top:3px;max-width:85px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{background:none;border:none;color:#fff;font:bold 12px Helvetica, sans-serif;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://connect.facebook.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #4a4a4a;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f5f6f7;border:1px solid #4a4a4a;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://connect.facebook.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-position:50% 50%;background-repeat:no-repeat;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-    .fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}
-    .fb_mpn_mobile_landing_page_slide_out{animation-duration:200ms;animation-name:fb_mpn_landing_page_slide_out;transition-timing-function:ease-in}.fb_mpn_mobile_landing_page_slide_out_from_left{animation-duration:200ms;animation-name:fb_mpn_landing_page_slide_out_from_left;transition-timing-function:ease-in}.fb_mpn_mobile_landing_page_slide_up{animation-duration:500ms;animation-name:fb_mpn_landing_page_slide_up;transition-timing-function:ease-in}.fb_mpn_mobile_bounce_in{animation-duration:300ms;animation-name:fb_mpn_bounce_in;transition-timing-function:ease-in}.fb_mpn_mobile_bounce_out{animation-duration:300ms;animation-name:fb_mpn_bounce_out;transition-timing-function:ease-in}.fb_mpn_mobile_bounce_out_v2{animation-duration:300ms;animation-name:fb_mpn_fade_out;transition-timing-function:ease-in}.fb_customer_chat_bounce_in_v2{animation-duration:300ms;animation-name:fb_bounce_in_v2;transition-timing-function:ease-in}.fb_customer_chat_bounce_in_from_left{animation-duration:300ms;animation-name:fb_bounce_in_from_left;transition-timing-function:ease-in}.fb_customer_chat_bounce_out_v2{animation-duration:300ms;animation-name:fb_bounce_out_v2;transition-timing-function:ease-in}.fb_customer_chat_bounce_out_from_left{animation-duration:300ms;animation-name:fb_bounce_out_from_left;transition-timing-function:ease-in}.fb_invisible_flow{display:inherit;height:0;overflow-x:hidden;width:0}@keyframes fb_mpn_landing_page_slide_out{0%{margin:0 12px;width:100% - 24px}60%{border-radius:18px}100%{border-radius:50%;margin:0 24px;width:60px}}@keyframes fb_mpn_landing_page_slide_out_from_left{0%{left:12px;width:100% - 24px}60%{border-radius:18px}100%{border-radius:50%;left:12px;width:60px}}@keyframes fb_mpn_landing_page_slide_up{0%{bottom:0;opacity:0}100%{bottom:24px;opacity:1}}@keyframes fb_mpn_bounce_in{0%{opacity:.5;top:100%}100%{opacity:1;top:0}}@keyframes fb_mpn_fade_out{0%{bottom:30px;opacity:1}100%{bottom:0;opacity:0}}@keyframes fb_mpn_bounce_out{0%{opacity:1;top:0}100%{opacity:.5;top:100%}}@keyframes fb_bounce_in_v2{0%{opacity:0;transform:scale(0, 0);transform-origin:bottom right}50%{transform:scale(1.03, 1.03);transform-origin:bottom right}100%{opacity:1;transform:scale(1, 1);transform-origin:bottom right}}@keyframes fb_bounce_in_from_left{0%{opacity:0;transform:scale(0, 0);transform-origin:bottom left}50%{transform:scale(1.03, 1.03);transform-origin:bottom left}100%{opacity:1;transform:scale(1, 1);transform-origin:bottom left}}@keyframes fb_bounce_out_v2{0%{opacity:1;transform:scale(1, 1);transform-origin:bottom right}100%{opacity:0;transform:scale(0, 0);transform-origin:bottom right}}@keyframes fb_bounce_out_from_left{0%{opacity:1;transform:scale(1, 1);transform-origin:bottom left}100%{opacity:0;transform:scale(0, 0);transform-origin:bottom left}}@keyframes slideInFromBottom{0%{opacity:.1;transform:translateY(100%)}100%{opacity:1;transform:translateY(0)}}@keyframes slideInFromBottomDelay{0%{opacity:0;transform:translateY(100%)}97%{opacity:0;transform:translateY(100%)}100%{opacity:1;transform:translateY(0)}}</style>
+    <style>.async-hide {
+        opacity: 0 !important
+    } </style>
+    <style type="text/css"
+           data-fbcssmodules="css:fb.css.base css:fb.css.dialog css:fb.css.iframewidget css:fb.css.customer_chat_plugin_iframe">.fb_hidden {
+        position: absolute;
+        top: -10000px;
+        z-index: 10001
+    }
 
-  <link rel="shortcut icon" href="/images/favicon.ico">
-  <link rel="stylesheet" href="/css/mypage/font.css">
-  <link rel="stylesheet" href="/css/fragment/header.css" />
-  <link rel="stylesheet" href="/css/fragment/footer.css" />
-  <link rel="stylesheet" href="https://static.wadiz.kr/assets/fonts/font.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/7f85a56ba4.css">
-  <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/supporter-club-intro.978fbaa0.chunk.css">
-  <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/my-wadiz.8de3e6d3.chunk.css">
-  <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/wadiz-day.afe7a0c1.chunk.css">
-  <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/wadiz-day~wishes.3f77e16d.chunk.css">
-  <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/0.12412ac2.chunk.css">
-  <link rel="stylesheet" href="https://static.wadiz.kr/main/main.d37df1e2.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.wadiz.kr/resources/static/editor/4.0.15/froala_editor.pkgd.min.css?20230613">
-  <link rel="stylesheet" type="text/css" href="https://cdn.wadiz.kr/resources/static/editor/4.0.15/froala_custom.css?v=20221122">
-  <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/my-wadiz.8de3e6d3.chunk.css">
-  <link rel="stylesheet" href="https://static.wadiz.kr/main/main.d37df1e2.css">
-  <link rel="stylesheet" href="/css/mypage/ChangeProfile.css">
-  <link rel="stylesheet" href="/css/mypage/mypagemobile.css">
-  <link rel="mask-icon" href="/resources/static/svg/wa.svg" color="#1d2129">
+    .fb_reposition {
+        overflow: hidden;
+        position: relative
+    }
+
+    .fb_invisible {
+        display: none
+    }
+
+    .fb_reset {
+        background: none;
+        border: 0;
+        border-spacing: 0;
+        color: #000;
+        cursor: auto;
+        direction: ltr;
+        font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+        font-size: 11px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: normal;
+        letter-spacing: normal;
+        line-height: 1;
+        margin: 0;
+        overflow: visible;
+        padding: 0;
+        text-align: left;
+        text-decoration: none;
+        text-indent: 0;
+        text-shadow: none;
+        text-transform: none;
+        visibility: visible;
+        white-space: normal;
+        word-spacing: normal
+    }
+
+    .fb_reset > div {
+        overflow: hidden
+    }
+
+    @keyframes fb_transform {
+        from {
+            opacity: 0;
+            transform: scale(.95)
+        }
+        to {
+            opacity: 1;
+            transform: scale(1)
+        }
+    }
+
+    .fb_animate {
+        animation: fb_transform .3s forwards
+    }
+
+    .fb_hidden {
+        position: absolute;
+        top: -10000px;
+        z-index: 10001
+    }
+
+    .fb_reposition {
+        overflow: hidden;
+        position: relative
+    }
+
+    .fb_invisible {
+        display: none
+    }
+
+    .fb_reset {
+        background: none;
+        border: 0;
+        border-spacing: 0;
+        color: #000;
+        cursor: auto;
+        direction: ltr;
+        font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+        font-size: 11px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: normal;
+        letter-spacing: normal;
+        line-height: 1;
+        margin: 0;
+        overflow: visible;
+        padding: 0;
+        text-align: left;
+        text-decoration: none;
+        text-indent: 0;
+        text-shadow: none;
+        text-transform: none;
+        visibility: visible;
+        white-space: normal;
+        word-spacing: normal
+    }
+
+    .fb_reset > div {
+        overflow: hidden
+    }
+
+    @keyframes fb_transform {
+        from {
+            opacity: 0;
+            transform: scale(.95)
+        }
+        to {
+            opacity: 1;
+            transform: scale(1)
+        }
+    }
+
+    .fb_animate {
+        animation: fb_transform .3s forwards
+    }
+
+    .fb_dialog {
+        background: rgba(82, 82, 82, .7);
+        position: absolute;
+        top: -10000px;
+        z-index: 10001
+    }
+
+    .fb_dialog_advanced {
+        border-radius: 8px;
+        padding: 10px
+    }
+
+    .fb_dialog_content {
+        background: #fff;
+        color: #373737
+    }
+
+    .fb_dialog_close_icon {
+        background: url(https://connect.facebook.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;
+        cursor: pointer;
+        display: block;
+        height: 15px;
+        position: absolute;
+        right: 18px;
+        top: 17px;
+        width: 15px
+    }
+
+    .fb_dialog_mobile .fb_dialog_close_icon {
+        left: 5px;
+        right: auto;
+        top: 5px
+    }
+
+    .fb_dialog_padding {
+        background-color: transparent;
+        position: absolute;
+        width: 1px;
+        z-index: -1
+    }
+
+    .fb_dialog_close_icon:hover {
+        background: url(https://connect.facebook.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent
+    }
+
+    .fb_dialog_close_icon:active {
+        background: url(https://connect.facebook.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent
+    }
+
+    .fb_dialog_iframe {
+        line-height: 0
+    }
+
+    .fb_dialog_content .dialog_title {
+        background: #6d84b4;
+        border: 1px solid #365899;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+        margin: 0
+    }
+
+    .fb_dialog_content .dialog_title > span {
+        background: url(https://connect.facebook.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;
+        float: left;
+        padding: 5px 0 7px 26px
+    }
+
+    body.fb_hidden {
+        height: 100%;
+        left: 0;
+        margin: 0;
+        overflow: visible;
+        position: absolute;
+        top: -10000px;
+        transform: none;
+        width: 100%
+    }
+
+    .fb_dialog.fb_dialog_mobile.loading {
+        background: url(https://connect.facebook.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;
+        min-height: 100%;
+        min-width: 100%;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        z-index: 10001
+    }
+
+    .fb_dialog.fb_dialog_mobile.loading.centered {
+        background: none;
+        height: auto;
+        min-height: initial;
+        min-width: initial;
+        width: auto
+    }
+
+    .fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner {
+        width: 100%
+    }
+
+    .fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content {
+        background: none
+    }
+
+    .loading.centered #fb_dialog_loader_close {
+        clear: both;
+        color: #fff;
+        display: block;
+        font-size: 18px;
+        padding-top: 20px
+    }
+
+    #fb-root #fb_dialog_ipad_overlay {
+        background: rgba(0, 0, 0, .4);
+        bottom: 0;
+        left: 0;
+        min-height: 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100%;
+        z-index: 10000
+    }
+
+    #fb-root #fb_dialog_ipad_overlay.hidden {
+        display: none
+    }
+
+    .fb_dialog.fb_dialog_mobile.loading iframe {
+        visibility: hidden
+    }
+
+    .fb_dialog_mobile .fb_dialog_iframe {
+        position: sticky;
+        top: 0
+    }
+
+    .fb_dialog_content .dialog_header {
+        background: linear-gradient(from(#738aba), to(#2c4987));
+        border-bottom: 1px solid;
+        border-color: #043b87;
+        box-shadow: white 0 1px 1px -1px inset;
+        color: #fff;
+        font: bold 14px Helvetica, sans-serif;
+        text-overflow: ellipsis;
+        text-shadow: rgba(0, 30, 84, .296875) 0 -1px 0;
+        vertical-align: middle;
+        white-space: nowrap
+    }
+
+    .fb_dialog_content .dialog_header table {
+        height: 43px;
+        width: 100%
+    }
+
+    .fb_dialog_content .dialog_header td.header_left {
+        font-size: 12px;
+        padding-left: 5px;
+        vertical-align: middle;
+        width: 60px
+    }
+
+    .fb_dialog_content .dialog_header td.header_right {
+        font-size: 12px;
+        padding-right: 5px;
+        vertical-align: middle;
+        width: 60px
+    }
+
+    .fb_dialog_content .touchable_button {
+        background: linear-gradient(from(#4267B2), to(#2a4887));
+        background-clip: padding-box;
+        border: 1px solid #29487d;
+        border-radius: 3px;
+        display: inline-block;
+        line-height: 18px;
+        margin-top: 3px;
+        max-width: 85px;
+        padding: 4px 12px;
+        position: relative
+    }
+
+    .fb_dialog_content .dialog_header .touchable_button input {
+        background: none;
+        border: none;
+        color: #fff;
+        font: bold 12px Helvetica, sans-serif;
+        margin: 2px -12px;
+        padding: 2px 6px 3px 6px;
+        text-shadow: rgba(0, 30, 84, .296875) 0 -1px 0
+    }
+
+    .fb_dialog_content .dialog_header .header_center {
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 18px;
+        text-align: center;
+        vertical-align: middle
+    }
+
+    .fb_dialog_content .dialog_content {
+        background: url(https://connect.facebook.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;
+        border: 1px solid #4a4a4a;
+        border-bottom: 0;
+        border-top: 0;
+        height: 150px
+    }
+
+    .fb_dialog_content .dialog_footer {
+        background: #f5f6f7;
+        border: 1px solid #4a4a4a;
+        border-top-color: #ccc;
+        height: 40px
+    }
+
+    #fb_dialog_loader_close {
+        float: left
+    }
+
+    .fb_dialog.fb_dialog_mobile .fb_dialog_close_icon {
+        visibility: hidden
+    }
+
+    #fb_dialog_loader_spinner {
+        animation: rotateSpinner 1.2s linear infinite;
+        background-color: transparent;
+        background-image: url(https://connect.facebook.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        height: 24px;
+        width: 24px
+    }
+
+    @keyframes rotateSpinner {
+        0% {
+            transform: rotate(0deg)
+        }
+        100% {
+            transform: rotate(360deg)
+        }
+    }
+
+    .fb_iframe_widget {
+        display: inline-block;
+        position: relative
+    }
+
+    .fb_iframe_widget span {
+        display: inline-block;
+        position: relative;
+        text-align: justify
+    }
+
+    .fb_iframe_widget iframe {
+        position: absolute
+    }
+
+    .fb_iframe_widget_fluid_desktop, .fb_iframe_widget_fluid_desktop span, .fb_iframe_widget_fluid_desktop iframe {
+        max-width: 100%
+    }
+
+    .fb_iframe_widget_fluid_desktop iframe {
+        min-width: 220px;
+        position: relative
+    }
+
+    .fb_iframe_widget_lift {
+        z-index: 1
+    }
+
+    .fb_iframe_widget_fluid {
+        display: inline
+    }
+
+    .fb_iframe_widget_fluid span {
+        width: 100%
+    }
+
+    .fb_mpn_mobile_landing_page_slide_out {
+        animation-duration: 200ms;
+        animation-name: fb_mpn_landing_page_slide_out;
+        transition-timing-function: ease-in
+    }
+
+    .fb_mpn_mobile_landing_page_slide_out_from_left {
+        animation-duration: 200ms;
+        animation-name: fb_mpn_landing_page_slide_out_from_left;
+        transition-timing-function: ease-in
+    }
+
+    .fb_mpn_mobile_landing_page_slide_up {
+        animation-duration: 500ms;
+        animation-name: fb_mpn_landing_page_slide_up;
+        transition-timing-function: ease-in
+    }
+
+    .fb_mpn_mobile_bounce_in {
+        animation-duration: 300ms;
+        animation-name: fb_mpn_bounce_in;
+        transition-timing-function: ease-in
+    }
+
+    .fb_mpn_mobile_bounce_out {
+        animation-duration: 300ms;
+        animation-name: fb_mpn_bounce_out;
+        transition-timing-function: ease-in
+    }
+
+    .fb_mpn_mobile_bounce_out_v2 {
+        animation-duration: 300ms;
+        animation-name: fb_mpn_fade_out;
+        transition-timing-function: ease-in
+    }
+
+    .fb_customer_chat_bounce_in_v2 {
+        animation-duration: 300ms;
+        animation-name: fb_bounce_in_v2;
+        transition-timing-function: ease-in
+    }
+
+    .fb_customer_chat_bounce_in_from_left {
+        animation-duration: 300ms;
+        animation-name: fb_bounce_in_from_left;
+        transition-timing-function: ease-in
+    }
+
+    .fb_customer_chat_bounce_out_v2 {
+        animation-duration: 300ms;
+        animation-name: fb_bounce_out_v2;
+        transition-timing-function: ease-in
+    }
+
+    .fb_customer_chat_bounce_out_from_left {
+        animation-duration: 300ms;
+        animation-name: fb_bounce_out_from_left;
+        transition-timing-function: ease-in
+    }
+
+    .fb_invisible_flow {
+        display: inherit;
+        height: 0;
+        overflow-x: hidden;
+        width: 0
+    }
+
+    @keyframes fb_mpn_landing_page_slide_out {
+        0% {
+            margin: 0 12px;
+            width: 100% -24px
+        }
+        60% {
+            border-radius: 18px
+        }
+        100% {
+            border-radius: 50%;
+            margin: 0 24px;
+            width: 60px
+        }
+    }
+
+    @keyframes fb_mpn_landing_page_slide_out_from_left {
+        0% {
+            left: 12px;
+            width: 100% -24px
+        }
+        60% {
+            border-radius: 18px
+        }
+        100% {
+            border-radius: 50%;
+            left: 12px;
+            width: 60px
+        }
+    }
+
+    @keyframes fb_mpn_landing_page_slide_up {
+        0% {
+            bottom: 0;
+            opacity: 0
+        }
+        100% {
+            bottom: 24px;
+            opacity: 1
+        }
+    }
+
+    @keyframes fb_mpn_bounce_in {
+        0% {
+            opacity: .5;
+            top: 100%
+        }
+        100% {
+            opacity: 1;
+            top: 0
+        }
+    }
+
+    @keyframes fb_mpn_fade_out {
+        0% {
+            bottom: 30px;
+            opacity: 1
+        }
+        100% {
+            bottom: 0;
+            opacity: 0
+        }
+    }
+
+    @keyframes fb_mpn_bounce_out {
+        0% {
+            opacity: 1;
+            top: 0
+        }
+        100% {
+            opacity: .5;
+            top: 100%
+        }
+    }
+
+    @keyframes fb_bounce_in_v2 {
+        0% {
+            opacity: 0;
+            transform: scale(0, 0);
+            transform-origin: bottom right
+        }
+        50% {
+            transform: scale(1.03, 1.03);
+            transform-origin: bottom right
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1, 1);
+            transform-origin: bottom right
+        }
+    }
+
+    @keyframes fb_bounce_in_from_left {
+        0% {
+            opacity: 0;
+            transform: scale(0, 0);
+            transform-origin: bottom left
+        }
+        50% {
+            transform: scale(1.03, 1.03);
+            transform-origin: bottom left
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1, 1);
+            transform-origin: bottom left
+        }
+    }
+
+    @keyframes fb_bounce_out_v2 {
+        0% {
+            opacity: 1;
+            transform: scale(1, 1);
+            transform-origin: bottom right
+        }
+        100% {
+            opacity: 0;
+            transform: scale(0, 0);
+            transform-origin: bottom right
+        }
+    }
+
+    @keyframes fb_bounce_out_from_left {
+        0% {
+            opacity: 1;
+            transform: scale(1, 1);
+            transform-origin: bottom left
+        }
+        100% {
+            opacity: 0;
+            transform: scale(0, 0);
+            transform-origin: bottom left
+        }
+    }
+
+    @keyframes slideInFromBottom {
+        0% {
+            opacity: .1;
+            transform: translateY(100%)
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0)
+        }
+    }
+
+    @keyframes slideInFromBottomDelay {
+        0% {
+            opacity: 0;
+            transform: translateY(100%)
+        }
+        97% {
+            opacity: 0;
+            transform: translateY(100%)
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0)
+        }
+    }</style>
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/css/mypage/font.css">
+    <link rel="stylesheet" href="/css/fragment/header.css"/>
+    <link rel="stylesheet" href="/css/fragment/footer.css"/>
+    <link rel="stylesheet" href="https://static.wadiz.kr/assets/fonts/font.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/7f85a56ba4.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://static.wadiz.kr/main/css/supporter-club-intro.978fbaa0.chunk.css">
+    <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/my-wadiz.8de3e6d3.chunk.css">
+    <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/wadiz-day.afe7a0c1.chunk.css">
+    <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/wadiz-day~wishes.3f77e16d.chunk.css">
+    <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/0.12412ac2.chunk.css">
+    <link rel="stylesheet" href="https://static.wadiz.kr/main/main.d37df1e2.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.wadiz.kr/resources/static/editor/4.0.15/froala_editor.pkgd.min.css?20230613">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.wadiz.kr/resources/static/editor/4.0.15/froala_custom.css?v=20221122">
+    <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/my-wadiz.8de3e6d3.chunk.css">
+    <link rel="stylesheet" href="https://static.wadiz.kr/main/main.d37df1e2.css">
+    <link rel="stylesheet" href="/css/mypage/ChangeProfile.css">
+    <link rel="stylesheet" href="/css/mypage/mypagemobile.css">
+    <link rel="mask-icon" href="/resources/static/svg/wa.svg" color="#1d2129">
 </head>
 <body>
-  <div id="fb-root" class="fb_rest">
+<div id="fb-root" class="fb_rest">
     <div style="position: absolute; top: -10000px; width: 0px; height: 0px;">
-      <div></div>
+        <div></div>
     </div>
-  </div>
- <!-- 전체적인 페이지 틀 -->
-  <div id="papge-container">
+</div>
+<!-- 전체적인 페이지 틀 -->
+<div id="papge-container">
     <main id="main-app">
-      <!-- 상단 바 -->
-      <th:block th:replace="~{fragment/header :: header}"></th:block>
-      <th:block th:replace="~{fragment/footer-button :: footer-button}"></th:block>
+        <!-- 상단 바 -->
+        <th:block th:replace="~{fragment/header :: header}"></th:block>
+        <th:block th:replace="~{fragment/footer-button :: footer-button}"></th:block>
     </main>
     <!-- 상단바를 제외한 메인 layer -->
     <div class="MainWrapper_content_GZkTa">
-      <div class="MyRewardContainer_container_2qXDp">
-        <h2 class="MyRewardContainer_title_2TKbO">Profile 이미지 변경</h2>
-        <!-- 이미지 미리보기 layer -->
-        <div class="MyRewardContainer_column_1d06O">
-          <div class="SimplePayInfo_simplePayInfo_ejCel" id="registCardInfo">
-            <h3 class="SimplePayInfo_title_1a9F1">Profile 이미지 미리보기</h3>
-            <!-- 이미지 미리보기 및 이미지 등록 layer -->
-            <div class="SimplePayCard_simplecard_2wYo7 SimplePayCard_info_3rLl3 SimplePayCard_noInfo_pdX40">
-              <div class="SimplePayCard_unregisted_2uiqp">
-                <div class="SimplePayCard_addCard_2eagF">
-                  <svg viewBox="0 0 32 32" focusable="false" role="presentation" class="withIcon_icon_3VTbq SimplePayCard_addIcon_2DOov" aria-hidden="true">
-                    <path d="M30.4 15.2H16.8V1.6h-1.6v13.6H1.6v1.6h13.6v13.6h1.6V16.8h13.6v-1.6z"></path>
-                  </svg>
-                  <span class="SimplePayCard_title_PpPWZ">이미지 등록</span>
-                  <span class="SimplePayCard_description_IFa0t">변경할 Profile 이미지를 등록하세요</span>
+        <div class="MyRewardContainer_container_2qXDp">
+            <h2 class="MyRewardContainer_title_2TKbO">Profile 이미지 변경</h2>
+            <!-- 이미지 미리보기 layer -->
+            <div class="MyRewardContainer_column_1d06O">
+                <div class="SimplePayInfo_simplePayInfo_ejCel" id="registCardInfo">
+                    <h3 class="SimplePayInfo_title_1a9F1">Profile 이미지 미리보기</h3>
+                    <!-- 이미지 미리보기 및 이미지 등록 layer -->
+                    <div class="SimplePayCard_simplecard_2wYo7 SimplePayCard_info_3rLl3 SimplePayCard_noInfo_pdX40">
+                        <div class="SimplePayCard_unregisted_2uiqp">
+                            <label for="imageUploadContainer" class="SimplePayCard_addCard_2eagF">
+                                <img class="imageContainer">
+                                <button class="profile-img-delete-btn">
+                                    <svg height="16" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
+                                        <polygon fill-rule="evenodd"
+                                                 points="8 9.414 3.707 13.707 2.293 12.293 6.586 8 2.293 3.707 3.707 2.293 8 6.586 12.293 2.293 13.707 3.707 9.414 8 13.707 12.293 12.293 13.707 8 9.414"/>
+                                    </svg>
+                                </button>
+                                <svg viewBox="0 0 32 32" focusable="false" role="presentation"
+                                     class="withIcon_icon_3VTbq SimplePayCard_addIcon_2DOov" aria-hidden="true">
+                                    <path d="M30.4 15.2H16.8V1.6h-1.6v13.6H1.6v1.6h13.6v13.6h1.6V16.8h13.6v-1.6z"></path>
+                                </svg>
+                                <span class="SimplePayCard_title_PpPWZ">이미지 등록</span>
+                                <span class="SimplePayCard_description_IFa0t">변경할 Profile 이미지를 등록하세요</span>
+                            </label>
+                            <div class="SimplePayCard_notice_3PRPU">
+                                <svg viewBox="0 0 40 40" focusable="false" role="presentation"
+                                     class="withIcon_icon_3VTbq withIcon_inline_1lwwX" aria-hidden="true">
+                                    <path fill="none" d="M0 0h40v40H0z"></path>
+                                    <path d="M20 39a19 19 0 1 1 19-19 19.06 19.06 0 0 1-19 19zm0-36a17 17 0 1 0 17 17A17 17 0 0 0 20 3z"></path>
+                                    <path d="M20 26a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 1 0 0-3.6zm-1.04-15.83h2.08v13h-2.08z"></path>
+                                </svg>
+                                <em>ParkingMate에서 카드번호를 저장하지 않습니다!</em>
+                                <p>카드사에서 제공하는 암호화된 정보만을 저장하기 때문에 안심하셔도 됩니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <form th:action="@{/mypage/img-upload}" name="file-form" method="post"
+                          enctype="multipart/form-data">
+                        <input id="imageUploadContainer" name="uploadFile" class="imageUploadContainer"
+                               style="display: none"
+                               type="file"
+                               accept="image/jpg,image/png,image/jpeg,image/gif">
+                    </form>
+                    <div class="btn-wrap">
+                        <button type="submit" id="saveBtn" class="pm button primary block btn-block-mint">확인
+                        </button>
+                    </div>
                 </div>
-                <div class="SimplePayCard_notice_3PRPU">
-                  <svg viewBox="0 0 40 40" focusable="false" role="presentation" class="withIcon_icon_3VTbq withIcon_inline_1lwwX" aria-hidden="true">
-                    <path fill="none" d="M0 0h40v40H0z"></path>
-                    <path d="M20 39a19 19 0 1 1 19-19 19.06 19.06 0 0 1-19 19zm0-36a17 17 0 1 0 17 17A17 17 0 0 0 20 3z"></path>
-                    <path d="M20 26a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 1 0 0-3.6zm-1.04-15.83h2.08v13h-2.08z"></path>
-                  </svg>
-                  <em>ParkingMate에서 카드번호를 저장하지 않습니다!</em>
-                  <p>카드사에서 제공하는 암호화된 정보만을 저장하기 때문에 안심하셔도 됩니다.</p>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <!-- 하단 메뉴바 -->
-  <ul class="ParkingMateMobile_container_1OTMW">
-    <!-- 하단 메뉴 첫번째 -->
-    <li class="ParkingMateMobile_item_1b4ZL">
-      <a class="ParkingMateMobile_link_t1Y9t" href="" >
-        <!-- 하단 메뉴 첫번째 아이콘 -->
-        <span class="MyParkingMateMenu_icon_Home_pwW81" aria-hidden="true">
-          <i class="MyParkingMateSupporterProjectHome_icon_32Rsj" aria-hidden="true"></i>
-        </span>
-        <span class="ParkingMateMobile_text_2-voS">홈</span>
-      </a>
-    </li>
-    <!-- 하단 메뉴 두번째 -->
-    <li class="ParkingMateMobile_item_1b4ZL">
-      <a class="ParkingMateMobile_link_t1Y9t" href="" >
-        <span class="MyParkingMateMenu_icon_registor_pwW81" aria-hidden="true">
-          <i class="MyParkingMateSupporterProjectregistor_icon_32Rsj" aria-hidden="true"></i>
-        </span>
-        <span class="ParkingMateMobile_text_2-voS">예약하기</span>
-      </a>
-    </li>
-    <!-- 하단 메뉴 세번째 -->
-    <li class="ParkingMateMobile_item_1b4ZL">
-      <a class="ParkingMateMobile_link_t1Y9t" href="" >
-        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8ZGVmcz4KICAgICAgICA8cGF0aCBpZD0icjRzeW8za3R4YSIgZD0iTTAgMGg0MHY0MEgweiIvPgogICAgPC9kZWZzPgogICAgPGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8Zz4KICAgICAgICAgICAgPG1hc2sgaWQ9Im1kajRrdnh3amIiIGZpbGw9IiNmZmYiPgogICAgICAgICAgICAgICAgPHVzZSB4bGluazpocmVmPSIjcjRzeW8za3R4YSIvPgogICAgICAgICAgICA8L21hc2s+CiAgICAgICAgICAgIDxwYXRoIGQ9Ik0yMCAwQzguOTU0IDAgMCA4Ljk1NSAwIDIwYzAgMTEuMDQ2IDguOTU0IDIwIDIwIDIwczIwLTguOTU0IDIwLTIwQzQwIDguOTU1IDMxLjA0NiAwIDIwIDBtMCAxYzEwLjQ3NyAwIDE5IDguNTIzIDE5IDE5cy04LjUyMyAxOS0xOSAxOVMxIDMwLjQ3NyAxIDIwIDkuNTIzIDEgMjAgMSIgZmlsbD0iIzg2OEU5NiIgbWFzaz0idXJsKCNtZGo0a3Z4d2piKSIvPgogICAgICAgIDwvZz4KICAgICAgICA8cGF0aCBzdHJva2U9IiM4NjhFOTYiIGQ9Ik0yMCAxMXYxOE0yOSAyMEgxMSIvPgogICAgPC9nPgo8L3N2Zz4K" alt="">
-      </a>
-    </li>
-    <!-- 하단 메뉴 네번째 -->
-    <li class="ParkingMateMobile_item_1b4ZL">
-      <a class="ParkingMateMobile_link_t1Y9t" href="" >
-        <svg viewBox="0 0 32 32" focusable="false" role="presentation" class="withIcon_icon_3VTbq ParkingMateMobile_icon_3OOAF" aria-hidden="true" style="width: 24px; height: 24px;">
-          <path d="M22.16 4h-.007a8.142 8.142 0 0 0-6.145 2.79A8.198 8.198 0 0 0 9.76 3.998a7.36 7.36 0 0 0-7.359 7.446c0 5.116 4.64 9.276 11.6 15.596l2 1.76 2-1.76c6.96-6.32 11.6-10.48 11.6-15.6v-.08A7.36 7.36 0 0 0 22.241 4h-.085zm-5.28 21.84l-.88.8-.88-.8h-.08C8.4 19.76 4 15.84 4 11.44l-.001-.082A5.76 5.76 0 0 1 9.928 5.6a6.542 6.542 0 0 1 4.865 2.232l.486.567h1.52l.48-.56a6.548 6.548 0 0 1 4.877-2.24l.084-.001a5.76 5.76 0 0 1 5.76 5.76l-.001.085c0 4.396-4.4 8.316-11.12 14.396z"></path>
-        </svg>
-        <span class="ParkingMateMobile_text_2-voS">이벤트</span>
-      </a>
-    </li>
-
-    <!-- 하단 메뉴 다섯번째 -->
-    <li class="ParkingMateMobile_item_1b4ZL">
-      <a class="ParkingMateMobile_link_t1Y9t ParkingMateMobile_active_3WNf8" href="#" >
-        <svg viewBox="0 0 40 40" focusable="false" role="presentation" class="withIcon_icon_3VTbq ParkingMateMobile_icon_3OOAF ParkingMateMobile_active_3WNf8" aria-hidden="true" style="width: 24px; height: 24px;">
-          <path d="M20.27 3.46a9.42 9.42 0 1 0 0 18.84 9.42 9.42 0 1 0 0-18.84zm0 22.13c-6.52 0-15.19 1.09-15.19 10.57h30.38c0-9.48-8.67-10.57-15.19-10.57z"></path>
-          <path fill="none" d="M0 0h40v40H0z"></path>
-        </svg>
-        <span class="ParkingMateMobile_text_2-voS">마이페이지</span>
-      </a>
-    </li>
-  </ul>
+</div>
 </body>
+
 <script>
-  // 크롬에서 실행안됨... 
-  const input = document.querySelector('#registCardInfo > div > div');
-  const preview = document.querySelector('.preview');
+    const file = document.querySelector("#imageUploadContainer");
+    const profileImgForm = document.querySelector("form[name='file-form']");
+    const cancel = document.querySelector(".profile-img-delete-btn");
+    const send = document.querySelector("#saveBtn");
+    const form = document.querySelector("form[name='file-form']");
 
-  input.addEventListener('change', showTextFile);
+    send.addEventListener("click", ()=>{
+        form.submit();
+    })
 
-  function showTextFile() {
-    const selectedFiles = input.files;
-    const list = document.createElement('ul');
-    preview.appendChild(list);
-    
-    for(const file of selectedFiles) {
-      const listItem = document.createElement('li');
+    cancel.addEventListener("click", () => {
+        document.querySelector(".profile-img-delete-btn").style.display = "none";
+        document.querySelector(".imageContainer").setAttribute("src", "");
+        document.querySelector("input[name='uuid']").value = "";
+    })
 
-      if(validFileType(file)) {
-        const summary = document.createElement('div');
-        summary.textContent = `파일명 : ${file.name}, 파일 크기 : ${returnFileSize(file.size)}.`;
-        const textContents = document.createElement('div');
-        
-        let reader = new FileReader();
-        reader.onload = function () {
-          textContents.innerText = reader.result;
-        };
-        reader.readAsText(file, "UTF-8");
-        
-        listItem.appendChild(summary);
-        listItem.appendChild(textContents);
-      } else {
-        const message = document.createElement('div');
-        message.textContent = `파일명 ${file.name}: .txt 파일을 선택하세요`;
-        listItem.appendChild(message);
-      }
 
-      list.appendChild(listItem);
-    }
-  }
+    file.addEventListener("change", async (e) => {
+        try {
+            const file = e.target.files[0];
+            const name = file.name;
+            const formData = new FormData();
+            formData.append("uploadFile", e.target.files[0]);
+            console.log(e.target.files[0]);
 
-  const fileTypes = [
-    'text/plain',
-  ];
+            const response = await fetch("/file/upload", {
+                method: "POST",
+                body: formData
+            });
 
-  function validFileType(file) {
-    return fileTypes.includes(file.type);
-  }
+            const uuid = await response.json();
+            console.log(uuid);
 
-  function returnFileSize(number) {
-    if(number < 1024) {
-      return number + 'bytes';
-    } else if(number > 1024 && number < 1048576) {
-      return (number/1024).toFixed(1) + 'KB';
-    } else if(number > 1048576) {
-      return (number/1048576).toFixed(1) + 'MB';
-    }
-  }
-  // 이미지 등록 버튼 클릭 이벤트
-  const addCard = document.querySelector("#registCardInfo > div");
+            let now = new Date();
+            let year = now.getFullYear();
+            let month = now.getMonth() + 1;
+            let date = now.getDate();
+            month = month < 10 ? '0' + month : month;
+            date = date < 10 ? '0' + date : date;
+            let fileName = `${year}/${month}/${date}/t_${uuid[0]}_${name}`;
+            document.querySelector(".imageContainer").setAttribute("src", `/file/display?fileName=${fileName}`)
+            document.querySelector(".profile-img-delete-btn").style.display = "flex";
 
-  addCard.addEventListener("click", (e) => {
-    showTextFile();
-  })
+            let input = document.createElement("input");
+            input.name = "uuid";
+            input.value = uuid[0];
+            input.type = "hidden";
+            profileImgForm.append(input);
 
-  // 뒤로가기 버튼 클릭 시
-  const backbutton = document.querySelector("#main-app > div > div > header > div > button.HeaderMobile_button_3V4yt.HeaderMobile_back_mSo62");
-  const link2 = 'mypageMobile.html'
-  backbutton.addEventListener("click",(e) =>{
-
-  location.replace(link2);
-  })
-
-  // 마이페이지 아이콘 클릭 시
-  const mypageicon = document.querySelector("body > ul > li:nth-child(5) > a");
-
-  mypageicon.addEventListener("click",(e) =>{
-
-  location.replace(link2);
-  })
+        } catch (error) {
+            console.error("오류 발생:", error);
+        }
+    });
 </script>
 </html>
