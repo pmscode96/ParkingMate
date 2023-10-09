@@ -109,6 +109,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void updateProfile(UserVO userVO) {
+        userDAO.updateProfile(userVO);
+    }
+
+    @Override
+    public void uploadProfileImg(UserVO userVO) {
+        userDAO.updateProfileImg(userVO);
+    }
+
+    @Override
+    public void deleteProfileImg(Integer id) {
+        userDAO.deleteProfileImg(id);
+    }
+
+    @Override
     public List<UserVO> selectAllUser() {
         return userDAO.selectAllUser();
     }

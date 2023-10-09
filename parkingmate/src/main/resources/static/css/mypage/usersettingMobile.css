@@ -609,6 +609,11 @@ div[title] {
   margin-right: 8px;
 }
 
+#changephoneNumber-result {
+  display: none;
+  color: red;
+}
+
 .Button_button_2FuOU {
   position: relative;
   transition-property: background-color,border-color,color,opacity;
@@ -621,6 +626,7 @@ div[title] {
   white-space: nowrap;
   color: #495057;
   font-weight: 500;
+  cursor: pointer;
 }
 
 .Button_button_2FuOU.Button_lg_1Dftp {

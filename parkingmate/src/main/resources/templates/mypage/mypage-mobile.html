@@ -270,7 +270,6 @@
     }
 
     .fb_dialog_content .dialog_header {
-        background: linear-gradient(from(#738aba), to(#2c4987));
         border-bottom: 1px solid;
         border-color: #043b87;
         box-shadow: white 0 1px 1px -1px inset;
@@ -302,7 +301,6 @@
     }
 
     .fb_dialog_content .touchable_button {
-        background: linear-gradient(from(#4267B2), to(#2a4887));
         background-clip: padding-box;
         border: 1px solid #29487d;
         border-radius: 3px;
@@ -481,7 +479,7 @@
     @keyframes fb_mpn_landing_page_slide_out {
         0% {
             margin: 0 12px;
-            width: 100% -24px
+            width: 100%;
         }
         60% {
             border-radius: 18px
@@ -496,7 +494,7 @@
     @keyframes fb_mpn_landing_page_slide_out_from_left {
         0% {
             left: 12px;
-            width: 100% -24px;
+            width: 100%;
         }
         60% {
             border-radius: 18px
@@ -721,36 +719,46 @@
                                         <button type="button" class="MyParkingMateSupporterProfile_detailProfile_JoIEU"
                                                 aria-label="프로필 상세 보기" data-event="profile"
                                                 style="background-image: url(https://static.wadiz.kr/assets/icon/profile-icon-6.png);">
-                                            <img th:if="${session.user != null}" th:src="${session.user.UserProfile}">
+                                            <th:block th:if="${session.user != null}">
+                                                <img class="profile-img" th:if="${session.user.userProfileName == null}"
+                                                     th:src="${session.user.UserProfile}">
+                                                <img class="profile-img" th:if="${session.user.userProfileName != null}"
+                                                     th:src="@{/file/display(fileName=${session.user.userProfilePath} + '/' + ${session.user.userProfileName})}">
+                                            </th:block>
                                         </button>
                                         <!-- 프로필 이미지의 펜 이미지 -->
-                                        <div type="button" class="MyParkingMateSupporterProfile_editProfile_1Zcs_"
-                                             data-event="profile_edit" aria-label="프로필 편집하기">
-                                            <svg viewBox="0 0 32 32" focusable="false" role="presentation"
-                                                 class="withIcon_icon_3VTbq" aria-hidden="true">
-                                                <path d="M24 1.6L1.6 24v6.4H8L30.4 8zM7.36 28.8H3.2v-4.16L19.76 8.08l4.16 4.16zm17.68-17.68l-4.16-4.16L24 3.84 28.16 8z"></path>
-                                            </svg>
-                                        </div>
+                                        <a href="/mypage/change-profile">
+                                            <div type="button" class="MyParkingMateSupporterProfile_editProfile_1Zcs_"
+                                                 data-event="profile_edit" aria-label="프로필 편집하기">
+                                                <svg viewBox="0 0 32 32" focusable="false" role="presentation"
+                                                     class="withIcon_icon_3VTbq" aria-hidden="true">
+                                                    <path d="M24 1.6L1.6 24v6.4H8L30.4 8zM7.36 28.8H3.2v-4.16L19.76 8.08l4.16 4.16zm17.68-17.68l-4.16-4.16L24 3.84 28.16 8z"></path>
+                                                </svg>
+                                            </div>
+                                        </a>
                                     </div>
                                     <!-- 프로필 옆 layer -->
                                     <th:block th:if="${session.user != null}"
                                               class="MyParkingMateProfile_profileUser_2rCck">
-                                        <button type="button" class="MyParkingMateSupporterProfile_username_MypCN"
-                                                data-event="profile">
+                                        <div type="button" class="MyParkingMateSupporterProfile_username_MypCN"
+                                             data-event="profile">
                                               <span class="MyParkingMateSupporterProfile_textBox_3jsbN">
                                               <!-- 닉네임 layer -->
-                                                 <span th:text="${session.user.getUserNickName()}"
-                                                       class="MyParkingMateProfile_name_2BH2I"></span>
-                                                 <span>님</span>
-                                                 <svg viewBox="0 0 24 24" fill="none" focusable="false"
-                                                      role="presentation"
-                                                      class="withIcon_icon_3VTbq withIcon_inline_1lwwX MyParkingMateSupporterProfile_icon_YWNgi"
-                                                      aria-hidden="true" style="width: 16px; height: 16px;">
-                                                     <path fill-rule="evenodd" clip-rule="evenodd"
-                                                           d="M7.924 2.576l-.848.848L15.65 12l-8.575 8.576.848.848L17.35 12 7.924 2.576z"></path>
-                                                 </svg>
+                                                  <a href="/mypage/usersettings"
+                                                     style="display: flex;align-items: center;">
+                                                      <span th:text="${session.user.userNickName}" class="MyParkingMateProfile_name_2BH2I"></span>
+                                                      <span>님</span>
+                                                      <svg viewBox="0 0 24 24" fill="none" focusable="false"
+                                                           role="presentation"
+                                                           class="withIcon_icon_3VTbq withIcon_inline_1lwwX MyParkingMateSupporterProfile_icon_YWNgi"
+                                                           aria-hidden="true"
+                                                           style="/* top: 100px; */width: 16px;height: 16px;/* margin: auto; */">
+                                                          <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                d="M7.924 2.576l-.848.848L15.65 12l-8.575 8.576.848.848L17.35 12 7.924 2.576z"></path>
+                                                      </svg>
+                                                  </a>
                                             </span>
-                                        </button>
+                                        </div>
                                         <!-- 회원 구분 layer -->
                                         <th:block th:if="${session.user.userClass != null}">
                                             <dl class="MyParkingMateSupporterProfile_profileUserLable_3GjOy">
@@ -769,7 +777,12 @@
                                                  src="/images/kakao_login_medium_narrow.png">
                                         </a>
                                     </th:block>
-
+                                    <th:block
+                                            th:if="${session.user != null} and ${session.user.getUserProfileName() != null}">
+                                        <a href="/mypage/delete-img">
+                                            <button class="profile-img-delete-btn-main">현재 프로필 사진 삭제하기</button>
+                                        </a>
+                                    </th:block>
                                 </div>
                                 <!-- ::after -->
                             </div>
@@ -799,7 +812,8 @@
                                                                     <span class="MyParkingMateSupporterAccumulate_name_y445e">쿠폰</span>
                                                                 </dt>
                                                                 <div style="display: flex; align-items: center">
-                                                                    <dd th:text="${#lists.size(enabledList)}" style="margin-right: 2px"
+                                                                    <dd th:text="${#lists.size(enabledList)}"
+                                                                        style="margin-right: 2px"
                                                                         class="MyParkingMateSupporterAccumulate_value_3TyL_"></dd>
                                                                     <span style="font-size: 14px">장</span>
                                                                 </div>
@@ -852,7 +866,7 @@
                                         <ul>
                                             <!-- 개인정보 -->
                                             <li class="MyParkingMateMenu_menu_3TRMx">
-                                                <a>
+                                                <a href="/mypage/usersettings">
                                                     <span class="MyParkingMateMenu_icon_pwW81" aria-hidden="true">
                                                            <!-- 아이콘 -->
                                                         <svg viewBox="0 0 40 40" focusable="false" role="presentation"
@@ -942,7 +956,7 @@
                                             </li>
                                             <!-- 차량 관리 -->
                                             <li class="MyParkingMateMenu_menu_3TRMx CardInfo">
-                                                <a href="/mypage/caraddlist">
+                                                <a href="/mypage/carlist">
                                                     <span class="MyParkingMateMenu_icon_pwW81" aria-hidden="true">
                                                       <i class="MyParkingMateSupporterActivity_investIcon_Zm-kv"></i>
                                                     </span>
@@ -1024,85 +1038,6 @@
     const user = [[${session.user}]];
     console.log(user);
 
-    // 마이페이지 아이콘 클릭 시
-    const mypageicon = document.querySelector("#main-app > div.web-header > div > header > div > ul > li:nth-child(5)");
-    const linkMyPage = 'mypageMobile.html';
-    mypageicon.addEventListener("click", (e) => {
 
-        location.replace(linkMyPage);
-    })
-
-    // 프로필 아이콘 클릭 시 이벤트
-    const profileicon = document.querySelector("#myParkingMatePanel_supporter > div.MyParkingMateSupporterProfile_profileContainer_1Aqi- > div > div.MyParkingMateSupporterProfile_profileImage_11ISs");
-    const link = "usersettingsMobile.html";
-
-    profileicon.addEventListener("click", (e) => {
-        location.href = link;
-    })
-
-    // 닉네임쪽 클릭 시 이벤트(화살표 버튼 포함)
-    const nickName = document.querySelector("#myParkingMatePanel_supporter > div.MyParkingMateSupporterProfile_profileContainer_1Aqi- > div > div.MyParkingMateProfile_profileUser_2rCck > button");
-
-    nickName.addEventListener("click", (e) => {
-        location.href = link;
-    })
-
-    // 카드 등록 클릭 시 이벤트
-    const addCard = document.querySelector("#myParkingMatePanel_supporter > div.MyParkingMate_contents_-7JEI > div:nth-child(1) > div > div > div.MyParkingMateSupporterProjectInfo_container_XLkd5 > div.MyParkingMateSupporterProjectInfo_project_1rXDj > div > a > div > div.MyParkingMateSupporterProjectInfo_link_WS6I");
-    const link2 = "cardadd.html"
-
-    addCard.addEventListener("click", (e) => {
-        location.href = link2;
-    })
-
-    // 개인정보 layer 클릭 시 이벤트
-    const UserInfo = document.querySelector("#myParkingMatePanel_supporter > div.MyParkingMate_contents_-7JEI > div:nth-child(2) > div > ul > li:nth-child(1)");
-    const UserInfoLink = 'usersettingsMobile.html'
-
-    UserInfo.addEventListener("click", (e) => {
-        location.href = UserInfoLink;
-    })
-    // 예약 내역 확인 layer 클릭 시 이벤트(이건 이용내역임....)
-    const RegInfo = document.querySelector("#myParkingMatePanel_supporter > div.MyParkingMate_contents_-7JEI > div:nth-child(2) > div > ul > li:nth-child(2)");
-    const link3 = "use_history.html"
-
-    RegInfo.addEventListener("click", (e) => {
-        location.href = link3;
-    })
-    // 결제수단 관리 layer 클릭 시 이벤트
-    const CardInfo = document.querySelector("#myParkingMatePanel_supporter > div.MyParkingMate_contents_-7JEI > div:nth-child(3) > div > ul > li:nth-child(1)");
-    const link4 = "cardaddlist.html"
-
-    CardInfo.addEventListener("click", (e) => {
-        location.href = link4;
-    })
-    // 주차장 등록 관리 layer 클릭 시 이벤트 -> 주차장 list 페이지 만들어야함...ㅜㅜ
-    const ParkingInfo = document.querySelector("#myParkingMatePanel_supporter > div.MyParkingMate_contents_-7JEI > div:nth-child(3) > div > ul > li:nth-child(2)");
-    const link5 = "addParking.html"
-
-    ParkingInfo.addEventListener("click", (e) => {
-        location.href = link5;
-    })
-    // 차량 관리 layer 클릭 시 이벤트
-    const CarInfoLink = document.querySelector("#myParkingMatePanel_supporter > div.MyParkingMate_contents_-7JEI > div:nth-child(3) > div > ul > li.MyParkingMateMenu_menu_3TRMx.CardInfo");
-    const link6 = "caraddlist.html"
-
-    CarInfoLink.addEventListener("click", (e) => {
-        location.href = link6;
-    })
-    // // 이용내역 layer 클릭 시 이벤트
-    // const UseInfo = document.querySelector("#myParkingMatePanel_supporter > div.MyParkingMate_contents_-7JEI > div:nth-child(4) > div > ul > li");
-    // const link7 = "reservation-list.html"
-
-    // CarInfo.addEventListener("click", (e) => {
-    //   location.href = link7;
-    // })
-
-    // 로그아웃 버튼 클릭 시
-    const logoutButton = document.querySelector("#myParkingMatePanel_supporter > div.MyParkingMate_contents_-7JEI > div:nth-child(4) > div > div > div > button");
-
-    logoutButton.addEventListener("click", (e) => {
-
-    });
 </script>
 </html>

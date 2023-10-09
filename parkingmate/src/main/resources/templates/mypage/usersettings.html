@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParkingMate</title>
+
+    <style>
+        .async-hide {
+            opacity: 0 !important
+        }
+    </style>
+    <style type="text/css"
+           data-fbcssmodules="css:fb.css.base css:fb.css.dialog css:fb.css.iframewidget css:fb.css.customer_chat_plugin_iframe">.fb_hidden {
+        position: absolute;
+        top: -10000px;
+        z-index: 10001
+    }
+
+    .fb_reposition {
+        overflow: hidden;
+        position: relative
+    }
+
+    .fb_invisible {
+        display: none
+    }
+
+    .fb_reset {
+        background: none;
+        border: 0;
+        border-spacing: 0;
+        color: #000;
+        cursor: auto;
+        direction: ltr;
+        font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+        font-size: 11px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: normal;
+        letter-spacing: normal;
+        line-height: 1;
+        margin: 0;
+        overflow: visible;
+        padding: 0;
+        text-align: left;
+        text-decoration: none;
+        text-indent: 0;
+        text-shadow: none;
+        text-transform: none;
+        visibility: visible;
+        white-space: normal;
+        word-spacing: normal
+    }
+
+    .fb_reset > div {
+        overflow: hidden
+    }
+
+    @keyframes fb_transform {
+        from {
+            opacity: 0;
+            transform: scale(.95)
+        }
+        to {
+            opacity: 1;
+            transform: scale(1)
+        }
+    }
+
+    .fb_animate {
+        animation: fb_transform .3s forwards
+    }
+
+    .fb_hidden {
+        position: absolute;
+        top: -10000px;
+        z-index: 10001
+    }
+
+    .fb_reposition {
+        overflow: hidden;
+        position: relative
+    }
+
+    .fb_invisible {
+        display: none
+    }
+
+    .fb_reset {
+        background: none;
+        border: 0;
+        border-spacing: 0;
+        color: #000;
+        cursor: auto;
+        direction: ltr;
+        font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+        font-size: 11px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: normal;
+        letter-spacing: normal;
+        line-height: 1;
+        margin: 0;
+        overflow: visible;
+        padding: 0;
+        text-align: left;
+        text-decoration: none;
+        text-indent: 0;
+        text-shadow: none;
+        text-transform: none;
+        visibility: visible;
+        white-space: normal;
+        word-spacing: normal
+    }
+
+    .fb_reset > div {
+        overflow: hidden
+    }
+
+    @keyframes fb_transform {
+        from {
+            opacity: 0;
+            transform: scale(.95)
+        }
+        to {
+            opacity: 1;
+            transform: scale(1)
+        }
+    }
+
+    .fb_animate {
+        animation: fb_transform .3s forwards
+    }
+
+    .fb_dialog {
+        background: rgba(82, 82, 82, .7);
+        position: absolute;
+        top: -10000px;
+        z-index: 10001
+    }
+
+    .fb_dialog_advanced {
+        border-radius: 8px;
+        padding: 10px
+    }
+
+    .fb_dialog_content {
+        background: #fff;
+        color: #373737
+    }
+
+    .fb_dialog_close_icon {
+        background: url(https://connect.facebook.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;
+        cursor: pointer;
+        display: block;
+        height: 15px;
+        position: absolute;
+        right: 18px;
+        top: 17px;
+        width: 15px
+    }
+
+    .fb_dialog_mobile .fb_dialog_close_icon {
+        left: 5px;
+        right: auto;
+        top: 5px
+    }
+
+    .fb_dialog_padding {
+        background-color: transparent;
+        position: absolute;
+        width: 1px;
+        z-index: -1
+    }
+
+    .fb_dialog_close_icon:hover {
+        background: url(https://connect.facebook.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent
+    }
+
+    .fb_dialog_close_icon:active {
+        background: url(https://connect.facebook.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent
+    }
+
+    .fb_dialog_iframe {
+        line-height: 0
+    }
+
+    .fb_dialog_content .dialog_title {
+        background: #6d84b4;
+        border: 1px solid #365899;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+        margin: 0
+    }
+
+    .fb_dialog_content .dialog_title > span {
+        background: url(https://connect.facebook.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;
+        float: left;
+        padding: 5px 0 7px 26px
+    }
+
+    body.fb_hidden {
+        height: 100%;
+        left: 0;
+        margin: 0;
+        overflow: visible;
+        position: absolute;
+        top: -10000px;
+        transform: none;
+        width: 100%
+    }
+
+    .fb_dialog.fb_dialog_mobile.loading {
+        background: url(https://connect.facebook.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;
+        min-height: 100%;
+        min-width: 100%;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        z-index: 10001
+    }
+
+    .fb_dialog.fb_dialog_mobile.loading.centered {
+        background: none;
+        height: auto;
+        min-height: initial;
+        min-width: initial;
+        width: auto
+    }
+
+    .fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner {
+        width: 100%
+    }
+
+    .fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content {
+        background: none
+    }
+
+    .loading.centered #fb_dialog_loader_close {
+        clear: both;
+        color: #fff;
+        display: block;
+        font-size: 18px;
+        padding-top: 20px
+    }
+
+    #fb-root #fb_dialog_ipad_overlay {
+        background: rgba(0, 0, 0, .4);
+        bottom: 0;
+        left: 0;
+        min-height: 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100%;
+        z-index: 10000
+    }
+
+    #fb-root #fb_dialog_ipad_overlay.hidden {
+        display: none
+    }
+
+    .fb_dialog.fb_dialog_mobile.loading iframe {
+        visibility: hidden
+    }
+
+    .fb_dialog_mobile .fb_dialog_iframe {
+        position: sticky;
+        top: 0
+    }
+
+    .fb_dialog_content .dialog_header {
+        border-bottom: 1px solid;
+        border-color: #043b87;
+        box-shadow: white 0 1px 1px -1px inset;
+        color: #fff;
+        font: bold 14px Helvetica, sans-serif;
+        text-overflow: ellipsis;
+        text-shadow: rgba(0, 30, 84, .296875) 0 -1px 0;
+        vertical-align: middle;
+        white-space: nowrap
+    }
+
+    .fb_dialog_content .dialog_header table {
+        height: 43px;
+        width: 100%
+    }
+
+    .fb_dialog_content .dialog_header td.header_left {
+        font-size: 12px;
+        padding-left: 5px;
+        vertical-align: middle;
+        width: 60px
+    }
+
+    .fb_dialog_content .dialog_header td.header_right {
+        font-size: 12px;
+        padding-right: 5px;
+        vertical-align: middle;
+        width: 60px
+    }
+
+    .fb_dialog_content .touchable_button {
+        background-clip: padding-box;
+        border: 1px solid #29487d;
+        border-radius: 3px;
+        display: inline-block;
+        line-height: 18px;
+        margin-top: 3px;
+        max-width: 85px;
+        padding: 4px 12px;
+        position: relative
+    }
+
+    .fb_dialog_content .dialog_header .touchable_button input {
+        background: none;
+        border: none;
+        color: #fff;
+        font: bold 12px Helvetica, sans-serif;
+        margin: 2px -12px;
+        padding: 2px 6px 3px 6px;
+        text-shadow: rgba(0, 30, 84, .296875) 0 -1px 0
+    }
+
+    .fb_dialog_content .dialog_header .header_center {
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 18px;
+        text-align: center;
+        vertical-align: middle
+    }
+
+    .fb_dialog_content .dialog_content {
+        background: url(https://connect.facebook.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;
+        border: 1px solid #4a4a4a;
+        border-bottom: 0;
+        border-top: 0;
+        height: 150px
+    }
+
+    .fb_dialog_content .dialog_footer {
+        background: #f5f6f7;
+        border: 1px solid #4a4a4a;
+        border-top-color: #ccc;
+        height: 40px
+    }
+
+    #fb_dialog_loader_close {
+        float: left
+    }
+
+    .fb_dialog.fb_dialog_mobile .fb_dialog_close_icon {
+        visibility: hidden
+    }
+
+    #fb_dialog_loader_spinner {
+        animation: rotateSpinner 1.2s linear infinite;
+        background-color: transparent;
+        background-image: url(https://connect.facebook.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        height: 24px;
+        width: 24px
+    }
+
+    @keyframes rotateSpinner {
+        0% {
+            transform: rotate(0deg)
+        }
+        100% {
+            transform: rotate(360deg)
+        }
+    }
+
+    .fb_iframe_widget {
+        display: inline-block;
+        position: relative
+    }
+
+    .fb_iframe_widget span {
+        display: inline-block;
+        position: relative;
+        text-align: justify
+    }
+
+    .fb_iframe_widget iframe {
+        position: absolute
+    }
+
+    .fb_iframe_widget_fluid_desktop, .fb_iframe_widget_fluid_desktop span, .fb_iframe_widget_fluid_desktop iframe {
+        max-width: 100%
+    }
+
+    .fb_iframe_widget_fluid_desktop iframe {
+        min-width: 220px;
+        position: relative
+    }
+
+    .fb_iframe_widget_lift {
+        z-index: 1
+    }
+
+    .fb_iframe_widget_fluid {
+        display: inline
+    }
+
+    .fb_iframe_widget_fluid span {
+        width: 100%
+    }
+
+    .fb_mpn_mobile_landing_page_slide_out {
+        animation-duration: 200ms;
+        animation-name: fb_mpn_landing_page_slide_out;
+        transition-timing-function: ease-in
+    }
+
+    .fb_mpn_mobile_landing_page_slide_out_from_left {
+        animation-duration: 200ms;
+        animation-name: fb_mpn_landing_page_slide_out_from_left;
+        transition-timing-function: ease-in
+    }
+
+    .fb_mpn_mobile_landing_page_slide_up {
+        animation-duration: 500ms;
+        animation-name: fb_mpn_landing_page_slide_up;
+        transition-timing-function: ease-in
+    }
+
+    .fb_mpn_mobile_bounce_in {
+        animation-duration: 300ms;
+        animation-name: fb_mpn_bounce_in;
+        transition-timing-function: ease-in
+    }
+
+    .fb_mpn_mobile_bounce_out {
+        animation-duration: 300ms;
+        animation-name: fb_mpn_bounce_out;
+        transition-timing-function: ease-in
+    }
+
+    .fb_mpn_mobile_bounce_out_v2 {
+        animation-duration: 300ms;
+        animation-name: fb_mpn_fade_out;
+        transition-timing-function: ease-in
+    }
+
+    .fb_customer_chat_bounce_in_v2 {
+        animation-duration: 300ms;
+        animation-name: fb_bounce_in_v2;
+        transition-timing-function: ease-in
+    }
+
+    .fb_customer_chat_bounce_in_from_left {
+        animation-duration: 300ms;
+        animation-name: fb_bounce_in_from_left;
+        transition-timing-function: ease-in
+    }
+
+    .fb_customer_chat_bounce_out_v2 {
+        animation-duration: 300ms;
+        animation-name: fb_bounce_out_v2;
+        transition-timing-function: ease-in
+    }
+
+    .fb_customer_chat_bounce_out_from_left {
+        animation-duration: 300ms;
+        animation-name: fb_bounce_out_from_left;
+        transition-timing-function: ease-in
+    }
+
+    .fb_invisible_flow {
+        display: inherit;
+        height: 0;
+        overflow-x: hidden;
+        width: 0
+    }
+
+    @keyframes fb_mpn_landing_page_slide_out {
+        0% {
+            margin: 0 12px;
+            width: 100%;
+        }
+        60% {
+            border-radius: 18px
+        }
+        100% {
+            border-radius: 50%;
+            margin: 0 24px;
+            width: 60px
+        }
+    }
+
+    @keyframes fb_mpn_landing_page_slide_out_from_left {
+        0% {
+            left: 12px;
+            width: 100%;
+        }
+        60% {
+            border-radius: 18px
+        }
+        100% {
+            border-radius: 50%;
+            left: 12px;
+            width: 60px
+        }
+    }
+
+    @keyframes fb_mpn_landing_page_slide_up {
+        0% {
+            bottom: 0;
+            opacity: 0
+        }
+        100% {
+            bottom: 24px;
+            opacity: 1
+        }
+    }
+
+    @keyframes fb_mpn_bounce_in {
+        0% {
+            opacity: .5;
+            top: 100%
+        }
+        100% {
+            opacity: 1;
+            top: 0
+        }
+    }
+
+    @keyframes fb_mpn_fade_out {
+        0% {
+            bottom: 30px;
+            opacity: 1
+        }
+        100% {
+            bottom: 0;
+            opacity: 0
+        }
+    }
+
+    @keyframes fb_mpn_bounce_out {
+        0% {
+            opacity: 1;
+            top: 0
+        }
+        100% {
+            opacity: .5;
+            top: 100%
+        }
+    }
+
+    @keyframes fb_bounce_in_v2 {
+        0% {
+            opacity: 0;
+            transform: scale(0, 0);
+            transform-origin: bottom right
+        }
+        50% {
+            transform: scale(1.03, 1.03);
+            transform-origin: bottom right
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1, 1);
+            transform-origin: bottom right
+        }
+    }
+
+    @keyframes fb_bounce_in_from_left {
+        0% {
+            opacity: 0;
+            transform: scale(0, 0);
+            transform-origin: bottom left
+        }
+        50% {
+            transform: scale(1.03, 1.03);
+            transform-origin: bottom left
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1, 1);
+            transform-origin: bottom left
+        }
+    }
+
+    @keyframes fb_bounce_out_v2 {
+        0% {
+            opacity: 1;
+            transform: scale(1, 1);
+            transform-origin: bottom right
+        }
+        100% {
+            opacity: 0;
+            transform: scale(0, 0);
+            transform-origin: bottom right
+        }
+    }
+
+    @keyframes fb_bounce_out_from_left {
+        0% {
+            opacity: 1;
+            transform: scale(1, 1);
+            transform-origin: bottom left
+        }
+        100% {
+            opacity: 0;
+            transform: scale(0, 0);
+            transform-origin: bottom left
+        }
+    }
+
+    @keyframes slideInFromBottom {
+        0% {
+            opacity: .1;
+            transform: translateY(100%)
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0)
+        }
+    }
+
+    @keyframes slideInFromBottomDelay {
+        0% {
+            opacity: 0;
+            transform: translateY(100%)
+        }
+        97% {
+            opacity: 0;
+            transform: translateY(100%)
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0)
+        }
+    }</style>
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/css/mypage/font.css">
+    <link rel="stylesheet" href="/css/fragment/header.css"/>
+    <link rel="stylesheet" href="/css/fragment/footer.css"/>
+    <link rel="stylesheet" href="https://static.wadiz.kr/assets/fonts/font.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/7f85a56ba4.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://static.wadiz.kr/main/css/supporter-club-intro.978fbaa0.chunk.css">
+    <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/my-wadiz.8de3e6d3.chunk.css">
+    <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/wadiz-day.afe7a0c1.chunk.css">
+    <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/wadiz-day~wishes.3f77e16d.chunk.css">
+    <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/0.12412ac2.chunk.css">
+    <link rel="stylesheet" href="https://static.wadiz.kr/main/main.d37df1e2.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.wadiz.kr/resources/static/editor/4.0.15/froala_editor.pkgd.min.css?20230613">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.wadiz.kr/resources/static/editor/4.0.15/froala_custom.css?v=20221122">
+    <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/my-wadiz.8de3e6d3.chunk.css">
+    <link rel="stylesheet" href="https://static.wadiz.kr/main/main.d37df1e2.css">
+    <link rel="stylesheet" href="/css/mypage/usersettingMobile.css">
+    <link rel="stylesheet" href="/css/mypage/mypagemobile.css">
+    <link rel="mask-icon" href="/resources/static/svg/wa.svg" color="#1d2129">
+</head>
+<body class="show-ParkingMate">
+<!-- 전체적인 페이지 틀 -->
+<div id="page-container">
+    <div class="black-bg-wrap" style="display: none;"></div>
+    <!-- 맨 위 layer -->
+    <div id="ParkingMate-header">
+        <th:block th:replace="~{fragment/header :: header}"></th:block>
+        <th:block th:replace="~{fragment/footer-button :: footer-button}"></th:block>
+    </div>
+    <!-- 기본정보설정 내용 -->
+    <form id="forwardForm" method="get">
+        <input type="hidden" id="returnURL" name="returnURL">
+    </form>
+    <input type="hidden" id="sessionLoginCheck" value="true">
+
+    <!-- 계정 wrap -->
+    <div id="accountWrap">
+        <!-- 계정 container -->
+        <div id="newContainer">
+            <!-- 계정 wrap : class -->
+            <div class="account-wrap">
+                <h2>기본 정보 설정</h2>
+                <!-- Modal 회원탈퇴 창 -->
+                <div class="Modal_Overlay Modal_Overlay--after-open ConfirmModal_overlay_9xcDs waffle_modal_overlay"
+                     style="background-color: rgba(0, 0, 0, 0.2); display: none;">
+                    <div class="Modal_Content Modal_Content--after-open ConfirmModal_confirmModal_1x2Tw ConfirmModal_sizeMobile_1JFlG"
+                         tabindex="-1" role="dialog" aria-modal="true">
+                        <div class="ConfirmModal_header_gkXhb">
+                            <div class="ConfirmModal_closeIconRoot_1WImH">
+                                <button class="ConfirmModal_closeIconWrapper_1ON9Q">
+                                    <svg viewBox="0 0 40 40" focusable="false" role="presentation"
+                                         class="withIcon_icon_3VTbq ConfirmModal_closeIcon_23VbM" aria-hidden="true">
+                                        <path d="M33.4 8L32 6.6l-12 12-12-12L6.6 8l12 12-12 12L8 33.4l12-12 12 12 1.4-1.4-12-12 12-12z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <!-- 회원 탈퇴 -->
+                            <div title="회원 탈퇴를 하시겠습니까?"
+                                 class="ConfirmModal_title_ubaBW ConfirmModal_showCloseButton_50czX delCarInfo">회원 탈퇴를
+                                하시겠습니까?
+                            </div>
+                            <!-- 차량 정보 재등록 -->
+                            <!-- <div title="정말로 회원 탈퇴를 진행하시겠습니까?" class="ConfirmModal_title_ubaBW ConfirmModal_showCloseButton_50czX reCarRegister">정말로 회원 탈퇴를 진행하시겠습니까?</div>
+                          </div> -->
+                            <!-- 차량 정보 삭제 -->
+                            <div class="ConfirmModal_content_3KM88 ConfirmModal_hasTitle_3rvSc delCarInfo2">
+                                <div class="ConfirmModal_message_Mi2Ur">회원 탈퇴 시, 보유한 회원정보는 전부 삭제됩니다. <br> 또한, 회원 탈퇴할 경우,
+                                    30일동안 재가입이 불가합니다.
+                                </div>
+                            </div>
+                            <!-- 차량 정보 재등록 -->
+                            <!-- <div class="ConfirmModal_content_3KM88 ConfirmModal_hasTitle_3rvSc reCarRegister2">
+                              <div class="ConfirmModal_message_Mi2Ur">회원 탈퇴할 경우, 30일동안 재가입이 불가합니다.</div>
+                            </div> -->
+                            <div class="ConfirmModal_footer_gfGBl">
+                                <div class="ConfirmModal_buttonGroup_3YCl5">
+                                    <button class="Button_button_2FuOU Button_lg_1Dftp ConfirmModal_negativeButton_3VxAF"
+                                            type="button">
+                    <span><span class="Button_children_ilFun">취소</span>
+                  </span>
+                                    </button>
+                                    <button class="Button_button_2FuOU Button_primary_2mZni Button_contained_2SIAT Button_lg_1Dftp ConfirmModal_positiveButton_Fafi9"
+                                            type="button">
+                  <span><span class="Button_children_ilFun">확인</span>
+                </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="BasicDialog_modalClose_1o3rb" title="닫기">
+                        <svg viewBox="0 0 40 40" focusable="false" role="presentation" class="withIcon_icon_3VTbq"
+                             aria-hidden="true">
+                            <path d="M33.4 8L32 6.6l-12 12-12-12L6.6 8l12 12-12 12L8 33.4l12-12 12 12 1.4-1.4-12-12 12-12z"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Modal 이메일 변경 창 -->
+                <div class="Modal_Overlay Modal_Overlay--after-open ConfirmModal_overlay_9xcDs waffle_modal_overlay"
+                     style="background-color: rgba(0, 0, 0, 0.2); display: none;">
+                    <div class="Modal_Content Modal_Content--after-open ConfirmModal_confirmModal_1x2Tw ConfirmModal_sizeMobile_1JFlG"
+                         tabindex="-1" role="dialog" aria-modal="true">
+                        <div class="ConfirmModal_header_gkXhb">
+                            <div class="ConfirmModal_closeIconRoot_1WImH">
+                                <button class="ConfirmModal_closeIconWrapper_1ON9Q">
+                                    <svg viewBox="0 0 40 40" focusable="false" role="presentation"
+                                         class="withIcon_icon_3VTbq ConfirmModal_closeIcon_23VbM" aria-hidden="true">
+                                        <path d="M33.4 8L32 6.6l-12 12-12-12L6.6 8l12 12-12 12L8 33.4l12-12 12 12 1.4-1.4-12-12 12-12z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <!-- 이메일 변경 -->
+                            <div title="이메일을 변경 하시겠습니까?"
+                                 class="ConfirmModal_title_ubaBW ConfirmModal_showCloseButton_50czX delCarInfo">이메일을 변경
+                                하시겠습니까?
+                            </div>
+                            <!-- 이메일 변경 -->
+                            <div class="ConfirmModal_content_3KM88 ConfirmModal_hasTitle_3rvSc delCarInfo2">
+                                <input type="text" name="Changeemail" class="input-text" id="changeEmail"
+                                       maxlength="100"
+                                       placeholder="변경할 이메일을 입력해주세요" value="">
+                                <!-- <div class="ConfirmModal_message_Mi2Ur">변경할 이메일을 입력해주세요.</div> -->
+                            </div>
+                            <p id="changeemail-result" style="color: red;">변경할 이메일 주소를 입력해주세요</p>
+                            <div class="ConfirmModal_footer_gfGBl">
+                                <div class="ConfirmModal_buttonGroup_3YCl5">
+                                    <div class="Button_button_2FuOU Button_lg_1Dftp ConfirmModal_negativeButton_3VxAF"
+                                         type="button">
+                                        <span class="Button_children_ilFun">취소</span>
+                                    </div>
+                                    <button class="Button_button_2FuOU Button_primary_2mZni Button_contained_2SIAT Button_lg_1Dftp ConfirmModal_positiveButton_Fafi9"
+                                            type="button">
+                                        <span class="Button_children_ilFun" id="emailConfirm">확인</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="BasicDialog_modalClose_1o3rb" title="닫기">
+                        <svg viewBox="0 0 40 40" focusable="false" role="presentation" class="withIcon_icon_3VTbq"
+                             aria-hidden="true">
+                            <path d="M33.4 8L32 6.6l-12 12-12-12L6.6 8l12 12-12 12L8 33.4l12-12 12 12 1.4-1.4-12-12 12-12z"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Modal 휴대폰 번호 변경 창 -->
+                <div class="Modal_Overlay Modal_Overlay--after-open ConfirmModal_overlay_9xcDs waffle_modal_overlay"
+                     style="background-color: rgba(0, 0, 0, 0.2); display: none;">
+                    <div class="Modal_Content Modal_Content--after-open ConfirmModal_confirmModal_1x2Tw ConfirmModal_sizeMobile_1JFlG"
+                         tabindex="-1" role="dialog" aria-modal="true">
+                        <div class="ConfirmModal_header_gkXhb">
+                            <div class="ConfirmModal_closeIconRoot_1WImH">
+                                <button class="ConfirmModal_closeIconWrapper_1ON9Q">
+                                    <svg viewBox="0 0 40 40" focusable="false" role="presentation"
+                                         class="withIcon_icon_3VTbq ConfirmModal_closeIcon_23VbM" aria-hidden="true">
+                                        <path d="M33.4 8L32 6.6l-12 12-12-12L6.6 8l12 12-12 12L8 33.4l12-12 12 12 1.4-1.4-12-12 12-12z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <!-- 휴대폰 번호 변경 -->
+                            <div title="휴대폰 번호를 변경 하시겠습니까?"
+                                 class="ConfirmModal_title_ubaBW ConfirmModal_showCloseButton_50czX delCarInfo">휴대폰 번호를
+                                변경 하시겠습니까?
+                            </div>
+                            <!-- 휴대폰 번호 변경 -->
+                            <div class="ConfirmModal_content_3KM88 ConfirmModal_hasTitle_3rvSc delCarInfo2">
+                                <input type="text" name="Changephonenumber" class="input-text" maxlength="13"
+                                       id="changePhoneNum"
+                                       placeholder=" 변경할 휴대폰번호를 -포함하여 입력해주세요" value="">
+                                <!-- <div class="ConfirmModal_message_Mi2Ur">변경할 이메일을 입력해주세요.</div> -->
+                            </div>
+                            <p id="changephoneNumber-result" style="color: red;">유효한 휴대전화 번호를 입력해주세요.</p>
+                            <div class="ConfirmModal_footer_gfGBl">
+                                <div class="ConfirmModal_buttonGroup_3YCl5">
+                                    <button class="Button_button_2FuOU Button_lg_1Dftp ConfirmModal_negativeButton_3VxAF"
+                                            type="button">
+                                        <span class="Button_children_ilFun">취소</span>
+                                    </button>
+                                    <button class="Button_button_2FuOU Button_primary_2mZni Button_contained_2SIAT Button_lg_1Dftp ConfirmModal_positiveButton_Fafi9"
+                                            type="button">
+                                        <span class="Button_children_ilFun" id="confirmPhoneNum">확인</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="BasicDialog_modalClose_1o3rb" title="닫기">
+                        <svg viewBox="0 0 40 40" focusable="false" role="presentation" class="withIcon_icon_3VTbq"
+                             aria-hidden="true">
+                            <path d="M33.4 8L32 6.6l-12 12-12-12L6.6 8l12 12-12 12L8 33.4l12-12 12 12 1.4-1.4-12-12 12-12z"></path>
+                        </svg>
+                    </button>
+                </div>
+                <form id="saveForm" th:action="@{/mypage/profile-update}" method="post"th:object="${userVO}" >
+                    <div class="change-input-wrap">
+                        <!-- 닉네임 변경 -->
+                        <input th:field="*{UserNickName}" type="text" name="userNickName" class="input-text" maxlength="20" placeholder="닉네임" th:value="${session.user.getUserNickName()}">
+
+                        <!-- <input type="text" name="realName" class="input-text disable hide" maxlength="20"-->
+                        <!-- placeholder="이름" value="" disabled="" style="display: none;">-->
+                    </div>
+                    <div class="input-btn-wrap">
+                        <div class="input">
+                            <!-- 이메일 입력 -->
+                            <!-- 이메일의 경우에는 항시 유저이메일을 우선으로 찾아내어 보여주고 이메일 수정의 경우에도 카카오 이메일은 기존에 그대로 두고 유저이메일이 수정되도록 -->
+                            <input th:field="*{UserEmail}" type="text" id="userEmail" name="userEmail" class="disable input-text" placeholder="이메일 계정" readonly="readonly">
+                        </div>
+
+                        <div id="emailChangeBtn" class="emailAuthBtn btn" data-status="chagne">
+                            <!-- 변경 링크?? -->
+                            <a onclick="return false;">
+                                <span>변경</span>
+                            </a>
+                        </div>
+                        <!-- 이메일 체크 버튼 -->
+                        <div id="emailCheckBtn" class="emailAuthBtn btn" style="display: none;" data-status="check">
+                            <a onclick="return false;">
+                                <span>인증하기</span>
+                            </a>
+                        </div>
+                        <!-- 이메일 재인증 -->
+                        <div id="emailRetryBtn" class="emailAuthBtn btn" style="display: none;" data-status="retry">
+                            <a onclick="return false;">
+                                <span>재전송</span>
+                            </a>
+                        </div>
+                        <!-- ::after -->
+                    </div>
+                    <div id="emailConfirmArea" class="input-btn-wrap" style="display: none;">
+                        <div class="input">
+                            <div id="emailConfirmBtn" class="emailAuthBtn btn" data-status="confirm">
+                                <a onclick="return false;">
+                                    <span>인증완료</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 이메일 인증실패 : 인증번호 잘못입력 -->
+                    <p id="emailCheckNumberError" class="error-text emailMsg">인증번호를 잘못입력하였습니다 다시 입력해주세요</p>
+                    <!-- 이메일 인증 실패 : 기간 만료 -->
+                    <p id="emailTimeOutTokenError" class="error-text emailMsg">기간이 만료된 인증번호입니다. 다시 입력해주세요.</p>
+                    <!-- 이메일 인증 실패 : 시간 오버 -->
+                    <p id="emailTimeOutError" class="error-text emailMsg">시간이 종료되었습니다. 다시 인증해주세요.</p>
+                    <!-- 이메일 인증 성공 -->
+                    <p id="emailSuccessNumberCheckMsg" class="error-text emailMsg" style="color:#50e3c2;">인증이
+                        완료되었습니다.</p>
+                    <!-- 이메일 인증 실패 : 형식이 잘못됨 -->
+                    <p id="emailError" class="error-text emailMsg">이메일 형식이 올바르지 않습니다.</p>
+                    <!-- 이메일 인증 실패 : 이미 가입된 이메일 -->
+                    <p id="emailJoinedError" class="error-text emailMsg">이미 회원가입된 계정입니다. 다른 이메일을 입력해주세요.</p>
+                    <!-- 이메일 인증 실패 : 90일 이내 탈퇴한 회원 -->
+                    <p id="emailDropOutError" class="error-text emailMsg">90일 이내에 탈퇴한 이력이 있는 계정은 사용하실 수 없습니다. 다른 이메일을
+                        입력해주세요.</p>
+                    <!-- 이메일 인증 필요 -->
+                    <p id="checkEmailInfo" class="info-text emailMsg">이메일 인증이 필요합니다.</p>
+                    <!-- 아이디와 안내 메일 변경 -->
+                    <p id="changeEmailInfo" class="info-text emailMsg">로그인 아이디와 안내 메일 발송 주소가 변경됩니다.</p>
+                    <!-- 인증메일 발송 -->
+                    <p id="sendEmailInfo" class="info-text emailMsg">인증메일이 발송되었습니다.</p>
+                    <!-- 전화번호 변경  -->
+                    <div class="input-btn-wrap">
+                        <div class="input">
+                            <input th:field="*{UserPhoneNumber}" id="mobileNumber" name="userPhoneNumber" type="tel" class="disable input-text" placeholder="휴대폰 번호" readonly="readonly">
+                        </div>
+                        <div id="mobileCheckBtn" class="mobileAuthBtn btn" style="display: none;" data-status="check">
+                            <a onclick="return false;">
+                                <span>인증하기</span>
+                            </a>
+                        </div>
+                        <div id="mobileChangeBtn" class="mobileAuthBtn btn" data-status="change">
+                            <a onclick="return false;">
+                                <span>변경</span>
+                            </a>
+                        </div>
+                        <!-- 전화번호 재전송 시도 -->
+                        <div id="mobileRetryBtn" class="mobileAuthBtn btn" style="display: none;" data-status="retry">
+                            <a onclick="return false;">
+                                <span>재전송</span>
+                            </a>
+                        </div>
+                        <!-- ::after -->
+                    </div>
+                    <!-- 전화번호 전송부분 -->
+                    <div id="mobileConfirmArea" class="input-btn-wrap" style="display: none;">
+                        <div class="input">
+                            <input type="text" id="authCode" class="input-text" placeholder="인증번호">
+                            <input type="hidden" id="confirmId" value="">
+                            <!-- 인증번호 시간제한 -->
+                            <time class="limit_time" style="position:relative;top:-39px;left:85%;text-align:right;">
+                                <span id="smsMs_timer" style="color:#50e3c2;font-size:13px;"></span>
+                            </time>
+                        </div>
+                        <div id="confirmMobileBtn" class="mobileAuthBtn btn" data-status="confirm">
+                            <a onclick="return false;">
+                                <span>인증완료</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 전화번호 인증실패 : 유효한 전화번호 입력 -->
+                    <p id="mobileNumberError" class="checkMobileError error-text mobileMsg">유효한 전화번호를 입력해주세요.</p>
+                    <!-- 전화번호 인증실패 : 인증번호 잘못입력 -->
+                    <p id="mobileCheckNumberError" class="error-text mobileMsg">인증번호를 잘못 입력하셨습니다. 다시 입력해주세요.</p>
+                    <!-- 전화번호 인증실패 : 시간 오버 -->
+                    <p id="mobileTimeOutError" class="error-text mobileMsg">시간이 종료되었습니다. 다시 인증해주세요.</p>
+                    <!-- 인증완료 -->
+                    <p id="mobileSuccessNumberCheckMsg" class="error-text mobileMsg" style="color:#50e3c2;">인증이
+                        완료되었습니다.</p>
+
+                    <!-- 소셜 연동 -->
+                    <div class="social-account-wrap">
+                        <h3 class="title">SNS 연동</h3>
+                        <p>카카오를 연동하시면 피드에서 친구의 활동을 확인할 수 있어요</p>
+                        <!-- sns 버튼들 -->
+                        <ul>
+                            <!-- 페이스북 연동 -->
+                            <li class="facebook">
+                                <a id="facebookLink" class="unlinked">
+                                    <i class="ParkingMateicon pm-facebook">
+                                        <!-- ::before -->
+                                    </i>
+                                </a>
+                            </li>
+                            <!-- 네이버 연동 -->
+                            <li class="naver">
+                                <a id="naverLink">
+                                    <i class="ParkingMateicon pm-naver">
+                                        <!-- ::before -->
+                                    </i>
+                                </a>
+                            </li>
+                            <!-- 카카오 연동 -->
+                            <li class="kakao">
+                                <a id="kakaoLink" class="unlinked">
+                                    <i class="ParkingMateicon pm-kakao">
+                                        <!-- ::before -->
+                                    </i>
+                                </a>
+                            </li>
+                            <!-- 구글 연동 -->
+                            <li class="google">
+                                <a id="googleLink" class="unlinked">
+                                    <i></i>
+                                </a>
+                            </li>
+                            <!-- ::after -->
+                        </ul>
+                    </div>
+                    <!-- 회원탈퇴 버튼 -->
+                    <button class="Button_button_2FuOU Button_md_46Ai- Button_block_1-g8w" type="button">
+                        <span>
+                            <span class="Button_children_ilFun">회원 탈퇴</span>
+                        </span>
+                    </button>
+                    <div class="change-input-wrap small">
+                        <div class="btn-wrap">
+                            <button type="submit" id="saveBtn" class="pm button primary block btn-block-mint">확인
+                            </button>
+                        </div>
+                    </div>
+                    <input type="hidden" id="validEmailFirstCheck" value="Y">
+                    <input type="hidden" id="validEmail" value="1">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script th:inline="javascript">
+    const user = [[${session.user}]];
+    console.log(user);
+
+</script>
+<script>
+    // ======================================================
+    // 닉네임 박스 입력 클릭 시
+    const nickNameBox = document.querySelector("#saveForm > div:nth-child(1) > input:nth-child(1)");
+    // const parkingOtherResult = document.querySelector("#parkingOtherName-result");
+
+    nickNameBox.addEventListener("click", (e) => {
+        const target = e.target;
+        // parkingOtherResult.innerText = e.target.value;
+        if (!target.value) {
+            nickNameBox.style.borderColor = "#00c4c4";
+            // parkingOtherResult.innerText = "주차장 부가시설 정보를 입력해주세요!!";
+            // parkingOtherResult.style.color = "red";
+            target.focus();
+            return;
+        }
+    })
+
+    // 닉네임 박스 입력박스 마우스 떼었을때 시 이벤트
+    nickNameBox.addEventListener("mouseout", (e) => {
+        nickNameBox.style.borderColor = "#f66";
+        const target = e.target;
+
+    })
+
+    // 닉네임 박스 textbox안에 값 존재 시,
+    nickNameBox.addEventListener("keyup", (e) => {
+        const target = e.target;
+        // parkingOtherResult.innerText = e.target.value;
+
+        if (target.value) {
+            nickNameBox.style.borderColor = "#e4e4e4";
+            // parkingOtherResult.style.display = 'none';
+            target.focus();
+
+        }
+    })
+    // =======================================================
+    // 이메일 변경 버튼 클릭 시
+    const ChangeEmail = document.querySelector("#emailChangeBtn");
+    const linkChangeEmailOk = 'usersetting_emailChange.html';
+    const Modalpopupemail = document.querySelector("#newContainer > div > div:nth-child(3)");
+    // popup 이메일 inputbox
+    const emailpopupinputbox = document.querySelector("#newContainer > div > div:nth-child(3) > div > div > div.ConfirmModal_content_3KM88.ConfirmModal_hasTitle_3rvSc.delCarInfo2 > input");
+    const checkRedBorder = emailpopupinputbox.style.borderColor = "#f66";
+    const checkRedPtag =
+        ChangeEmail.addEventListener("click", (e) => {
+            Modalpopupemail.style.display = "inline-flex";
+            // 클릭했을 때 input bar가 빨간색일 경우
+            if (checkRedBorder) {
+                emailpopupinputbox.style.borderColor = "#e4e4e4";
+            }
+        })
+
+    // 이메일 변경 popupbox x버튼 클릭 시
+    const emailChangepopupXbutton = document.querySelector("#newContainer > div > div:nth-child(3) > div > div > div.ConfirmModal_closeIconRoot_1WImH > button");
+
+    emailChangepopupXbutton.addEventListener("click", (e) => {
+        Modalpopupemail.style.display = 'none'
+    })
+
+    // 이메일 변경 popupbox 취소 버튼 클릭 시
+    const emailChangepopupCancelbutton = document.querySelector("#newContainer > div > div:nth-child(3) > div > div > div.ConfirmModal_footer_gfGBl > div > div.Button_button_2FuOU.Button_lg_1Dftp.ConfirmModal_negativeButton_3VxAF");
+
+    emailChangepopupCancelbutton.addEventListener("click", (e) => {
+        Modalpopupemail.style.display = 'none'
+    })
+
+    // 이메일 변경 popupbox 확인 버튼 클릭 시
+    // const emailChangepopupOkbutton = document.querySelector("#newContainer > div > div:nth-child(3) > div > div > div.ConfirmModal_footer_gfGBl > div > button.Button_button_2FuOU.Button_primary_2mZni.Button_contained_2SIAT.Button_lg_1Dftp.ConfirmModal_positiveButton_Fafi9");
+    //
+    // emailChangepopupOkbutton.addEventListener("click", (e) => {
+    //     location.href = linkChangeEmailOk;
+    // })
+
+    // 확인 버튼 클릭 시
+    const confirmButton = document.querySelector("#emailConfirm");
+    const changeEmailInput = document.querySelector("#changeEmail");
+    const userNameInput = document.querySelector("#userEmail");
+
+    confirmButton.addEventListener("click", (e) => {
+        // changeEmail 인풋의 값을 읽어와서 userEmail 인풋의 값으로 설정
+        const newEmail = changeEmailInput.value;
+        userNameInput.value = newEmail;
+        Modalpopupemail.style.display = "none";
+    });
+
+
+    // =================================================================
+    // 이메일 변경 popupbox inputbox 클릭 시
+
+    const emailOtherResult = document.querySelector("#changeemail-result");
+
+    emailpopupinputbox.addEventListener("click", (e) => {
+        const target = e.target;
+        emailOtherResult.innerText = e.target.value;
+        if (!target.value) {
+            emailpopupinputbox.style.borderColor = "#00c4c4";
+            emailOtherResult.innerText = "변경할 이메일 주소를 입력해주세요";
+            emailOtherResult.style.color = "red";
+            target.focus();
+            return;
+        }
+    })
+
+    // 이메일 변경 popupbox inputbox 마우스 떼었을 때
+    emailpopupinputbox.addEventListener("mouseout", (e) => {
+        emailpopupinputbox.style.borderColor = "#f66";
+        const target = e.target;
+
+        if (target.value) {
+            emailpopupinputbox.style.borderColor = "#e4e4e4";
+            target.focus();
+        }
+    })
+
+    // 이메일 변경 popupbox inputbox안에 값 존재 시
+    emailpopupinputbox.addEventListener("keyup", (e) => {
+        const target = e.target;
+        emailOtherResult.innerText = e.target.value;
+
+        if (target.value) {
+            emailpopupinputbox.style.borderColor = "#e4e4e4";
+            emailOtherResult.style.display = 'none';
+            target.focus();
+
+        }
+    })
+    // =================================================================
+    // 핸드폰번호 변경 버튼 클릭 시
+    const ChangephoneNumber = document.querySelector("#mobileChangeBtn");
+    const ModalChangephoneNumber = document.querySelector("#newContainer > div > div:nth-child(4)");
+    // const linkChangephoneNumberOk = 'usersetting_phoneNumberChange.html';
+    // // 휴대폰 번호 변경 popupbox
+    // const phoneNumberpopupinputbox = document.querySelector("#newContainer > div > div:nth-child(4) > div > div > div.ConfirmModal_content_3KM88.ConfirmModal_hasTitle_3rvSc.delCarInfo2 > input");
+    // const checkRedBorder2 = phoneNumberpopupinputbox.style.borderColor = "#f66";
+    ChangephoneNumber.addEventListener("click", () => {
+        ModalChangephoneNumber.style.display = "inline-flex";
+    })
+
+    // 핸드폰 번호 변경 popupbox x버튼 클릭 시
+    const phoneNumberXbutton = document.querySelector("#newContainer > div > div:nth-child(4) > div > div > div.ConfirmModal_closeIconRoot_1WImH > button");
+
+    phoneNumberXbutton.addEventListener("click", (e) => {
+        ModalChangephoneNumber.style.display = 'none';
+    })
+
+    // 핸드폰 번호 변경 popupbox 취소 버튼 클릭 시
+    const phoneNumberCancelButton = document.querySelector("#newContainer > div > div:nth-child(4) > div > div > div.ConfirmModal_footer_gfGBl > div > button.Button_button_2FuOU.Button_lg_1Dftp.ConfirmModal_negativeButton_3VxAF");
+
+    phoneNumberCancelButton.addEventListener("click", (e) => {
+        ModalChangephoneNumber.style.display = 'none';
+    })
+
+    // 핸드폰 번호 변경 popupbox 확인 버튼 클릭 시
+    const confirmPhoneNumButton = document.querySelector("#confirmPhoneNum");
+    const changePhoneNumInput = document.querySelector("#changePhoneNum");
+    const mobileNumberInput = document.querySelector("#mobileNumber");
+
+    confirmPhoneNumButton.addEventListener("click", (e) => {
+        const newPhoneNum = changePhoneNumInput.value;
+        const errorLine = document.querySelector("#changephoneNumber-result");
+
+        // 원하는 형태(예: "000-0000-0000")와 일치하는지 검증 후 아닐시 if문 실행
+        const regex = /^\d{3}-\d{4}-\d{4}$/;
+        if (!regex.test(newPhoneNum)) {
+
+            changePhoneNumInput.style.borderColor = "red";
+            errorLine.style.display = "block";
+            return;
+        }
+
+        // changePhoneNum 인풋의 값을 읽어와서 mobileNumber 인풋의 값으로 설정
+        changePhoneNumInput.style.borderColor = "#e4e4e4";
+        errorLine.style.display = "none";
+        mobileNumberInput.value = newPhoneNum;
+        ModalChangephoneNumber.style.display = "none";
+    });
+
+
+    // =================================================================
+    // 휴대폰 번호 변경 popupbox inputbox 클릭 시
+    // const phoneNumberOtherResult = document.querySelector("#changephoneNumber-result");
+    // phoneNumberpopupinputbox.addEventListener("click", (e) => {
+    //     const target = e.target;
+    //     // parkingOtherResult.innerText = e.target.value;
+    //     if (!target.value) {
+    //         phoneNumberpopupinputbox.style.borderColor = "#00c4c4";
+    //         phoneNumberOtherResult.innerText = "변경할 휴대폰번호를 (-)을 붙여 입력해주세요";
+    //         phoneNumberOtherResult.style.color = "red";
+    //         target.focus();
+    //         return;
+    //     }
+    // })
+
+    // 휴대폰 번호 변경 popupbox inputbox 마우스 떼었을 때
+    // phoneNumberpopupinputbox.addEventListener("mouseout", (e) => {
+    //     phoneNumberpopupinputbox.style.borderColor = "#f66";
+    //     const target = e.target;
+    //
+    //     if (target.value) {
+    //         phoneNumberpopupinputbox.style.borderColor = "#e4e4e4";
+    //         target.focus();
+    //     }
+    // })
+    //
+    // // 휴대폰 번호 변경 popupbox inputbox안에 값 존재 시
+    // phoneNumberpopupinputbox.addEventListener("keyup", (e) => {
+    //     const target = e.target;
+    //     phoneNumberOtherResult.innerText = e.target.value;
+    //
+    //     if (target.value) {
+    //         phoneNumberpopupinputbox.style.borderColor = "#e4e4e4";
+    //         phoneNumberOtherResult.style.display = 'none';
+    //         target.focus();
+    //
+    //     }
+    // })
+    // =================================================================
+
+    // 회원 탈퇴 버튼 클릭 시
+    const userdelButton = document.querySelector("#saveForm > button");
+    const Modalpopup = document.querySelector("#newContainer > div > div");
+    userdelButton.addEventListener("click", (e) => {
+        Modalpopup.style.display = 'inline-flex';
+    })
+
+    // 회원탈퇴 popupbox x버튼 클릭 시
+    const popupxButton = document.querySelector("#newContainer > div > div > div > div > div.ConfirmModal_closeIconRoot_1WImH > button");
+    const popupxButtonLink = 'usersettingsMobile.html';
+
+    popupxButton.addEventListener("click", (e) => {
+        location.replace(popupxButtonLink);
+    })
+
+    // 회원탈퇴 popupbox 취소버튼 클릭 시
+    const popupCancelButton = document.querySelector("#newContainer > div > div > div > div > div.ConfirmModal_footer_gfGBl > div > button.Button_button_2FuOU.Button_lg_1Dftp.ConfirmModal_negativeButton_3VxAF");
+
+    popupCancelButton.addEventListener("click", (e) => {
+        location.replace(popupxButtonLink);
+    })
+
+    // 회원탈퇴 popupbox 확인버튼 클릭 시
+    const popupOkButton = document.querySelector("#newContainer > div > div > div > div > div.ConfirmModal_footer_gfGBl > div > button.Button_button_2FuOU.Button_primary_2mZni.Button_contained_2SIAT.Button_lg_1Dftp.ConfirmModal_positiveButton_Fafi9");
+    const popupOkButtonLink = 'userdel.html';
+
+    popupOkButton.addEventListener("click", (e) => {
+        location.replace(popupOkButtonLink);
+    })
+
+    // 페이스북 아이콘 버튼
+    const facebookicon = document.querySelector("#saveForm > div.social-account-wrap > ul > li.facebook");
+    const facebookunlink = document.querySelector("#facebookLink");
+    // 네이버 아이콘 버튼
+    const navericon = document.querySelector("#saveForm > div.social-account-wrap > ul > li.naver");
+    const naverunlink = document.querySelector("#naverLink");
+    // 카카오 아이콘 버튼
+    const kakaoicon = document.querySelector("#saveForm > div.social-account-wrap > ul > li.kakao");
+    const kakaounlink = document.querySelector("#kakaoLink");
+    // 구글 아이콘 버튼
+    const googleicon = document.querySelector("#saveForm > div.social-account-wrap > ul > li.google");
+    const googleunlink = document.querySelector("#googleLink");
+
+    // 페이스북 버튼 클릭 시
+    facebookicon.addEventListener("click", (e) => {
+        facebookunlink.style.opacity = "1";
+        naverunlink.style.opacity = "0.3";
+        kakaounlink.style.opacity = "0.3";
+        googleunlink.style.opacity = "0.3";
+    })
+
+    // 네이버 버튼 클릭 시
+    navericon.addEventListener("click", (e) => {
+        facebookunlink.style.opacity = "0.3";
+        naverunlink.style.opacity = "1";
+        kakaounlink.style.opacity = "0.3";
+        googleunlink.style.opacity = "0.3";
+    })
+
+    // 카카오 버튼 클릭 시
+    kakaoicon.addEventListener("click", (e) => {
+        facebookunlink.style.opacity = "0.3";
+        naverunlink.style.opacity = "0.3";
+        kakaounlink.style.opacity = "1";
+        googleunlink.style.opacity = "0.3";
+    })
+
+    // 구글 버튼 클릭 시
+    googleicon.addEventListener("click", (e) => {
+        facebookunlink.style.opacity = "0.3";
+        naverunlink.style.opacity = "0.3";
+        kakaounlink.style.opacity = "0.3";
+        googleunlink.style.opacity = "1";
+    })
+</script>
+</html>

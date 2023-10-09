@@ -33,6 +33,14 @@ public interface UserService {
 //    전달받은 카카오프사로 업데이트
     public void updateKakaoProfile(UserVO userVO);
 
+    //    유저 계정 업데이트
+    public void updateProfile(UserVO userVO);
+
+//    유저 프로필 사진 업데이트
+    public void uploadProfileImg(UserVO userVO);
+
+    public void deleteProfileImg(Integer id);
+
 //    회원 전체 선택
     public List<UserVO> selectAllUser();
 }

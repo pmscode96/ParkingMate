@@ -167,6 +167,11 @@ a, button{
   margin-bottom: 4px;
 }
 
+.profile-img {
+  width: 40px;
+  height: 40px;
+}
+
 .ParkingMateMobile_text_2-voS{
   line-height: 14px;
   font-size: 10px;
@@ -313,8 +318,21 @@ main, section, article {
 .MyParkingMateSupporterProfile_supporterInfo_3zJwW{
   display: flex;
   align-items: center;
+  position: relative;
   width: 100%;
   gap: 8px;
+}
+
+.profile-img-delete-btn-main {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  color: #fff;
+  background: #00C4C4;
+  padding: 4px 6px;
+  border-radius: 4px;
 }
 
 .MyParkingMateSupporterProfile_profileImage_11ISs{
