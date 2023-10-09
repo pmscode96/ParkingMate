@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.parkingmate.mapper.CarInfoMapper">
+    <select id="selectAll" resultType="carInfoVO">
+        SELECT ID, CAR_MODEL, CAR_NUMBER, CAR_REGISTER_DATE, CAR_REGISTER_STATUS, CREATE_DATE, UPDATE_DATE, USER_ID
+        FROM TBL_CAR_INFO
+        WHERE USER_ID = #{UserId}
+        ORDER BY CREATE_DATE DESC
+    </select>
 
+    <insert id="insert">
+        INSERT INTO TBL_CAR_INFO(ID, CAR_MODEL, CAR_NUMBER, CAR_REGISTER_DATE, CREATE_DATE, USER_ID)
+        VALUES (SEQ_CAR_INFO.NEXTVAL, #{CarModel}, #{CarNumber}, CURRENT_DATE, CURRENT_DATE, #{UserId})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM TBL_CAR_INFO
+        WHERE ID = #{Id}
+    </delete>
 </mapper>

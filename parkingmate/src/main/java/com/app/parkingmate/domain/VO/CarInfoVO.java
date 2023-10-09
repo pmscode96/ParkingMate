@@ -11,7 +11,7 @@ import java.util.Date;
 public class CarInfoVO {
 //    차량정보 고유 id
 //     not null
-    private Integer CarInfoId;
+    private Integer Id;
 //    차량 모델
 //     not null
     private String CarModel;
@@ -29,6 +29,7 @@ public class CarInfoVO {
 //    생성 날짜
     private LocalDateTime CreateDate;
 //    업데이트 날짜
+    // 삭제 후 재생성이 디폴트이므로 업데이트타임은 필요없음
     private LocalDateTime UpdateDate;
 
 //    ================================ FK

@@ -682,48 +682,68 @@
                 <div class="SimplePayInfo_simplePayInfo_ejCel" id="registCardInfo">
                     <h3 class="SimplePayInfo_title_1a9F1">등록된 차량</h3>
                     <div class="SimpleCar_registed_2yAC4">
-                        <div class="SimpleCar_creditCar_2nvHf">
-                            <span class="SimpleCar_carName_1no5L">QM6</span>
-                            <!-- 차량 삭제 -->
-                            <button type="button" class="SimpleCar_editButton_Q120P">
-                                <svg viewBox="0 0 40 40" focusable="false" role="presentation"
-                                     class="withIcon_icon_3VTbq SimpleCar_deleteIcon_1tC7k" aria-hidden="true">
-                                    <path d="M36.67 5.31H3.33v2h2.82v31.88h27.7V7.31h2.82zm-4.82 31.88H8.15V7.31h23.7zM15 .81h10v2H15z"></path>
-                                    <path d="M14.75 15.18h2v15h-2zm8.5 0h2v15h-2z"></path>
-                                </svg>
-                                삭제
-                            </button>
-                            <!-- 차량 번호 -->
-                            <div class="SimpleCar_carNumber_3fnJ">
-                                <span>123가&nbsp;&nbsp;6890</span>
+                        <th:block th:if="${#lists.size(carInfos) != 0}">
+                            <div class="car-wrap">
+                                <th:block th:each="carInfo:${carInfos}">
+                                    <article th:object="${carInfo}" class="SimpleCar_creditCar_2nvHf">
+                                        <span th:text="*{CarModel}" class="SimpleCar_carName_1no5L"></span>
+                                        <!-- 차량 삭제 -->
+                                        <form th:action="@{/mypage/car-delete}" method="post">
+                                            <input type="hidden" th:value="*{Id}" name="id">
+                                            <button class="SimpleCar_editButton_Q120P">
+                                                <svg viewBox="0 0 40 40" focusable="false" role="presentation"
+                                                     class="withIcon_icon_3VTbq SimpleCar_deleteIcon_1tC7k"
+                                                     aria-hidden="true">
+                                                    <path d="M36.67 5.31H3.33v2h2.82v31.88h27.7V7.31h2.82zm-4.82 31.88H8.15V7.31h23.7zM15 .81h10v2H15z"></path>
+                                                    <path d="M14.75 15.18h2v15h-2zm8.5 0h2v15h-2z"></path>
+                                                </svg>
+                                                삭제
+                                            </button>
+                                        </form>
+                                        <!-- 차량 번호 -->
+                                        <div class="SimpleCar_carNumber_3fnJ">
+                                            <div th:text="*{CarNumber}"></div>
+                                        </div>
+                                        <!-- 차량 등록일 -->
+                                        <span class="SimpleCar_createdAt_Alwbk">
+                                            차량 등록일
+                                            <div th:text="*{CarRegisterDate}"></div>
+                                        </span>
+                                    </article>
+                                </th:block>
+                                <ul class="SimpleCarInfo_noticeList_VXr7r">
+                                    <li>ParkingMate에서는 차량 번호를 저장하지 않으니 안심하세요.</li>
+                                    <li>차량 정보 변경을 원한다면, 기존에 등록되었던 차량 정보를 삭제하고 다시 등록해 주세요.</li>
+                                </ul>
                             </div>
-                            <!-- 차량 등록일 -->
-                            <span class="SimpleCar_createdAt_Alwbk">
-                                차량 등록일
-                                <span>2023. 08. 20</span>
-                            </span>
-                        </div>
+                        </th:block>
                         <!-- 간편 차량 등록 layer -->
-                        <div class="SimplePayCard_simplecard_2wYo7 SimplePayCard_info_3rLl3 SimplePayCard_noInfo_pdX40">
-                            <div class="SimplePayCard_unregisted_2uiqp">
-                                <div class="SimplePayCard_addCard_2eagF">
-                                    <svg class="car_number" width="80px" height="80px" viewBox="0 0 80 80"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <image href="car_number.svg" x="18px" y="40px"/>
-                                    </svg>
+                        <th:block th:unless="${#lists.size(carInfos) != 0}">
+                            <div class="SimplePayCard_simplecard_2wYo7 SimplePayCard_info_3rLl3 SimplePayCard_noInfo_pdX40">
+                                <div class="SimplePayCard_unregisted_2uiqp">
+                                    <div class="SimplePayCard_addCard_2eagF">
+                                        <svg class="car_number" width="80px" height="80px" viewBox="0 0 80 80"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <image href="car_number.svg" x="18px" y="40px"/>
+                                        </svg>
 
-                                    <span class="SimplePayCard_title_PpPWZ">차량 등록</span>
-                                    <span class="SimplePayCard_description_IFa0t">차량을 등록하고, 빠르게 예약하세요!</span>
+                                        <span class="SimplePayCard_title_PpPWZ">차량 등록</span>
+                                        <span class="SimplePayCard_description_IFa0t">차량을 등록하고, 빠르게 예약하세요!</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </th:block>
                     </div>
+
                     <input type="hidden" name="has-simplepay-info" value="false">
                 </div>
             </div>
         </div>
     </div>
-    <button class="car_register">등록</button>
+    <a href="/mypage/caradd">
+        <button class="car_register">차량 추가하기</button>
+    </a>
+</div>
 </body>
 <script>
 

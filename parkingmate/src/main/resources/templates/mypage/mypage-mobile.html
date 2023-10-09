@@ -746,7 +746,7 @@
                                               <!-- 닉네임 layer -->
                                                   <a href="/mypage/usersettings"
                                                      style="display: flex;align-items: center;">
-                                                      <span class="MyParkingMateProfile_name_2BH2I">조남호</span>
+                                                      <span th:text="${session.user.userNickName}" class="MyParkingMateProfile_name_2BH2I"></span>
                                                       <span>님</span>
                                                       <svg viewBox="0 0 24 24" fill="none" focusable="false"
                                                            role="presentation"
@@ -956,7 +956,7 @@
                                             </li>
                                             <!-- 차량 관리 -->
                                             <li class="MyParkingMateMenu_menu_3TRMx CardInfo">
-                                                <a href="/mypage/caraddlist">
+                                                <a href="/mypage/carlist">
                                                     <span class="MyParkingMateMenu_icon_pwW81" aria-hidden="true">
                                                       <i class="MyParkingMateSupporterActivity_investIcon_Zm-kv"></i>
                                                     </span>

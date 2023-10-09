@@ -212,6 +212,8 @@ a {
 .MainWrapper_content_GZkTa{
   transition: padding-top .25s;
   padding-top: 0;
+  overflow-y: auto;
+  height: calc(100vh - 113px);
 }
 
 .MyRewardContainer_container_2qXDp{
@@ -486,7 +488,7 @@ ul, li {
   background-color: #00c4c4;
   color: #fff;
   width: 100%;
-  bottom: 100px;
+  bottom: 57px;
   position: fixed;
   /* position: relative;
   top:50%;
@@ -518,6 +520,7 @@ ul, li {
   border-radius: 8px;
   background-color: #e7f9f9;
   padding: 77px 20px;
+  margin-bottom: 15px;
 }
 
 .SimpleCar_carName_1no5L{
@@ -616,4 +619,10 @@ ul, li {
   font-weight: 400;
   padding-left: 16px;
   color: #495057;
+}
+
+.SimpleCarInfo_noticeList_VXr7r li{
+  margin: 0;
+  padding: 0;
+  list-style: disc;
 }

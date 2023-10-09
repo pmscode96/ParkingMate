@@ -1,7 +1,9 @@
 package com.app.parkingmate.controller;
 
 
+import com.app.parkingmate.domain.VO.CarInfoVO;
 import com.app.parkingmate.domain.VO.UserVO;
+import com.app.parkingmate.service.CarInfoService;
 import com.app.parkingmate.service.CouponlistService;
 import com.app.parkingmate.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +31,7 @@ import java.time.format.DateTimeFormatter;
 public class MyPageController {
     private final UserService userService;
     private final CouponlistService couponlistService;
+    private final CarInfoService carInfoService;
 
     @GetMapping("add-parking")
     public void goToAddParkingForm() {
@@ -46,7 +49,7 @@ public class MyPageController {
     }
 
     @GetMapping("caradd")
-    public void goToCarAddForm() {
+    public void goToCarAddForm(CarInfoVO carInfoVO) {
         ;
     }
 
@@ -111,8 +114,10 @@ public class MyPageController {
     }
 
     @GetMapping("carlist")
-    public void goToCarList() {
-        ;
+    public void goToCarList(Model model, HttpSession session) {
+        UserVO sessionVO = (UserVO) session.getAttribute("user");
+
+        model.addAttribute("carInfos", carInfoService.bringAllCarInfos(sessionVO.getId()));
     }
 
     @GetMapping("change-profile")
@@ -176,25 +181,25 @@ public class MyPageController {
     }
 
     @GetMapping("usersettings")
-    public void goToUserSettingMobile() {
-        ;
+    public void goToUserSettingMobile(Model model, HttpSession session) {
+        UserVO sessionVO = (UserVO) session.getAttribute("user");
+
+        model.addAttribute("userVO", sessionVO);
     }
 
     @PostMapping("profile-update")
-    public RedirectView updateProfile(
-            @RequestParam("userNickName") String userNickName,
-            @RequestParam("userEmail") String userEmail,
-            @RequestParam("userPhoneNumber") String userPhoneNumber,
-            HttpSession session,
-            RedirectAttributes redirectAttributes) {
+    public RedirectView updateProfile(UserVO userVO, HttpSession session, RedirectAttributes redirectAttributes) {
         UserVO sessionVO = (UserVO) session.getAttribute("user");
 
         // 세션 변경 또한 즉각 이뤄져야 하므로 세션의 값을 수정하고 update에 세션을 넣어 수정하는 방식.
-        sessionVO.setUserNickName(userNickName);
-        sessionVO.setUserEmail(userEmail);
-        sessionVO.setUserPhoneNumber(userPhoneNumber);
+        log.info(String.valueOf(userVO));
+
+        sessionVO.setUserNickName(userVO.getUserNickName());
+        sessionVO.setUserEmail(userVO.getUserEmail());
+        sessionVO.setUserPhoneNumber(userVO.getUserPhoneNumber());
 
         userService.updateProfile(sessionVO);
+        log.info(String.valueOf(sessionVO));
         redirectAttributes.addFlashAttribute("update", true);
 
         return new RedirectView("/mypage/usersettings");
@@ -229,5 +234,23 @@ public class MyPageController {
         session.setAttribute("user", sessionVO);
 
         return new RedirectView("/mypage/");
+    }
+
+    @PostMapping("caradd")
+    public RedirectView carInfoAdd(CarInfoVO carInfoVO, HttpSession session){
+        UserVO sessionVO = (UserVO) session.getAttribute("user");
+
+        carInfoVO.setUserId(sessionVO.getId());
+
+        carInfoService.save(carInfoVO);
+
+        return new RedirectView("/mypage/carlist");
+    }
+
+    @PostMapping("car-delete")
+    public RedirectView carDelete(@RequestParam("id")int id){
+        carInfoService.delete(id);
+
+        return new RedirectView("/mypage/carlist");
     }
 }
