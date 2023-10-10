@@ -13,20 +13,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/results/*")
 public class EventSearchController {
     public final EventService eventService;
 
-    @GetMapping("search")
-    public EventSearchDTO getResult(EventSearch eventSearch){
+    @GetMapping("results/search")
+    public EventSearchDTO getResult(EventSearch eventSearch, Pagination pagination, Model model){
+        pagination.setTotal(eventService.selectTotal(eventSearch));
+        pagination.progress();
+        model.addAttribute("pagination", pagination);
         return eventService.searchEvent(eventSearch);
     }
 

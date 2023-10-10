@@ -88,7 +88,7 @@ public class test {
     @Test
     public void selectAllTest(Pagination pagination, EventSearch eventSearch){
         pagination.setTotal(eventMapper.selectTotal(eventSearch));
-        eventMapper.selectAll(pagination).stream().map(EventVO::toString).forEach(log::info);
+        eventMapper.selectAll(pagination, eventSearch, eventSearch.getKeyword()).stream().map(EventVO::toString).forEach(log::info);
     }
 
     @Test
@@ -113,7 +113,7 @@ public class test {
         couponVO.setCouponStartDate(Date.valueOf("2023-10-01"));
         couponVO.setCouponEndDate(Date.valueOf("2023-11-01"));
         couponVO.setCouponUseCondition("전체회원");
-        couponVO.setCouponCode("55555");
+        couponVO.setCouponCode("54455");
         couponVO.setEventId(41);
 
         couponService.create(couponVO);
@@ -153,6 +153,11 @@ public class test {
     }
 
     @Test
+    public void insertAllCouponTest(){
+        couponService.signUpCoupon(215);
+    }
+
+
     public void updateProfileTest(){
         UserVO userVO = new UserVO();
 
@@ -182,7 +187,6 @@ public class test {
         carInfoVO.setCarNumber("1234");
         carInfoVO.setCarModel("mama");
         carInfoVO.setUserId(217);
-
         carInfoService.save(carInfoVO);
     }
 

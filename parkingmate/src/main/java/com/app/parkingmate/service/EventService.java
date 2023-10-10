@@ -14,7 +14,7 @@ public interface EventService {
 
 //    이벤트 리스트
 
-    public List<EventVO> list(Pagination pagination);
+    public List<EventVO> list(Pagination pagination, EventSearch eventSearch,String keyword);
 
 //    이벤트 리스트 카운터
     public int selectTotal(EventSearch eventSearch);
@@ -30,4 +30,8 @@ public interface EventService {
 
 //    이벤트 검색
     public EventSearchDTO searchEvent(EventSearch eventSearch);
+
+    public int nextEvent(int id);
+
+    public int prevEvent(int id);
 }

@@ -2,6 +2,7 @@ package com.app.parkingmate.controller;
 
 
 import com.app.parkingmate.domain.VO.CouponlistVO;
+import com.app.parkingmate.domain.VO.UserVO;
 import com.app.parkingmate.service.CouponService;
 import com.app.parkingmate.service.CouponlistService;
 import lombok.RequiredArgsConstructor;
@@ -24,9 +25,10 @@ public class CouponController {
 //    private final UserService userService;
 
     @GetMapping("coupons")
-    public void goToJoinCoupons(Model model){
-        model.addAttribute("coupons", couponlistService.listWithCoupon(25));
-        model.addAttribute("enabledList" , couponlistService.enabledList(25));
+    public void goToJoinCoupons(Model model, HttpSession session){
+        UserVO user = (UserVO) session.getAttribute("user");
+        model.addAttribute("coupons", couponlistService.listWithCoupon(user.getId()));
+        model.addAttribute("enabledList" , couponlistService.enabledList(user.getId()));
 
     }
 
@@ -47,10 +49,10 @@ public class CouponController {
 //    }
 
     @GetMapping("couponlist")
-    public void goToJoinCouponList(Model model){
-//        model.addAttribute("coupons", couponService.list());
-        model.addAttribute("coupons", couponlistService.listWithCoupon(25));
-        model.addAttribute("enabledList" , couponlistService.enabledList(25));
+    public void goToJoinCouponList(Model model, HttpSession session){
+        UserVO user = (UserVO) session.getAttribute("user");
+        model.addAttribute("coupons", couponlistService.listWithCoupon(user.getId()));
+        model.addAttribute("enabledList" , couponlistService.enabledList(user.getId()));
     }
 
 
@@ -58,13 +60,13 @@ public class CouponController {
     @RequestMapping(value = "couponlist/ajax", method = RequestMethod.POST, produces = "application/test; charset=UTF-8")
     public void insertCoupon(@RequestBody String json, HttpSession session ){
         JSONObject jsn = new JSONObject(json);
+        UserVO user = (UserVO) session.getAttribute("user");
 
         String couponlistId = (String) jsn.get("couponlistId");
         Integer couponID = Integer.parseInt(couponlistId);
-        log.info(String.valueOf(couponlistId));
         CouponlistVO couponlistVO = new CouponlistVO();
         couponlistVO.setId(couponID);
-        couponlistVO.setUserId(25);
+        couponlistVO.setUserId(user.getId());
         couponlistVO.setCouponStatus(1);
         couponlistService.updateStatus(couponlistVO);
     }

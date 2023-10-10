@@ -38,5 +38,6 @@ public class EventVO {
 //    업데이트 날짜
     private LocalDateTime updateDate;
 
+    private Integer rownum;
 
 }

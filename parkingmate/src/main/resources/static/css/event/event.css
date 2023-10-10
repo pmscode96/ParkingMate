@@ -466,7 +466,7 @@ i.wadizicon.wa-chevron-right::before, i.icon.chevron-right::before,
 
 .parkingmate_board-footer .parkingmate_search .parkingmate_filter-container .filter {
   background-color: #fff;
-  padding: 0 0 0 10px;
+  padding: 0 5px 0 0;
   width: 100%;
   text-align: center;
   line-height: 34px;

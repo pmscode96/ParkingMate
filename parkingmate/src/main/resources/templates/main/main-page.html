@@ -578,6 +578,7 @@
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao.maps.InfoWindow({
           position: coords,
+          // i로 접근했을 때 ParkingName이 안나옴..... 숫자로 접근하면 나옴..., 이거랑 검색했을 때 검색 값이랑 매치되는 주차장 위치만 나와야함!!
           content: ('<div id="ParkingLocation1"  style="width:150px;text-align:center;padding:6px 0;">' + parkingName1 + '</div>')
         });
         // moveinfowindowinfo = infowindow;

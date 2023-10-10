@@ -22,8 +22,8 @@ public class EventServiceImpl implements EventService {
 
 
     @Override
-    public List<EventVO> list(Pagination pagination) {
-        return eventDAO.list(pagination);
+    public List<EventVO> list(Pagination pagination ,EventSearch eventSearch,String keyword) {
+        return eventDAO.list(pagination, eventSearch,keyword);
     }
 
     @Override
@@ -52,5 +52,15 @@ public class EventServiceImpl implements EventService {
         eventSearchDTO.setFreeEvents(eventDAO.selectSearch(eventSearch));
         eventSearchDTO.setFreeEventsTotalCount(eventDAO.selectTotal(eventSearch));
         return eventSearchDTO;
+    }
+
+    @Override
+    public int nextEvent(int id) {
+       return eventDAO.nextEvent(id);
+    }
+
+    @Override
+    public int prevEvent(int id) {
+       return eventDAO.prevEvent(id);
     }
 }
