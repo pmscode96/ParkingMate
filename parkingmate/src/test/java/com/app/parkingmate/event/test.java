@@ -2,16 +2,12 @@ package com.app.parkingmate.event;
 
 import com.app.parkingmate.domain.EventSearch;
 import com.app.parkingmate.domain.Pagination;
-import com.app.parkingmate.domain.VO.CouponVO;
-import com.app.parkingmate.domain.VO.CouponlistVO;
-import com.app.parkingmate.domain.VO.EventVO;
-import com.app.parkingmate.domain.VO.UserVO;
+import com.app.parkingmate.domain.VO.*;
 import com.app.parkingmate.mapper.CouponMapper;
 import com.app.parkingmate.mapper.CouponlistMapper;
 import com.app.parkingmate.mapper.EventMapper;
 import com.app.parkingmate.mapper.UserMapper;
-import com.app.parkingmate.service.CouponServiceImpl;
-import com.app.parkingmate.service.CouponlistService;
+import com.app.parkingmate.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +23,8 @@ import java.util.Random;
 public class test {
     @Autowired
     private EventMapper eventMapper;
+    @Autowired
+    private CarInfoService carInfoService;
 
     @Autowired
     private CouponMapper couponMapper;
@@ -39,6 +37,9 @@ public class test {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private CouponlistService couponlistService;
@@ -157,6 +158,40 @@ public class test {
     }
 
 
+    public void updateProfileTest(){
+        UserVO userVO = new UserVO();
 
+        userVO.setUserNickName("nathan");
+        userVO.setUserEmail("cnh1234578@gmail.com");
+        userVO.setUserPhoneNumber("010-3631-6448");
+        userVO.setId(217);
+        userService.updateProfile(userVO);
+    }
 
+    @Test
+    public void updateProfileMapperTest(){
+        UserVO userVO = new UserVO();
+
+        userVO.setUserNickName("nathan");
+        userVO.setUserEmail("cnh1234578@gmail.com");
+        userVO.setUserPhoneNumber("null");
+        userVO.setId(217);
+
+        userMapper.updateUser(userVO);
+    }
+
+    @Test
+    public void insertCar(){
+        CarInfoVO carInfoVO = new CarInfoVO();
+
+        carInfoVO.setCarNumber("1234");
+        carInfoVO.setCarModel("mama");
+        carInfoVO.setUserId(217);
+        carInfoService.save(carInfoVO);
+    }
+
+    @Test
+    public void bringAllCar(){
+        carInfoService.bringAllCarInfos(217).stream().map(CarInfoVO::toString).forEach(log::info);
+    }
 }

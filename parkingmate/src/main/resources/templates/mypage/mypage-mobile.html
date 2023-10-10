@@ -1,419 +1,1043 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ParkingMate</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParkingMate</title>
 
-  <style>.async-hide { opacity: 0 !important} </style>
-  <style type="text/css" data-fbcssmodules="css:fb.css.base css:fb.css.dialog css:fb.css.iframewidget css:fb.css.customer_chat_plugin_iframe">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:'lucida grande', tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
-    .fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:'lucida grande', tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
-    .fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_dialog_advanced{border-radius:8px;padding:10px}.fb_dialog_content{background:#fff;color:#373737}.fb_dialog_close_icon{background:url(https://connect.facebook.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{left:5px;right:auto;top:5px}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://connect.facebook.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://connect.facebook.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://connect.facebook.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{height:100%;left:0;margin:0;overflow:visible;position:absolute;top:-10000px;transform:none;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://connect.facebook.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{background:none;height:auto;min-height:initial;min-width:initial;width:auto}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{clear:both;color:#fff;display:block;font-size:18px;padding-top:20px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .4);bottom:0;left:0;min-height:100%;position:absolute;right:0;top:0;width:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_mobile .fb_dialog_iframe{position:sticky;top:0}.fb_dialog_content .dialog_header{background:linear-gradient(from(#738aba), to(#2c4987));border-bottom:1px solid;border-color:#043b87;box-shadow:white 0 1px 1px -1px inset;color:#fff;font:bold 14px Helvetica, sans-serif;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:linear-gradient(from(#4267B2), to(#2a4887));background-clip:padding-box;border:1px solid #29487d;border-radius:3px;display:inline-block;line-height:18px;margin-top:3px;max-width:85px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{background:none;border:none;color:#fff;font:bold 12px Helvetica, sans-serif;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://connect.facebook.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #4a4a4a;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f5f6f7;border:1px solid #4a4a4a;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://connect.facebook.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-position:50% 50%;background-repeat:no-repeat;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-    .fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}
-    .fb_mpn_mobile_landing_page_slide_out{animation-duration:200ms;animation-name:fb_mpn_landing_page_slide_out;transition-timing-function:ease-in}.fb_mpn_mobile_landing_page_slide_out_from_left{animation-duration:200ms;animation-name:fb_mpn_landing_page_slide_out_from_left;transition-timing-function:ease-in}.fb_mpn_mobile_landing_page_slide_up{animation-duration:500ms;animation-name:fb_mpn_landing_page_slide_up;transition-timing-function:ease-in}.fb_mpn_mobile_bounce_in{animation-duration:300ms;animation-name:fb_mpn_bounce_in;transition-timing-function:ease-in}.fb_mpn_mobile_bounce_out{animation-duration:300ms;animation-name:fb_mpn_bounce_out;transition-timing-function:ease-in}.fb_mpn_mobile_bounce_out_v2{animation-duration:300ms;animation-name:fb_mpn_fade_out;transition-timing-function:ease-in}.fb_customer_chat_bounce_in_v2{animation-duration:300ms;animation-name:fb_bounce_in_v2;transition-timing-function:ease-in}.fb_customer_chat_bounce_in_from_left{animation-duration:300ms;animation-name:fb_bounce_in_from_left;transition-timing-function:ease-in}.fb_customer_chat_bounce_out_v2{animation-duration:300ms;animation-name:fb_bounce_out_v2;transition-timing-function:ease-in}.fb_customer_chat_bounce_out_from_left{animation-duration:300ms;animation-name:fb_bounce_out_from_left;transition-timing-function:ease-in}.fb_invisible_flow{display:inherit;height:0;overflow-x:hidden;width:0}@keyframes fb_mpn_landing_page_slide_out{0%{margin:0 12px;width:100% - 24px}60%{border-radius:18px}100%{border-radius:50%;margin:0 24px;width:60px}}@keyframes fb_mpn_landing_page_slide_out_from_left{0%{left:12px;width:100% - 24px}60%{border-radius:18px}100%{border-radius:50%;left:12px;width:60px}}@keyframes fb_mpn_landing_page_slide_up{0%{bottom:0;opacity:0}100%{bottom:24px;opacity:1}}@keyframes fb_mpn_bounce_in{0%{opacity:.5;top:100%}100%{opacity:1;top:0}}@keyframes fb_mpn_fade_out{0%{bottom:30px;opacity:1}100%{bottom:0;opacity:0}}@keyframes fb_mpn_bounce_out{0%{opacity:1;top:0}100%{opacity:.5;top:100%}}@keyframes fb_bounce_in_v2{0%{opacity:0;transform:scale(0, 0);transform-origin:bottom right}50%{transform:scale(1.03, 1.03);transform-origin:bottom right}100%{opacity:1;transform:scale(1, 1);transform-origin:bottom right}}@keyframes fb_bounce_in_from_left{0%{opacity:0;transform:scale(0, 0);transform-origin:bottom left}50%{transform:scale(1.03, 1.03);transform-origin:bottom left}100%{opacity:1;transform:scale(1, 1);transform-origin:bottom left}}@keyframes fb_bounce_out_v2{0%{opacity:1;transform:scale(1, 1);transform-origin:bottom right}100%{opacity:0;transform:scale(0, 0);transform-origin:bottom right}}@keyframes fb_bounce_out_from_left{0%{opacity:1;transform:scale(1, 1);transform-origin:bottom left}100%{opacity:0;transform:scale(0, 0);transform-origin:bottom left}}@keyframes slideInFromBottom{0%{opacity:.1;transform:translateY(100%)}100%{opacity:1;transform:translateY(0)}}@keyframes slideInFromBottomDelay{0%{opacity:0;transform:translateY(100%)}97%{opacity:0;transform:translateY(100%)}100%{opacity:1;transform:translateY(0)}}</style>
-  <link rel="shortcut icon" href="/images/favicon.ico">
-  <link rel="stylesheet" href="/css/mypage/font.css">
-  <link rel="stylesheet" href="/css/fragment/header.css" />
-  <link rel="stylesheet" href="/css/fragment/footer.css" />
-  <link rel="stylesheet" href="https://static.wadiz.kr/assets/fonts/font.css">
-  <link rel="stylesheet" href="https://static.wadiz.kr/static/web/wui.c30dc2b4.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/7f85a56ba4.css">
-  <link rel="stylesheet" href="https://static.wadiz.kr/static/web/css/vendor.3570589c.chunk.css">
-  <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/supporter-club-intro.978fbaa0.chunk.css">
-  <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/my-wadiz.8de3e6d3.chunk.css">
-  <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/wadiz-day.afe7a0c1.chunk.css">
-  <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/wadiz-day~wishes.3f77e16d.chunk.css">
-  <link rel="stylesheet" href="https://static.wadiz.kr/static/web/common.a1265b88.css">
-  <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/0.12412ac2.chunk.css">
-  <link rel="stylesheet" href="https://static.wadiz.kr/main/main.d37df1e2.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.wadiz.kr/resources/static/editor/4.0.15/froala_editor.pkgd.min.css?20230613">
-  <link rel="stylesheet" type="text/css" href="https://cdn.wadiz.kr/resources/static/editor/4.0.15/froala_custom.css?v=20221122">
-  <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/my-wadiz.8de3e6d3.chunk.css">
-  <link rel="stylesheet" href="https://static.wadiz.kr/static/web/common.a1265b88.css">
-  <link rel="stylesheet" href="https://static.wadiz.kr/static/web/layout.c8035bb3.css">
-  <link rel="stylesheet" href="https://static.wadiz.kr/main/main.d37df1e2.css">
-  <link rel="stylesheet" href="/css/mypage/mypagemobile.css">
-  <link rel="mask-icon" href="/resources/static/svg/wa.svg" color="#1d2129">
+    <style>.async-hide {
+        opacity: 0 !important
+    } </style>
+    <style type="text/css"
+           data-fbcssmodules="css:fb.css.base css:fb.css.dialog css:fb.css.iframewidget css:fb.css.customer_chat_plugin_iframe">.fb_hidden {
+        position: absolute;
+        top: -10000px;
+        z-index: 10001
+    }
+
+    .fb_reposition {
+        overflow: hidden;
+        position: relative
+    }
+
+    .fb_invisible {
+        display: none
+    }
+
+    .fb_reset {
+        background: none;
+        border: 0;
+        border-spacing: 0;
+        color: #000;
+        cursor: auto;
+        direction: ltr;
+        font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+        font-size: 11px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: normal;
+        letter-spacing: normal;
+        line-height: 1;
+        margin: 0;
+        overflow: visible;
+        padding: 0;
+        text-align: left;
+        text-decoration: none;
+        text-indent: 0;
+        text-shadow: none;
+        text-transform: none;
+        visibility: visible;
+        white-space: normal;
+        word-spacing: normal
+    }
+
+    .fb_reset > div {
+        overflow: hidden
+    }
+
+    @keyframes fb_transform {
+        from {
+            opacity: 0;
+            transform: scale(.95)
+        }
+        to {
+            opacity: 1;
+            transform: scale(1)
+        }
+    }
+
+    .fb_animate {
+        animation: fb_transform .3s forwards
+    }
+
+    .fb_hidden {
+        position: absolute;
+        top: -10000px;
+        z-index: 10001
+    }
+
+    .fb_reposition {
+        overflow: hidden;
+        position: relative
+    }
+
+    .fb_invisible {
+        display: none
+    }
+
+    .fb_reset {
+        background: none;
+        border: 0;
+        border-spacing: 0;
+        color: #000;
+        cursor: auto;
+        direction: ltr;
+        font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+        font-size: 11px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: normal;
+        letter-spacing: normal;
+        line-height: 1;
+        margin: 0;
+        overflow: visible;
+        padding: 0;
+        text-align: left;
+        text-decoration: none;
+        text-indent: 0;
+        text-shadow: none;
+        text-transform: none;
+        visibility: visible;
+        white-space: normal;
+        word-spacing: normal
+    }
+
+    .fb_reset > div {
+        overflow: hidden
+    }
+
+    @keyframes fb_transform {
+        from {
+            opacity: 0;
+            transform: scale(.95)
+        }
+        to {
+            opacity: 1;
+            transform: scale(1)
+        }
+    }
+
+    .fb_animate {
+        animation: fb_transform .3s forwards
+    }
+
+    .fb_dialog {
+        background: rgba(82, 82, 82, .7);
+        position: absolute;
+        top: -10000px;
+        z-index: 10001
+    }
+
+    .fb_dialog_advanced {
+        border-radius: 8px;
+        padding: 10px
+    }
+
+    .fb_dialog_content {
+        background: #fff;
+        color: #373737
+    }
+
+    .fb_dialog_close_icon {
+        background: url(https://connect.facebook.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;
+        cursor: pointer;
+        display: block;
+        height: 15px;
+        position: absolute;
+        right: 18px;
+        top: 17px;
+        width: 15px
+    }
+
+    .fb_dialog_mobile .fb_dialog_close_icon {
+        left: 5px;
+        right: auto;
+        top: 5px
+    }
+
+    .fb_dialog_padding {
+        background-color: transparent;
+        position: absolute;
+        width: 1px;
+        z-index: -1
+    }
+
+    .fb_dialog_close_icon:hover {
+        background: url(https://connect.facebook.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent
+    }
+
+    .fb_dialog_close_icon:active {
+        background: url(https://connect.facebook.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent
+    }
+
+    .fb_dialog_iframe {
+        line-height: 0
+    }
+
+    .fb_dialog_content .dialog_title {
+        background: #6d84b4;
+        border: 1px solid #365899;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+        margin: 0
+    }
+
+    .fb_dialog_content .dialog_title > span {
+        background: url(https://connect.facebook.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;
+        float: left;
+        padding: 5px 0 7px 26px
+    }
+
+    body.fb_hidden {
+        height: 100%;
+        left: 0;
+        margin: 0;
+        overflow: visible;
+        position: absolute;
+        top: -10000px;
+        transform: none;
+        width: 100%
+    }
+
+    .fb_dialog.fb_dialog_mobile.loading {
+        background: url(https://connect.facebook.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;
+        min-height: 100%;
+        min-width: 100%;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        z-index: 10001
+    }
+
+    .fb_dialog.fb_dialog_mobile.loading.centered {
+        background: none;
+        height: auto;
+        min-height: initial;
+        min-width: initial;
+        width: auto
+    }
+
+    .fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner {
+        width: 100%
+    }
+
+    .fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content {
+        background: none
+    }
+
+    .loading.centered #fb_dialog_loader_close {
+        clear: both;
+        color: #fff;
+        display: block;
+        font-size: 18px;
+        padding-top: 20px
+    }
+
+    #fb-root #fb_dialog_ipad_overlay {
+        background: rgba(0, 0, 0, .4);
+        bottom: 0;
+        left: 0;
+        min-height: 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100%;
+        z-index: 10000
+    }
+
+    #fb-root #fb_dialog_ipad_overlay.hidden {
+        display: none
+    }
+
+    .fb_dialog.fb_dialog_mobile.loading iframe {
+        visibility: hidden
+    }
+
+    .fb_dialog_mobile .fb_dialog_iframe {
+        position: sticky;
+        top: 0
+    }
+
+    .fb_dialog_content .dialog_header {
+        border-bottom: 1px solid;
+        border-color: #043b87;
+        box-shadow: white 0 1px 1px -1px inset;
+        color: #fff;
+        font: bold 14px Helvetica, sans-serif;
+        text-overflow: ellipsis;
+        text-shadow: rgba(0, 30, 84, .296875) 0 -1px 0;
+        vertical-align: middle;
+        white-space: nowrap
+    }
+
+    .fb_dialog_content .dialog_header table {
+        height: 43px;
+        width: 100%
+    }
+
+    .fb_dialog_content .dialog_header td.header_left {
+        font-size: 12px;
+        padding-left: 5px;
+        vertical-align: middle;
+        width: 60px
+    }
+
+    .fb_dialog_content .dialog_header td.header_right {
+        font-size: 12px;
+        padding-right: 5px;
+        vertical-align: middle;
+        width: 60px
+    }
+
+    .fb_dialog_content .touchable_button {
+        background-clip: padding-box;
+        border: 1px solid #29487d;
+        border-radius: 3px;
+        display: inline-block;
+        line-height: 18px;
+        margin-top: 3px;
+        max-width: 85px;
+        padding: 4px 12px;
+        position: relative
+    }
+
+    .fb_dialog_content .dialog_header .touchable_button input {
+        background: none;
+        border: none;
+        color: #fff;
+        font: bold 12px Helvetica, sans-serif;
+        margin: 2px -12px;
+        padding: 2px 6px 3px 6px;
+        text-shadow: rgba(0, 30, 84, .296875) 0 -1px 0
+    }
+
+    .fb_dialog_content .dialog_header .header_center {
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 18px;
+        text-align: center;
+        vertical-align: middle
+    }
+
+    .fb_dialog_content .dialog_content {
+        background: url(https://connect.facebook.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;
+        border: 1px solid #4a4a4a;
+        border-bottom: 0;
+        border-top: 0;
+        height: 150px
+    }
+
+    .fb_dialog_content .dialog_footer {
+        background: #f5f6f7;
+        border: 1px solid #4a4a4a;
+        border-top-color: #ccc;
+        height: 40px
+    }
+
+    #fb_dialog_loader_close {
+        float: left
+    }
+
+    .fb_dialog.fb_dialog_mobile .fb_dialog_close_icon {
+        visibility: hidden
+    }
+
+    #fb_dialog_loader_spinner {
+        animation: rotateSpinner 1.2s linear infinite;
+        background-color: transparent;
+        background-image: url(https://connect.facebook.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        height: 24px;
+        width: 24px
+    }
+
+    @keyframes rotateSpinner {
+        0% {
+            transform: rotate(0deg)
+        }
+        100% {
+            transform: rotate(360deg)
+        }
+    }
+
+    .fb_iframe_widget {
+        display: inline-block;
+        position: relative
+    }
+
+    .fb_iframe_widget span {
+        display: inline-block;
+        position: relative;
+        text-align: justify
+    }
+
+    .fb_iframe_widget iframe {
+        position: absolute
+    }
+
+    .fb_iframe_widget_fluid_desktop, .fb_iframe_widget_fluid_desktop span, .fb_iframe_widget_fluid_desktop iframe {
+        max-width: 100%
+    }
+
+    .fb_iframe_widget_fluid_desktop iframe {
+        min-width: 220px;
+        position: relative
+    }
+
+    .fb_iframe_widget_lift {
+        z-index: 1
+    }
+
+    .fb_iframe_widget_fluid {
+        display: inline
+    }
+
+    .fb_iframe_widget_fluid span {
+        width: 100%
+    }
+
+    .fb_mpn_mobile_landing_page_slide_out {
+        animation-duration: 200ms;
+        animation-name: fb_mpn_landing_page_slide_out;
+        transition-timing-function: ease-in
+    }
+
+    .fb_mpn_mobile_landing_page_slide_out_from_left {
+        animation-duration: 200ms;
+        animation-name: fb_mpn_landing_page_slide_out_from_left;
+        transition-timing-function: ease-in
+    }
+
+    .fb_mpn_mobile_landing_page_slide_up {
+        animation-duration: 500ms;
+        animation-name: fb_mpn_landing_page_slide_up;
+        transition-timing-function: ease-in
+    }
+
+    .fb_mpn_mobile_bounce_in {
+        animation-duration: 300ms;
+        animation-name: fb_mpn_bounce_in;
+        transition-timing-function: ease-in
+    }
+
+    .fb_mpn_mobile_bounce_out {
+        animation-duration: 300ms;
+        animation-name: fb_mpn_bounce_out;
+        transition-timing-function: ease-in
+    }
+
+    .fb_mpn_mobile_bounce_out_v2 {
+        animation-duration: 300ms;
+        animation-name: fb_mpn_fade_out;
+        transition-timing-function: ease-in
+    }
+
+    .fb_customer_chat_bounce_in_v2 {
+        animation-duration: 300ms;
+        animation-name: fb_bounce_in_v2;
+        transition-timing-function: ease-in
+    }
+
+    .fb_customer_chat_bounce_in_from_left {
+        animation-duration: 300ms;
+        animation-name: fb_bounce_in_from_left;
+        transition-timing-function: ease-in
+    }
+
+    .fb_customer_chat_bounce_out_v2 {
+        animation-duration: 300ms;
+        animation-name: fb_bounce_out_v2;
+        transition-timing-function: ease-in
+    }
+
+    .fb_customer_chat_bounce_out_from_left {
+        animation-duration: 300ms;
+        animation-name: fb_bounce_out_from_left;
+        transition-timing-function: ease-in
+    }
+
+    .fb_invisible_flow {
+        display: inherit;
+        height: 0;
+        overflow-x: hidden;
+        width: 0
+    }
+
+    @keyframes fb_mpn_landing_page_slide_out {
+        0% {
+            margin: 0 12px;
+            width: 100%;
+        }
+        60% {
+            border-radius: 18px
+        }
+        100% {
+            border-radius: 50%;
+            margin: 0 24px;
+            width: 60px
+        }
+    }
+
+    @keyframes fb_mpn_landing_page_slide_out_from_left {
+        0% {
+            left: 12px;
+            width: 100%;
+        }
+        60% {
+            border-radius: 18px
+        }
+        100% {
+            border-radius: 50%;
+            left: 12px;
+            width: 60px
+        }
+    }
+
+    @keyframes fb_mpn_landing_page_slide_up {
+        0% {
+            bottom: 0;
+            opacity: 0
+        }
+        100% {
+            bottom: 24px;
+            opacity: 1
+        }
+    }
+
+    @keyframes fb_mpn_bounce_in {
+        0% {
+            opacity: .5;
+            top: 100%
+        }
+        100% {
+            opacity: 1;
+            top: 0
+        }
+    }
+
+    @keyframes fb_mpn_fade_out {
+        0% {
+            bottom: 30px;
+            opacity: 1
+        }
+        100% {
+            bottom: 0;
+            opacity: 0
+        }
+    }
+
+    @keyframes fb_mpn_bounce_out {
+        0% {
+            opacity: 1;
+            top: 0
+        }
+        100% {
+            opacity: .5;
+            top: 100%
+        }
+    }
+
+    @keyframes fb_bounce_in_v2 {
+        0% {
+            opacity: 0;
+            transform: scale(0, 0);
+            transform-origin: bottom right
+        }
+        50% {
+            transform: scale(1.03, 1.03);
+            transform-origin: bottom right
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1, 1);
+            transform-origin: bottom right
+        }
+    }
+
+    @keyframes fb_bounce_in_from_left {
+        0% {
+            opacity: 0;
+            transform: scale(0, 0);
+            transform-origin: bottom left
+        }
+        50% {
+            transform: scale(1.03, 1.03);
+            transform-origin: bottom left
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1, 1);
+            transform-origin: bottom left
+        }
+    }
+
+    @keyframes fb_bounce_out_v2 {
+        0% {
+            opacity: 1;
+            transform: scale(1, 1);
+            transform-origin: bottom right
+        }
+        100% {
+            opacity: 0;
+            transform: scale(0, 0);
+            transform-origin: bottom right
+        }
+    }
+
+    @keyframes fb_bounce_out_from_left {
+        0% {
+            opacity: 1;
+            transform: scale(1, 1);
+            transform-origin: bottom left
+        }
+        100% {
+            opacity: 0;
+            transform: scale(0, 0);
+            transform-origin: bottom left
+        }
+    }
+
+    @keyframes slideInFromBottom {
+        0% {
+            opacity: .1;
+            transform: translateY(100%)
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0)
+        }
+    }
+
+    @keyframes slideInFromBottomDelay {
+        0% {
+            opacity: 0;
+            transform: translateY(100%)
+        }
+        97% {
+            opacity: 0;
+            transform: translateY(100%)
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0)
+        }
+    }</style>
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/css/mypage/font.css">
+    <link rel="stylesheet" href="/css/fragment/header.css"/>
+    <link rel="stylesheet" href="/css/fragment/footer.css"/>
+    <link rel="stylesheet" href="https://static.wadiz.kr/assets/fonts/font.css">
+    <link rel="stylesheet" href="https://static.wadiz.kr/static/web/wui.c30dc2b4.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/7f85a56ba4.css">
+    <link rel="stylesheet" href="https://static.wadiz.kr/static/web/css/vendor.3570589c.chunk.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://static.wadiz.kr/main/css/supporter-club-intro.978fbaa0.chunk.css">
+    <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/my-wadiz.8de3e6d3.chunk.css">
+    <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/wadiz-day.afe7a0c1.chunk.css">
+    <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/wadiz-day~wishes.3f77e16d.chunk.css">
+    <link rel="stylesheet" href="https://static.wadiz.kr/static/web/common.a1265b88.css">
+    <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/0.12412ac2.chunk.css">
+    <link rel="stylesheet" href="https://static.wadiz.kr/main/main.d37df1e2.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.wadiz.kr/resources/static/editor/4.0.15/froala_editor.pkgd.min.css?20230613">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.wadiz.kr/resources/static/editor/4.0.15/froala_custom.css?v=20221122">
+    <link rel="stylesheet" type="text/css" href="https://static.wadiz.kr/main/css/my-wadiz.8de3e6d3.chunk.css">
+    <link rel="stylesheet" href="https://static.wadiz.kr/static/web/common.a1265b88.css">
+    <link rel="stylesheet" href="https://static.wadiz.kr/static/web/layout.c8035bb3.css">
+    <link rel="stylesheet" href="https://static.wadiz.kr/main/main.d37df1e2.css">
+    <link rel="stylesheet" href="/css/mypage/mypagemobile.css">
+    <link rel="mask-icon" href="/resources/static/svg/wa.svg" color="#1d2129">
 </head>
+
 <body class="show-ParkingMate" style="overflow: auto;">
-  <!-- 전체적인 페이지 틀 -->
-  <div class="page-container">
+<!-- 전체적인 페이지 틀 -->
+<div class="page-container">
     <main id="main-app">
-      <!-- 로고쪽 header -->
-      <div class="web-header">
-        <div class="web-header-mobile">
-          <header class="header-wrapper" style="background: rgb(0, 196, 196);">
-            <div class="header-container" style="display: flex;">
-              <!-- 하단 메뉴바 -->
-              <th:block th:replace="~{fragment/footer-button :: footer-button}"></th:block>
-              <!-- 상단 맨 위 배너 -->
-              <div class="TitleField_container_KPCmF TitleField_isLeft_GkYZZ" style="color: rgb(255, 255, 255);">
-                <p class="TitleField_title_3MvYO TitleField_isLeft_GkYZZ">ParkingMate</p>
-              </div> 
-
-              <div class="PreviewOverlay_container_W6b-E">
-                <svg viewBox="0 0 40 40" focusable="false" role="presentation" class="withIcon_icon_3VTbq" aria-hidden="true" style="width: 24px; height: 24px;">
-                  <path fill="none" d="M0 0h40v40H0z"></path>
-                  <path d="M29.12 2.23H10.88a1 1 0 0 0-1 1v33.88a1 1 0 0 0 1 1h18.24a1 1 0 0 0 1-1V3.28a1 1 0 0 0-1-1.05zm-7.3 30.61A1.82 1.82 0 1 1 20 31a1.83 1.83 0 0 1 1.82 1.84zm6.26 3.23H11.92V4.32h16.16z"></path>
-                  <path d="M18.18 6.89h3.65v2.08h-3.65z"></path>
-                </svg>
-                <p class="PreviewOverlay_title_1p_pc">미리보기 모드</p>
-                <p class="PreviewOverlay_description_3Cqx5">저장한 내용을 미리 볼 수 있어요</p>
-              </div> 
-            </div>
-          </header>
-        </div>
-      </div>
-      <!-- 상단 배너를 제외한 밑에 부분 전체 -->
-      <div class="MainWrapper_content_GZkTa">
-        <section class="ParkingMatePage_MyParkingMatePage_GLuZU">
-          <div class="MyParkingMatePage_profileBackground_3pq-5" aria-hidden="true"></div>
-          <h2 class="BlindText_textHidden_ovQb4">MyParkingMate</h2>
-          <!-- 상단배너 바로 아래layer부분 -->
-          <div class="MyParkingMatePage_inner_3-l11">
-            <div class="MyParkingMatePage_popperBox_GoAia">
-              <div class="MyParkingMateHeader_ParkingMateHeader_385kM"></div>
-              <div class="popperRenew_container_1PprA PopperRenew_hasOutsideChildren_3F_zW">
-                <div class="PopperRenew_popperContainer_2aDcn MyParkingMatePage_popperContent_2acU0 PopperRenew_bottom-right_3C1jr PopperRenew_fixed_295ce"></div>
-              </div>
-            </div>
-            <div class="MyParkingMate_contentWrapper_1JOIj">
-              <div class="MyParkingMate_container_242IL MyParkingMate_supportMode_3Wwdm" role="tabpanel" id="myParkingMatePanel_supporter" aria-labelledby="myParkingMateTab_supporter">
-                <div class="MyParkingMateSupporterProfile_profileContainer_1Aqi-">
-                  <h3 class="BlindText_textHidden_ovQb4">나의 프로필</h3>
-                  <!-- 프로필 layer -->
-                  <div class="MyParkingMateSupporterProfile_supporterInfo_3zJwW">
-                    <!-- 프로필 이미지 -->
-                    <div class="MyParkingMateSupporterProfile_profileImage_11ISs">
-                      <button type="button" class="MyParkingMateSupporterProfile_detailProfile_JoIEU" aria-label="프로필 상세 보기" data-event="profile" style="background-image: url(&quot;https://static.wadiz.kr/assets/icon/profile-icon-6.png&quot;);">
-                        <img th:src="${session.user.UserProfile}">
-                      </button>
-                      <!-- 프로필 이미지의 펜 이미지 -->
-                      <button type="button" class="MyParkingMateSupporterProfile_editProfile_1Zcs_" data-event="profile_edit" aria-label="프로필 편집하기">
-                        <svg viewBox="0 0 32 32" focusable="false" role="presentation" class="withIcon_icon_3VTbq" aria-hidden="true">
-                          <path d="M24 1.6L1.6 24v6.4H8L30.4 8zM7.36 28.8H3.2v-4.16L19.76 8.08l4.16 4.16zm17.68-17.68l-4.16-4.16L24 3.84 28.16 8z"></path>
-                        </svg>
-                      </button>
-                    </div>
-                    <!-- 프로필 옆 layer -->
-                    <div class="MyParkingMateProfile_profileUser_2rCck">
-                      <button type="button" class="MyParkingMateSupporterProfile_username_MypCN" data-event="profile">
-                        <span class="MyParkingMateSupporterProfile_textBox_3jsbN">
-                          <!-- 닉네임 layer -->
-                          <span class="MyParkingMateProfile_name_2BH2I">비준</span>
-                          <span>님</span>
-                          <svg viewBox="0 0 24 24" fill="none" focusable="false" role="presentation" class="withIcon_icon_3VTbq withIcon_inline_1lwwX MyParkingMateSupporterProfile_icon_YWNgi" aria-hidden="true" style="width: 16px; height: 16px;">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.924 2.576l-.848.848L15.65 12l-8.575 8.576.848.848L17.35 12 7.924 2.576z"></path>
-                          </svg>
-                        </span>
-                      </button>
-                      <!-- 회원 구분 layer -->
-                      <dl class="MyParkingMateSupporterProfile_profileUserLable_3GjOy">
-                        <dt class="BlindText_textHidden_ovQb4">내 회원 정보</dt>
-                        <dd>
-                          일반 회원
-                        </dd>
-                      </dl>
-                    </div>
-
-                    <a style="width: 50px; height: 20px" th:if="${session.user.kakaoEmail eq null}" href="https://kauth.kakao.com/oauth/authorize?client_id=1fd38d790204d58dbce4c9b70a0f5013&redirect_uri=http://localhost:10000/kakao/login&response_type=code">
-                      <img style="width: 50px; height: 20px; z-index: 500" src="../../static/images/kakao_login_medium_narrow.png" alt="">
-                    </a>
-
-
-                  </div>
-                  <!-- ::after -->
-                </div>
-                <!-- 프로필 layer 밑 전체부분 -->
-                <div class="MyParkingMate_contents_-7JEI">
-                  <!-- 포인트 및 쿠폰, 결제정보 관리 박스 부분 -->
-                  <div class="MyParkingMateSection_section_1ykXL">
-                    <div class="MyParkingMateSupporterProject_container_3Bv5d">
-                      <div class="MyParkingMateSupporterProject_title_1gDKa">
-                        <div class="MyParkingMateSupporterProject_accumulate_xGGms">
-                          <div class="MyParkingMateSupporter_value_2qx0D">
-                            <!-- 쿠폰 layer -->
-                            <a href="/coupon/coupons" class="MyParkingMateSupporterAccumulate_container_3c9u2">
-                              <dl class="MyParkingMateSupporterAccumulate_info_pJkKs">
-                                <dt class="MyParkingMateSupporterAccumulate_title_3BFcB">
-                                  <svg viewBox="0 0 40 40" focusable="false" role="presentation" class="withIcon_icon_3VTbq" aria-hidden="true">
-                                    <g data-name="레이어 2">
-                                      <path d="M37.64 17.54l.86-.12V8.5a2 2 0 0 0-2-2h-33a2 2 0 0 0-2 2v8.92l.86.12a2.48 2.48 0 0 1 0 4.92l-.86.12v8.92a2 2 0 0 0 2 2h33a2 2 0 0 0 2-2v-8.92l-.86-.12a2.48 2.48 0 0 1 0-4.92zm-1.14 6.69v7.27h-33v-7.27a4.48 4.48 0 0 0 0-8.46V8.5h33v7.27a4.48 4.48 0 0 0 0 8.46z"></path>
-                                      <path d="M18.16 16.73a2.66 2.66 0 1 0-2.66 2.66 2.66 2.66 0 0 0 2.66-2.66zm-3.8 0a1.14 1.14 0 1 1 1.14 1.14 1.14 1.14 0 0 1-1.14-1.14zm12.14 4.34a2.66 2.66 0 1 0 2.66 2.66 2.66 2.66 0 0 0-2.66-2.66zm0 3.8a1.14 1.14 0 1 1 1.14-1.14 1.14 1.14 0 0 1-1.14 1.14zm.43-10.45l-1.08-.98-10.99 12.01-.09.09 1.08.98 10.99-12.01.09-.09z"></path>
-                                      <path fill="none" d="M0 0h40v40H0z"></path>
-                                    </g>
-                                  </svg>
-                                  <span class="MyParkingMateSupporterAccumulate_name_y445e">쿠폰</span>
-                                </dt>
-                                <dd class="MyParkingMateSupporterAccumulate_value_3TyL_">5장</dd>
-                              </dl>
-                            </a>
-                          </div>
+        <!-- 로고쪽 header -->
+        <div class="web-header">
+            <div class="web-header-mobile">
+                <header class="header-wrapper" style="background: rgb(0, 196, 196);">
+                    <div class="header-container" style="display: flex;">
+                        <!-- 하단 메뉴바 -->
+                        <th:block th:replace="~{fragment/footer-button :: footer-button}"></th:block>
+                        <!-- 상단 맨 위 배너 -->
+                        <div class="TitleField_container_KPCmF TitleField_isLeft_GkYZZ"
+                             style="color: rgb(255, 255, 255);">
+                            <p class="TitleField_title_3MvYO TitleField_isLeft_GkYZZ">ParkingMate</p>
                         </div>
-                        <!-- 결제 정보 관리 layer -->
-                        <div class="MyParkingMateSupporterProjectInfo_container_XLkd5">
-                          <div class="MyParkingMateSupporterProjectInfo_project_1rXDj">
-                            <div class="MyParkingMateSupporterProjectInfo_payment_RiX8m">
-                              <!-- 결제 정보 관리 페이지로 이동 -->
-                              <a >
-                                <div class="MyParkingMateSupporterProjectInfo_content_VwaqY">
-                                  <div class="MyParkingMateSupporterProjectInfo_titleInfo_9V3NT">
-                                    <i class="MyParkingMateSupporterProjectInfo_icon_32Rsj" aria-hidden="true"></i>
-                                    <strong class="MyParkingMateSupporterProjectInfo_title_fYmNn">결제정보 관리</strong>
-                                  </div>
-                                  <!-- 카드 등록 링크 이동 -->
-                                  <div class="MyParkingMateSupporterProjectInfo_link_WS6I">
-                                    <span>카드 등록</span>
-                                    <svg viewBox="0 0 24 24" fill="none" focusable="false" role="presentation" class="withIcon_icon_3VTbq" aria-hidden="true">
-                                      <path fill-rule="evenodd" clip-rule="evenodd" d="M7.924 2.576l-.848.848L15.65 12l-8.575 8.576.848.848L17.35 12 7.924 2.576z"></path>
-                                    </svg>
-                                  </div>
-                                </div>
-                              </a>
-                            </div>
-                          </div>
-                          <!-- 결제 정보 관리 outline layer -->
-                          <div class="PopperRenew_container_1PprA PopperRenew_hasOutsideChildren_3F_zW">
-                            <div class="PopperRenew_popperContainer_2aDcn MyParkingMateSupporterProjectInfo_popperContainer_CufH8 PopperRenew_bottom-right3C1jr"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- 정보 -->
-                  <div class="MyParkingMateSection_section_1ykXL">
-                    <h4 class="MyParkingMateSection_title_dWRmW">정보</h4>
-                    <div>
-                      <ul>
-                        <!-- 개인정보 -->
-                        <li class="MyParkingMateMenu_menu_3TRMx">
-                          <a >
-                            <span class="MyParkingMateMenu_icon_pwW81" aria-hidden="true">
-                              <!-- 아이콘 -->
-                              <svg viewBox="0 0 40 40" focusable="false" role="presentation" class="withIcon_icon_3VTbq" aria-hidden="true">
+
+                        <div class="PreviewOverlay_container_W6b-E">
+                            <svg viewBox="0 0 40 40" focusable="false" role="presentation" class="withIcon_icon_3VTbq"
+                                 aria-hidden="true" style="width: 24px; height: 24px;">
                                 <path fill="none" d="M0 0h40v40H0z"></path>
-                                <path d="M28.13 9.39a5.26 5.26 0 0 1 0 10.52 8.93 8.93 0 0 1-1.71 1.87 7.07 7.07 0 0 0 1.73.22 7.35 7.35 0 1 0 0-14.7 7.07 7.07 0 0 0-1.73.22 8.93 8.93 0 0 1 1.71 1.87zM29.82 24a8.41 8.41 0 0 1 2.63 2.38c3.71.69 5.3 2.51 5.3 5.8h2.09c0-6.58-5.31-7.97-10.02-8.18zM11.3 20.79v-1.04H6.69v-4.61H4.61v4.61H0v2.08h4.61v4.61h2.08v-4.61h4.61v-1.04z"></path>
-                                <path d="M27.85 14.65A7.35 7.35 0 1 0 20.5 22a7.36 7.36 0 0 0 7.35-7.35zm-12.62 0a5.27 5.27 0 1 1 5.27 5.26 5.27 5.27 0 0 1-5.27-5.26zM20.5 24c-5 0-11.69.85-11.69 8.22h2.08c0-4.36 2.79-6.14 9.61-6.14s9.6 1.78 9.6 6.14h2.08c0-7.42-6.67-8.22-11.68-8.22z"></path>
-                              </svg>
-                            </span>
-                            <span class="MyParkingMateMenu_text_35T0C">개인정보</span>
-                            <span class="MyParkingMateMenu_arrowIcon_2tZ9Y" aria-hidden="true">
-                              <svg viewBox="0 0 24 24" fill="none" focusable="false" role="presentation" class="withIcon_icon_3VTbq" aria-hidden="true">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M7.924 2.576l-.848.848L15.65 12l-8.575 8.576.848.848L17.35 12 7.924 2.576z"></path>
-                              </svg>
-                            </span>
-                            <!-- ::after -->
-                          </a>
-                        </li>
-                        <!-- 예약 내역 확인 -->
-                        <li class="MyParkingMateMenu_menu_3TRMx">
-                          <a >
-                            <span class="MyParkingMateMenu_icon_pwW81" aria-hidden="true">
-                              <i class="MyParkingMATE_UseIcon_8k3Zb"></i>
-                            </span>
-                            <span class="MyParkingMateMenu_text_35T0C">이용내역 확인</span>
-                            <span class="MyParkingMateMenu_arrowIcon_2tZ9Y" aria-hidden="true">
-                              <svg viewBox="0 0 24 24" fill="none" focusable="false" role="presentation" class="withIcon_icon_3VTbq" aria-hidden="true">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M7.924 2.576l-.848.848L15.65 12l-8.575 8.576.848.848L17.35 12 7.924 2.576z"></path>
-                              </svg>
-                            </span>
-                            <!-- ::after -->
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <!-- 관리 -->
-                  <div class="MyParkingMateSection_section_1ykXL">
-                    <h4 class="MyParkingMateSection_title_dWRmW">관리</h4>
-                    <div>
-                      <ul>
-                        <!-- 결제 수단 관리 -->
-                        <li class="MyParkingMateMenu_menu_3TRMx">
-                          <a >
-                            <span class="MyParkingMateMenu_icon_pwW81" aria-hidden="true">
-                              <i class="MyParkingMateSupporterProjectInfo_icon_32Rsj" aria-hidden="true"></i>
-                            </span>
-                            <span class="MyParkingMate_text_35T0C">결제수단 관리</span>
-                            <span class="MyParkingMateMenu_arrowIcon_2tZ9Y" aria-hidden="true">
-                              <svg viewBox="0 0 24 24" fill="none" focusable="false" role="presentation" class="withIcon_icon_3VTbq" aria-hidden="true">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M7.924 2.576l-.848.848L15.65 12l-8.575 8.576.848.848L17.35 12 7.924 2.576z"></path>
-                              </svg>
-                            </span>
-                          </a>
-                        </li>
-                        <!-- 주차장 등록 관리 -->
-                        <li class="MyParkingMateMenu_menu_3TRMx">
-                          <a >
-                            <span class="MyParkingMateMenu_icon_pwW81" aria-hidden="true">
-                              <svg viewBox="0 0 24 24" focusable="false" role="presentation" class="withIcon_icon_3VTbq" aria-hidden="true">
-                                <path d="M14.559 13.587a3.972 3.972 0 0 1 6.747 2.931 3.792 3.792 0 0 1-.768 2.28l2.808 2.736-.84.858-2.82-2.748a4.014 4.014 0 0 1-2.352.756 3.972 3.972 0 0 1-2.775-6.813zM20.562 2.64v7.926h-1.2V3.84H8.838v17.628h-1.2V9.708H1.674v11.76h-1.2V8.508h7.164V2.64h12.924zm-1.294 11.798a2.772 2.772 0 0 0-4.7 2.08 2.724 2.724 0 0 0 2.766 2.682 2.772 2.772 0 0 0 1.934-4.762zm-13.4.256v1.2H3.492v-1.2h2.376zm0-3.12v1.2H3.492v-1.2h2.376zm7.95-2.52v1.2h-2.652v-1.2h2.652zm3.12-3.12v1.2h-5.772v-1.2h5.772z"></path>
-                              </svg>
-                            </span>
-                            <span class="MyParkingMate_text_35T0C">주차장 등록 관리</span>
-                            <span class="MyParkingMateMenu_arrowIcon_2tZ9Y" aria-hidden="true">
-                              <svg viewBox="0 0 24 24" fill="none" focusable="false" role="presentation" class="withIcon_icon_3VTbq" aria-hidden="true">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M7.924 2.576l-.848.848L15.65 12l-8.575 8.576.848.848L17.35 12 7.924 2.576z"></path>
-                              </svg>
-                            </span>
-                          </a>
-                        </li>
-                        <!-- 차량 관리 -->
-                        <li class="MyParkingMateMenu_menu_3TRMx CardInfo">
-                          <a href="/mypage/caraddlist">
-                            <span class="MyParkingMateMenu_icon_pwW81" aria-hidden="true">
-                              <i class="MyParkingMateSupporterActivity_investIcon_Zm-kv"></i>
-                            </span>
-                            <span class="MyParkingMateMenu_text_35T0C Car">차량 관리</span>
-                            <span class="MyParkingMateMenu_arrowIcon_2tZ9Y" aria-hidden="true">
-                              <svg viewBox="0 0 24 24" fill="none" focusable="false" role="presentation" class="withIcon_icon_3VTbq" aria-hidden="true">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M7.924 2.576l-.848.848L15.65 12l-8.575 8.576.848.848L17.35 12 7.924 2.576z"></path>
-                              </svg>
-                            </span>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <!-- 내역 -->
-                  <!-- <div class="MyParkingMateSection_section_1ykXL">
-                    <h4 class="MyParkingMateSection_title_dWRmW">내역</h4>
-                    <div>
-                      <ul>
-                        <li class="MyParkingMateMenu_menu_3TRMx">
-                          <a >
-                            <span class="MyParkingMateMenu_icon_pwW81" aria-hidden="true">
-                              <i class="MyParkingMATE_UseIcon_8k3Zb"></i>
-                            </span>
-                            <span class="MyParkingMateMenu_text_35T0C">이용 내역</span>
-                            <span class="MyParkingMateMenu_arrowIcon_2tZ9Y" aria-hidden="true">
-                              <svg viewBox="0 0 24 24" fill="none" focusable="false" role="presentation" class="withIcon_icon_3VTbq" aria-hidden="true">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M7.924 2.576l-.848.848L15.65 12l-8.575 8.576.848.848L17.35 12 7.924 2.576z"></path>
-                              </svg>
-                            </span>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div> -->
-                  <!-- 로그아웃 -->
-                  <div class="MyParkingMateSection_section_1ykXL">
-                    <div>
-                      <div class="MyParkingMateOtherMenu_btnWrapper_2-p-V">
-                        <div class="MyParkingMateOtherMenu_loginMode_enpaO">
-                          <p class="MyParkingMateLoginMode_loginMode_1o8tN">
-                            <!-- 네이버 아이콘 -->
-                            <span class="MyParkingMateLoginMode_naverIcon_tnmPJ">
-                              <svg viewBox="0 0 32 32" focusable="false" role="presentation" class="withIcon_icon_3VTbq" aria-hidden="true">
-                                <path d="M19.52 5.76v10.32L12.48 5.76H4.8v20.48h7.68V15.92l7.12 10.32h7.6V5.76z"></path>
-                              </svg>
-                            </span>
-                            네이버로 로그인 중
-                          </p>
-
-                          <a href="/login/logout">
-                            <button class="Button_button_2FuOU Button_md_46Ai- Button_block_1-g8w" type="button">
-                            <span>
-                              <span class="Button_children_ilFun">로그아웃</span>
-                            </span>
-                            </button>
-                          </a>
-
+                                <path d="M29.12 2.23H10.88a1 1 0 0 0-1 1v33.88a1 1 0 0 0 1 1h18.24a1 1 0 0 0 1-1V3.28a1 1 0 0 0-1-1.05zm-7.3 30.61A1.82 1.82 0 1 1 20 31a1.83 1.83 0 0 1 1.82 1.84zm6.26 3.23H11.92V4.32h16.16z"></path>
+                                <path d="M18.18 6.89h3.65v2.08h-3.65z"></path>
+                            </svg>
+                            <p class="PreviewOverlay_title_1p_pc">미리보기 모드</p>
+                            <p class="PreviewOverlay_description_3Cqx5">저장한 내용을 미리 볼 수 있어요</p>
                         </div>
-                      </div>
                     </div>
-                  </div>
-                </div>
-              </div>
+                </header>
             </div>
-          </div>
-        </section>
-      </div>
+        </div>
+        <!-- 상단 배너를 제외한 밑에 부분 전체 -->
+        <div class="MainWrapper_content_GZkTa">
+            <section class="ParkingMatePage_MyParkingMatePage_GLuZU">
+                <div class="MyParkingMatePage_profileBackground_3pq-5" aria-hidden="true"></div>
+                <h2 class="BlindText_textHidden_ovQb4">MyParkingMate</h2>
+                <!-- 상단배너 바로 아래layer부분 -->
+                <div class="MyParkingMatePage_inner_3-l11">
+                    <div class="MyParkingMatePage_popperBox_GoAia">
+                        <div class="MyParkingMateHeader_ParkingMateHeader_385kM"></div>
+                        <div class="popperRenew_container_1PprA PopperRenew_hasOutsideChildren_3F_zW">
+                            <div class="PopperRenew_popperContainer_2aDcn MyParkingMatePage_popperContent_2acU0 PopperRenew_bottom-right_3C1jr PopperRenew_fixed_295ce"></div>
+                        </div>
+                    </div>
+                    <div class="MyParkingMate_contentWrapper_1JOIj">
+                        <div class="MyParkingMate_container_242IL MyParkingMate_supportMode_3Wwdm" role="tabpanel"
+                             id="myParkingMatePanel_supporter" aria-labelledby="myParkingMateTab_supporter">
+                            <div class="MyParkingMateSupporterProfile_profileContainer_1Aqi-">
+                                <h3 class="BlindText_textHidden_ovQb4">나의 프로필</h3>
+                                <!-- 프로필 layer -->
+                                <div class="MyParkingMateSupporterProfile_supporterInfo_3zJwW">
+                                    <!-- 프로필 이미지 -->
+                                    <div class="MyParkingMateSupporterProfile_profileImage_11ISs">
+                                        <button type="button" class="MyParkingMateSupporterProfile_detailProfile_JoIEU"
+                                                aria-label="프로필 상세 보기" data-event="profile"
+                                                style="background-image: url(https://static.wadiz.kr/assets/icon/profile-icon-6.png);">
+                                            <th:block th:if="${session.user != null}">
+                                                <img class="profile-img" th:if="${session.user.userProfileName == null}"
+                                                     th:src="${session.user.UserProfile}">
+                                                <img class="profile-img" th:if="${session.user.userProfileName != null}"
+                                                     th:src="@{/file/display(fileName=${session.user.userProfilePath} + '/' + ${session.user.userProfileName})}">
+                                            </th:block>
+                                        </button>
+                                        <!-- 프로필 이미지의 펜 이미지 -->
+                                        <a href="/mypage/change-profile">
+                                            <div type="button" class="MyParkingMateSupporterProfile_editProfile_1Zcs_"
+                                                 data-event="profile_edit" aria-label="프로필 편집하기">
+                                                <svg viewBox="0 0 32 32" focusable="false" role="presentation"
+                                                     class="withIcon_icon_3VTbq" aria-hidden="true">
+                                                    <path d="M24 1.6L1.6 24v6.4H8L30.4 8zM7.36 28.8H3.2v-4.16L19.76 8.08l4.16 4.16zm17.68-17.68l-4.16-4.16L24 3.84 28.16 8z"></path>
+                                                </svg>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!-- 프로필 옆 layer -->
+                                    <th:block th:if="${session.user != null}"
+                                              class="MyParkingMateProfile_profileUser_2rCck">
+                                        <div type="button" class="MyParkingMateSupporterProfile_username_MypCN"
+                                             data-event="profile">
+                                              <span class="MyParkingMateSupporterProfile_textBox_3jsbN">
+                                              <!-- 닉네임 layer -->
+                                                  <a href="/mypage/usersettings"
+                                                     style="display: flex;align-items: center;">
+                                                      <span th:text="${session.user.userNickName}" class="MyParkingMateProfile_name_2BH2I"></span>
+                                                      <span>님</span>
+                                                      <svg viewBox="0 0 24 24" fill="none" focusable="false"
+                                                           role="presentation"
+                                                           class="withIcon_icon_3VTbq withIcon_inline_1lwwX MyParkingMateSupporterProfile_icon_YWNgi"
+                                                           aria-hidden="true"
+                                                           style="/* top: 100px; */width: 16px;height: 16px;/* margin: auto; */">
+                                                          <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                d="M7.924 2.576l-.848.848L15.65 12l-8.575 8.576.848.848L17.35 12 7.924 2.576z"></path>
+                                                      </svg>
+                                                  </a>
+                                            </span>
+                                        </div>
+                                        <!-- 회원 구분 layer -->
+                                        <th:block th:if="${session.user.userClass != null}">
+                                            <dl class="MyParkingMateSupporterProfile_profileUserLable_3GjOy">
+                                                <dt class="BlindText_textHidden_ovQb4">내 회원 정보</dt>
+                                                <dd th:text="${session.user.getUserClass()}"></dd>
+                                            </dl>
+                                        </th:block>
+                                    </th:block>
+                                    <th:block th:unless="${session.user != null}"
+                                              class="MyParkingMateProfile_profileUser_2rCck">
+                                        <div class="MyParkingMateSupporterProfile_textBox_3jsbN">로그인이 필요합니다!</div>
+                                    </th:block>
+                                    <th:block th:if="${session.user == null}">
+                                        <a href="https://kauth.kakao.com/oauth/authorize?client_id=1fd38d790204d58dbce4c9b70a0f5013&redirect_uri=http://localhost:10000/kakao/login&response_type=code">
+                                            <img style="height: 40px; z-index: 500"
+                                                 src="/images/kakao_login_medium_narrow.png">
+                                        </a>
+                                    </th:block>
+                                    <th:block
+                                            th:if="${session.user != null} and ${session.user.getUserProfileName() != null}">
+                                        <a href="/mypage/delete-img">
+                                            <button class="profile-img-delete-btn-main">현재 프로필 사진 삭제하기</button>
+                                        </a>
+                                    </th:block>
+                                </div>
+                                <!-- ::after -->
+                            </div>
+                            <!-- 프로필 layer 밑 전체부분 -->
+                            <div class="MyParkingMate_contents_-7JEI">
+                                <!-- 포인트 및 쿠폰, 결제정보 관리 박스 부분 -->
+                                <th:block th:if="${session.user != null}">
+                                    <div class="MyParkingMateSection_section_1ykXL">
+                                        <div class="MyParkingMateSupporterProject_container_3Bv5d">
+                                            <div class="MyParkingMateSupporterProject_title_1gDKa">
+                                                <div class="MyParkingMateSupporterProject_accumulate_xGGms">
+                                                    <div class="MyParkingMateSupporter_value_2qx0D">
+                                                        <!-- 쿠폰 layer -->
+                                                        <a href="/coupon/coupons"
+                                                           class="MyParkingMateSupporterAccumulate_container_3c9u2">
+                                                            <dl class="MyParkingMateSupporterAccumulate_info_pJkKs">
+                                                                <dt class="MyParkingMateSupporterAccumulate_title_3BFcB">
+                                                                    <svg viewBox="0 0 40 40" focusable="false"
+                                                                         role="presentation" class="withIcon_icon_3VTbq"
+                                                                         aria-hidden="true">
+                                                                        <g data-name="레이어 2">
+                                                                            <path d="M37.64 17.54l.86-.12V8.5a2 2 0 0 0-2-2h-33a2 2 0 0 0-2 2v8.92l.86.12a2.48 2.48 0 0 1 0 4.92l-.86.12v8.92a2 2 0 0 0 2 2h33a2 2 0 0 0 2-2v-8.92l-.86-.12a2.48 2.48 0 0 1 0-4.92zm-1.14 6.69v7.27h-33v-7.27a4.48 4.48 0 0 0 0-8.46V8.5h33v7.27a4.48 4.48 0 0 0 0 8.46z"></path>
+                                                                            <path d="M18.16 16.73a2.66 2.66 0 1 0-2.66 2.66 2.66 2.66 0 0 0 2.66-2.66zm-3.8 0a1.14 1.14 0 1 1 1.14 1.14 1.14 1.14 0 0 1-1.14-1.14zm12.14 4.34a2.66 2.66 0 1 0 2.66 2.66 2.66 2.66 0 0 0-2.66-2.66zm0 3.8a1.14 1.14 0 1 1 1.14-1.14 1.14 1.14 0 0 1-1.14 1.14zm.43-10.45l-1.08-.98-10.99 12.01-.09.09 1.08.98 10.99-12.01.09-.09z"></path>
+                                                                            <path fill="none" d="M0 0h40v40H0z"></path>
+                                                                        </g>
+                                                                    </svg>
+                                                                    <span class="MyParkingMateSupporterAccumulate_name_y445e">쿠폰</span>
+                                                                </dt>
+                                                                <div style="display: flex; align-items: center">
+                                                                    <dd th:text="${#lists.size(enabledList)}"
+                                                                        style="margin-right: 2px"
+                                                                        class="MyParkingMateSupporterAccumulate_value_3TyL_"></dd>
+                                                                    <span style="font-size: 14px">장</span>
+                                                                </div>
+                                                            </dl>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!-- 결제 정보 관리 layer -->
+                                                <div class="MyParkingMateSupporterProjectInfo_container_XLkd5">
+                                                    <div class="MyParkingMateSupporterProjectInfo_project_1rXDj">
+                                                        <div class="MyParkingMateSupporterProjectInfo_payment_RiX8m">
+                                                            <!-- 결제 정보 관리 페이지로 이동 -->
+                                                            <a>
+                                                                <div class="MyParkingMateSupporterProjectInfo_content_VwaqY">
+                                                                    <div class="MyParkingMateSupporterProjectInfo_titleInfo_9V3NT">
+                                                                        <i class="MyParkingMateSupporterProjectInfo_icon_32Rsj"
+                                                                           aria-hidden="true"></i>
+                                                                        <strong class="MyParkingMateSupporterProjectInfo_title_fYmNn">결제정보
+                                                                            관리</strong>
+                                                                    </div>
+                                                                    <!-- 카드 등록 링크 이동 -->
+                                                                    <div class="MyParkingMateSupporterProjectInfo_link_WS6I">
+                                                                        <span>카드 등록</span>
+                                                                        <svg viewBox="0 0 24 24" fill="none"
+                                                                             focusable="false" role="presentation"
+                                                                             class="withIcon_icon_3VTbq"
+                                                                             aria-hidden="true">
+                                                                            <path fill-rule="evenodd"
+                                                                                  clip-rule="evenodd"
+                                                                                  d="M7.924 2.576l-.848.848L15.65 12l-8.575 8.576.848.848L17.35 12 7.924 2.576z"></path>
+                                                                        </svg>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <!-- 결제 정보 관리 outline layer -->
+                                                    <div class="PopperRenew_container_1PprA PopperRenew_hasOutsideChildren_3F_zW">
+                                                        <div class="PopperRenew_popperContainer_2aDcn MyParkingMateSupporterProjectInfo_popperContainer_CufH8 PopperRenew_bottom-right3C1jr"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th:block>
+                                <!-- 정보 -->
+                                <div class="MyParkingMateSection_section_1ykXL">
+                                    <h4 class="MyParkingMateSection_title_dWRmW">정보</h4>
+                                    <div>
+                                        <ul>
+                                            <!-- 개인정보 -->
+                                            <li class="MyParkingMateMenu_menu_3TRMx">
+                                                <a href="/mypage/usersettings">
+                                                    <span class="MyParkingMateMenu_icon_pwW81" aria-hidden="true">
+                                                           <!-- 아이콘 -->
+                                                        <svg viewBox="0 0 40 40" focusable="false" role="presentation"
+                                                             class="withIcon_icon_3VTbq"
+                                                             aria-hidden="true">
+                                                            <path fill="none" d="M0 0h40v40H0z"></path>
+                                                            <path d="M28.13 9.39a5.26 5.26 0 0 1 0 10.52 8.93 8.93 0 0 1-1.71 1.87 7.07 7.07 0 0 0 1.73.22 7.35 7.35 0 1 0 0-14.7 7.07 7.07 0 0 0-1.73.22 8.93 8.93 0 0 1 1.71 1.87zM29.82 24a8.41 8.41 0 0 1 2.63 2.38c3.71.69 5.3 2.51 5.3 5.8h2.09c0-6.58-5.31-7.97-10.02-8.18zM11.3 20.79v-1.04H6.69v-4.61H4.61v4.61H0v2.08h4.61v4.61h2.08v-4.61h4.61v-1.04z"></path>
+                                                            <path d="M27.85 14.65A7.35 7.35 0 1 0 20.5 22a7.36 7.36 0 0 0 7.35-7.35zm-12.62 0a5.27 5.27 0 1 1 5.27 5.26 5.27 5.27 0 0 1-5.27-5.26zM20.5 24c-5 0-11.69.85-11.69 8.22h2.08c0-4.36 2.79-6.14 9.61-6.14s9.6 1.78 9.6 6.14h2.08c0-7.42-6.67-8.22-11.68-8.22z"></path>
+                                                        </svg>
+                                                    </span>
+                                                    <span class="MyParkingMateMenu_text_35T0C">개인정보</span>
+                                                    <span class="MyParkingMateMenu_arrowIcon_2tZ9Y" aria-hidden="true">
+                                                        <svg viewBox="0 0 24 24" fill="none" focusable="false"
+                                                             role="presentation"
+                                                             class="withIcon_icon_3VTbq" aria-hidden="true">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                  d="M7.924 2.576l-.848.848L15.65 12l-8.575 8.576.848.848L17.35 12 7.924 2.576z"></path>
+                                                        </svg>
+                                                    </span>
+                                                    <!-- ::after -->
+                                                </a>
+                                            </li>
+                                            <!-- 예약 내역 확인 -->
+                                            <li class="MyParkingMateMenu_menu_3TRMx">
+                                                <a>
+                                                    <span class="MyParkingMateMenu_icon_pwW81" aria-hidden="true">
+                                                      <i class="MyParkingMATE_UseIcon_8k3Zb"></i>
+                                                    </span>
+                                                    <span class="MyParkingMateMenu_text_35T0C">이용내역 확인</span>
+                                                    <span class="MyParkingMateMenu_arrowIcon_2tZ9Y" aria-hidden="true">
+                                                        <svg viewBox="0 0 24 24" fill="none" focusable="false"
+                                                             role="presentation"
+                                                             class="withIcon_icon_3VTbq" aria-hidden="true">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                  d="M7.924 2.576l-.848.848L15.65 12l-8.575 8.576.848.848L17.35 12 7.924 2.576z"></path>
+                                                        </svg>
+                                                    </span>
+                                                    <!-- ::after -->
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- 관리 -->
+                                <div class="MyParkingMateSection_section_1ykXL">
+                                    <h4 class="MyParkingMateSection_title_dWRmW">관리</h4>
+                                    <div>
+                                        <ul>
+                                            <!-- 결제 수단 관리 -->
+                                            <li class="MyParkingMateMenu_menu_3TRMx">
+                                                <a>
+                                                    <span class="MyParkingMateMenu_icon_pwW81" aria-hidden="true">
+                                                      <i class="MyParkingMateSupporterProjectInfo_icon_32Rsj"
+                                                         aria-hidden="true"></i>
+                                                    </span>
+                                                    <span class="MyParkingMate_text_35T0C">결제수단 관리</span>
+                                                    <span class="MyParkingMateMenu_arrowIcon_2tZ9Y" aria-hidden="true">
+                                                          <svg viewBox="0 0 24 24" fill="none" focusable="false"
+                                                               role="presentation"
+                                                               class="withIcon_icon_3VTbq" aria-hidden="true">
+                                                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                    d="M7.924 2.576l-.848.848L15.65 12l-8.575 8.576.848.848L17.35 12 7.924 2.576z"></path>
+                                                         </svg>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <!-- 주차장 등록 관리 -->
+                                            <li class="MyParkingMateMenu_menu_3TRMx">
+                                                <a>
+                                                    <span class="MyParkingMateMenu_icon_pwW81" aria-hidden="true">
+                                                          <svg viewBox="0 0 24 24" focusable="false" role="presentation"
+                                                               class="withIcon_icon_3VTbq"
+                                                               aria-hidden="true">
+                                                        <path d="M14.559 13.587a3.972 3.972 0 0 1 6.747 2.931 3.792 3.792 0 0 1-.768 2.28l2.808 2.736-.84.858-2.82-2.748a4.014 4.014 0 0 1-2.352.756 3.972 3.972 0 0 1-2.775-6.813zM20.562 2.64v7.926h-1.2V3.84H8.838v17.628h-1.2V9.708H1.674v11.76h-1.2V8.508h7.164V2.64h12.924zm-1.294 11.798a2.772 2.772 0 0 0-4.7 2.08 2.724 2.724 0 0 0 2.766 2.682 2.772 2.772 0 0 0 1.934-4.762zm-13.4.256v1.2H3.492v-1.2h2.376zm0-3.12v1.2H3.492v-1.2h2.376zm7.95-2.52v1.2h-2.652v-1.2h2.652zm3.12-3.12v1.2h-5.772v-1.2h5.772z"></path>
+                                                          </svg>
+                                                    </span>
+                                                    <span class="MyParkingMate_text_35T0C">주차장 등록 관리</span>
+                                                    <span class="MyParkingMateMenu_arrowIcon_2tZ9Y" aria-hidden="true">
+                                                       <svg viewBox="0 0 24 24" fill="none" focusable="false"
+                                                            role="presentation"
+                                                            class="withIcon_icon_3VTbq" aria-hidden="true">
+                                                          <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                d="M7.924 2.576l-.848.848L15.65 12l-8.575 8.576.848.848L17.35 12 7.924 2.576z"></path>
+                                                        </svg>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <!-- 차량 관리 -->
+                                            <li class="MyParkingMateMenu_menu_3TRMx CardInfo">
+                                                <a href="/mypage/carlist">
+                                                    <span class="MyParkingMateMenu_icon_pwW81" aria-hidden="true">
+                                                      <i class="MyParkingMateSupporterActivity_investIcon_Zm-kv"></i>
+                                                    </span>
+                                                    <span class="MyParkingMateMenu_text_35T0C Car">차량 관리</span>
+                                                    <span class="MyParkingMateMenu_arrowIcon_2tZ9Y" aria-hidden="true">
+                                                        <svg viewBox="0 0 24 24" fill="none" focusable="false"
+                                                             role="presentation"
+                                                             class="withIcon_icon_3VTbq" aria-hidden="true">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                  d="M7.924 2.576l-.848.848L15.65 12l-8.575 8.576.848.848L17.35 12 7.924 2.576z"></path>
+                                                        </svg>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- 내역 -->
+                                <!-- <div class="MyParkingMateSection_section_1ykXL">
+                                  <h4 class="MyParkingMateSection_title_dWRmW">내역</h4>
+                                  <div>
+                                    <ul>
+                                      <li class="MyParkingMateMenu_menu_3TRMx">
+                                        <a >
+                                          <span class="MyParkingMateMenu_icon_pwW81" aria-hidden="true">
+                                            <i class="MyParkingMATE_UseIcon_8k3Zb"></i>
+                                          </span>
+                                          <span class="MyParkingMateMenu_text_35T0C">이용 내역</span>
+                                          <span class="MyParkingMateMenu_arrowIcon_2tZ9Y" aria-hidden="true">
+                                            <svg viewBox="0 0 24 24" fill="none" focusable="false" role="presentation" class="withIcon_icon_3VTbq" aria-hidden="true">
+                                              <path fill-rule="evenodd" clip-rule="evenodd" d="M7.924 2.576l-.848.848L15.65 12l-8.575 8.576.848.848L17.35 12 7.924 2.576z"></path>
+                                            </svg>
+                                          </span>
+                                        </a>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div> -->
+                                <!-- 로그아웃 -->
+                                <th:block th:if="${session.user != null}">
+                                    <div class="MyParkingMateSection_section_1ykXL">
+                                        <div>
+                                            <div class="MyParkingMateOtherMenu_btnWrapper_2-p-V">
+                                                <div class="MyParkingMateOtherMenu_loginMode_enpaO">
+                                                    <th:block th:if="${session.user.userSnsLoginStatus == 1}"
+                                                              class="MyParkingMateLoginMode_loginMode_1o8tN">
+                                                        <!-- 카카오 아이콘 -->
+                                                        <div class="KakaoIndicator">
+                                                            <span class="MyParkingMateLoginMode_naverIcon_tnmPJ">
+                                                                <img src="/images/kakao.svg"
+                                                                     class="withIcon_icon_3VTbq">
+                                                            </span>
+                                                            카카오로 로그인 중
+                                                        </div>
+                                                    </th:block>
+                                                    <a href="/login/logout">
+                                                        <button class="Button_button_2FuOU Button_md_46Ai- Button_block_1-g8w"
+                                                                type="button">
+                                                            <span>
+                                                                <span class="Button_children_ilFun">로그아웃</span>
+                                                            </span>
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
-  </div>
+</div>
 </body>
 <script th:inline="javascript">
-  const user = [[${session.user}]];
+    const user = [[${session.user}]];
+    console.log(user);
 
-  // 마이페이지 아이콘 클릭 시
-  const mypageicon = document.querySelector("#main-app > div.web-header > div > header > div > ul > li:nth-child(5)");
-  const linkMyPage = 'mypageMobile.html';
-  mypageicon.addEventListener("click",(e) =>{
 
-  location.replace(linkMyPage);
-  })
-
-  // 프로필 아이콘 클릭 시 이벤트
-  const profileicon = document.querySelector("#myParkingMatePanel_supporter > div.MyParkingMateSupporterProfile_profileContainer_1Aqi- > div > div.MyParkingMateSupporterProfile_profileImage_11ISs");
-  const link = "usersettingsMobile.html";
-
-  profileicon.addEventListener("click", (e) => {
-    location.href = link;
-  })
-
-  // 닉네임쪽 클릭 시 이벤트(화살표 버튼 포함)
-  const nickName = document.querySelector("#myParkingMatePanel_supporter > div.MyParkingMateSupporterProfile_profileContainer_1Aqi- > div > div.MyParkingMateProfile_profileUser_2rCck > button");
-
-  nickName.addEventListener("click", (e) => {
-    location.href = link;
-  })
-
-  // 카드 등록 클릭 시 이벤트
-  const addCard = document.querySelector("#myParkingMatePanel_supporter > div.MyParkingMate_contents_-7JEI > div:nth-child(1) > div > div > div.MyParkingMateSupporterProjectInfo_container_XLkd5 > div.MyParkingMateSupporterProjectInfo_project_1rXDj > div > a > div > div.MyParkingMateSupporterProjectInfo_link_WS6I");
-  const link2 = "cardadd.html"
-  
-  addCard.addEventListener("click", (e) => {
-    location.href = link2;
-  })
-
-  // 개인정보 layer 클릭 시 이벤트
-  const UserInfo = document.querySelector("#myParkingMatePanel_supporter > div.MyParkingMate_contents_-7JEI > div:nth-child(2) > div > ul > li:nth-child(1)");
-  const UserInfoLink = 'usersettingsMobile.html'
-
-  UserInfo.addEventListener("click", (e) => {
-    location.href = UserInfoLink;
-  })
-  // 예약 내역 확인 layer 클릭 시 이벤트(이건 이용내역임....)
-  const RegInfo = document.querySelector("#myParkingMatePanel_supporter > div.MyParkingMate_contents_-7JEI > div:nth-child(2) > div > ul > li:nth-child(2)");
-  const link3 = "use_history.html" 
-
-  RegInfo.addEventListener("click", (e) => {
-    location.href = link3;
-  })
-  // 결제수단 관리 layer 클릭 시 이벤트
-  const CardInfo = document.querySelector("#myParkingMatePanel_supporter > div.MyParkingMate_contents_-7JEI > div:nth-child(3) > div > ul > li:nth-child(1)");
-  const link4 = "cardaddlist.html" 
-
-  CardInfo.addEventListener("click", (e) => {
-    location.href = link4;
-  })
-  // 주차장 등록 관리 layer 클릭 시 이벤트 -> 주차장 list 페이지 만들어야함...ㅜㅜ
-  const ParkingInfo = document.querySelector("#myParkingMatePanel_supporter > div.MyParkingMate_contents_-7JEI > div:nth-child(3) > div > ul > li:nth-child(2)");
-  const link5 = "addParking.html" 
-
-  ParkingInfo.addEventListener("click", (e) => {
-    location.href = link5;
-  })
-  // 차량 관리 layer 클릭 시 이벤트
-  const CarInfoLink = document.querySelector("#myParkingMatePanel_supporter > div.MyParkingMate_contents_-7JEI > div:nth-child(3) > div > ul > li.MyParkingMateMenu_menu_3TRMx.CardInfo");
-  const link6 = "caraddlist.html" 
-
-  CarInfoLink.addEventListener("click", (e) => {
-    location.href = link6;
-  })
-  // // 이용내역 layer 클릭 시 이벤트
-  // const UseInfo = document.querySelector("#myParkingMatePanel_supporter > div.MyParkingMate_contents_-7JEI > div:nth-child(4) > div > ul > li");
-  // const link7 = "reservation-list.html"
-
-  // CarInfo.addEventListener("click", (e) => {
-  //   location.href = link7;
-  // })
-
-  // 로그아웃 버튼 클릭 시
-  const logoutButton = document.querySelector("#myParkingMatePanel_supporter > div.MyParkingMate_contents_-7JEI > div:nth-child(4) > div > div > div > button");
-
-  logoutButton.addEventListener("click", (e) => {
-    
-  });
 </script>
 </html>

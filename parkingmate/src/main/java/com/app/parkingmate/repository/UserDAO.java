@@ -42,7 +42,13 @@ public class UserDAO {
         userMapper.updateKaKaoProfile(userVO);
     }
 
+//    회원 정보 수정
+    public void updateProfile(UserVO userVO){userMapper.updateUser(userVO);}
 
+//    프로필 사진 수정
+    public void updateProfileImg(UserVO userVO){userMapper.updateProfileImg(userVO);}
+
+    public void deleteProfileImg(Integer id){userMapper.updateToDeleteProfileImg(id);}
 
 //    로그인
     public Optional<UserVO> login(UserVO userVO){

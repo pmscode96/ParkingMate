@@ -53,10 +53,27 @@
         WHERE KAKAO_EMAIL = #{KakaoEmail}
     </update>
 
-
     <update id="updateBySync">
         UPDATE TBL_USER
         SET KAKAO_EMAIL = #{KakaoEmail}, USER_PROFILE = #{UserProfile}, USER_SNS_LOGIN_STATUS = 1, UPDATE_DATE = #{UpdateDate}
+        WHERE ID = #{Id}
+    </update>
+
+    <update id="updateUser">
+        UPDATE TBL_USER
+        SET USER_NICKNAME = #{UserNickName}, USER_EMAIL = #{UserEmail}, USER_PHONE_NUMBER = #{UserPhoneNumber}
+        WHERE ID = #{Id}
+    </update>
+
+    <update id="updateProfileImg">
+        UPDATE TBL_USER
+        SET USER_PROFILE_NAME = #{UserProfileName}, USER_PROFILE_PATH = #{UserProfilePath}
+        WHERE ID = #{Id}
+    </update>
+
+    <update id="updateToDeleteProfileImg">
+        UPDATE TBL_USER
+        SET USER_PROFILE_NAME = NULL, USER_PROFILE_PATH = NULL
         WHERE ID = #{Id}
     </update>
 
