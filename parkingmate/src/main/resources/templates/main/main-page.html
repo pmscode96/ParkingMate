@@ -55,21 +55,21 @@
         <h2 class="parkingmate-account-title">로그인</h2>
         <section aria-labelledby="emailLogin">
           <h3 class="parkingmate-bline-text">email 로그인</h3>
-          <form class="parkingmate-signInForm">
+          <form th:action="@{/login/login}" method="post" th:object="${userVO}" class="parkingmate-signInForm">
             <div class="parkingmate-signInForm-field" data-test-id="emailField">
               <label class="parkingmate-bline-text">이메일</label>
-              <input type="email" class="parkingmate-input input-email" placeholder="이메일 입력" title="이메일 입력">
+              <input th:field="*{UserEmail}" type="email" class="parkingmate-input input-email" placeholder="이메일 입력" title="이메일 입력">
             </div>
             <div class="parkingmate-signInForm-field" data-test-id="passwordField">
               <label class="parkingmate-bline-text">비밀번호</label>
-              <input type="password" class="parkingmate-input input-password" placeholder="비밀번호 입력" title="비밀번호 입력">
+              <input th:field="*{UserPassword}" type="password" class="parkingmate-input input-password" placeholder="비밀번호 입력" title="비밀번호 입력">
             </div>
             <div class="parkingmate-login-action">
               <p class="parkingmate-forgot">
                 <a href="/login/find-id">로그인 정보를 잊으셨나요?</a>
               </p>
             </div>
-            <button class="parkingmate-button parkingmate-login-button" type="submit">
+            <button class="parkingmate-button parkingmate-login-button" type="button">
                   <span>
                     <span class="parkingmate-button-children">로그인</span>
                   </span>
@@ -79,14 +79,18 @@
         <section aria-labelledby="SNSLogin">
           <h3 class="parkingmate-bline-text">SNS 로그인</h3>
           <div>
-            <button class="parkingmate-button parkingmate-kakao-button" aria-label="카카오로 인증하기">
-                  <span>
-                    <span class="parkingmate-button-children">
-                      <svg viewBox="0 0 32 32" focusable="false" role="presentation" class="parkingmate-kakao-button-svg" aria-hidden="true"><path d="M16 4.64c-6.96 0-12.64 4.48-12.64 10.08 0 3.52 2.32 6.64 5.76 8.48l-.96 4.96 5.44-3.6 2.4.16c6.96 0 12.64-4.48 12.64-10.08S22.96 4.56 16 4.64z"></path></svg>
-                      카카오로 시작하기
+
+            <a href="https://kauth.kakao.com/oauth/authorize?client_id=1fd38d790204d58dbce4c9b70a0f5013&redirect_uri=http://localhost:10000/kakao/login&response_type=code">
+              <button class="parkingmate-button parkingmate-kakao-button" aria-label="카카오로 인증하기" type="button">
+                    <span>
+                      <span class="parkingmate-button-children">
+                        <svg viewBox="0 0 32 32" focusable="false" role="presentation" class="parkingmate-kakao-button-svg" aria-hidden="true"><path d="M16 4.64c-6.96 0-12.64 4.48-12.64 10.08 0 3.52 2.32 6.64 5.76 8.48l-.96 4.96 5.44-3.6 2.4.16c6.96 0 12.64-4.48 12.64-10.08S22.96 4.56 16 4.64z"></path></svg>
+                        카카오로 시작하기
+                      </span>
                     </span>
-                  </span>
-            </button>
+              </button>
+            </a>
+
           </div>
         </section>
         <div class="parkingmate-signUpMessage">
@@ -187,7 +191,7 @@
           <li class="point-box">
 
             <!-- 리뷰 텍스트 -->
-            <p class="point-p">4.7</p>
+            <p  id="parking-grade" class="point-p">4.7</p>
 
           </li>
 
@@ -219,7 +223,7 @@
         <div class="price-box">
 
           <!-- 가격 숫자 -->
-          <p class="price-number">29,000</p>
+          <p id="parking-price" class="price-number">29,000</p>
 
           <!-- 가격 뒤 원 -->
           <p class="price-number2">원</p>
@@ -230,14 +234,14 @@
         <div class="parking-content-box">
 
           <!-- 주차장 설명 -->
-          <p class="parking-content">
+          <p id="parking-address" class="parking-content">
             경기도 성남시 탁구 우동 주차장-주소
           </p>
 
         </div>
 
         <!-- 예약하기 버튼 박스 -->
-        <div class="reservation-button">
+        <div id="reservationButton" class="reservation-button">
 
           <!-- 예약하기 텍스트 -->
           <p>예약하기</p>
@@ -315,6 +319,13 @@
   // 밑에서 올라오는 페이지 안 제목
   // const footerPageTitle = document.querySelector(".parking-name-p");
   const footerPageTitle = document.getElementById("pakring_name");
+  // 밑에서 올라오는 페이지 안 평점
+  const footerPageGrade = document.getElementById("parking-grade");
+  // 밑에서 올라오는 페이지 안 가격
+  const footerPagePrice = document.getElementById("parking-price");
+  // 밑에서 올라오는 페이지 안 주소
+  const footerPageAddress = document.getElementById("parking-address");
+
   var mapContainer = document.getElementById('map'), // 지도를 표시할 div
           mapOption = {
             center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
@@ -323,6 +334,8 @@
 
   // 지도를 생성합니다
   var map = new kakao.maps.Map(mapContainer, mapOption);
+  // 지도 랜덤 생성 방지
+  var mapcount = 0;
 
   // 장소 검색 객체를 생성합니다
   var ps = new kakao.maps.services.Places(map);
@@ -337,9 +350,7 @@
       // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
       // LatLngBounds 객체에 좌표를 추가합니다
       var bounds = new kakao.maps.LatLngBounds();
-      // console.log(bounds);
-      // console.log(SearchBox.value);
-      // console.log(data[0]);
+
       for (var i=0; i<1; i++) {
 
         //사용자 검색 값이 존재하면
@@ -353,8 +364,6 @@
         }
         bounds.extend(new kakao.maps.LatLng(data[0].y, data[0].x));
 
-        // bounds.extend(new kakao.maps.LatLng(result[0].y, result[0].x));
-        // console.log("parking : " + parkings[i].ParkingAddress);
       }
       // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
       map.setBounds(bounds);
@@ -370,40 +379,45 @@
       map: map,
       position: new kakao.maps.LatLng(place.y, place.x)
     });
+    var moveinfowindowinfo = "";
 
-    const markerlocation = document.querySelector("#map > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(7)");
-    const markerlocationname = document.querySelectorAll("#ParkingLocation1");
-
+    console.log(moveinfowindowinfo);
     // 마커 전체
     var allitems = document.querySelectorAll("#map > div:nth-child(1) > div > div:nth-child(6):last-child");
-
+    var reservationButton = document.getElementById("reservationButton");
     // 각각의 marker 클릭 시의 이벤트
     allitems.forEach(function (allitem){
       // console.log(parkingName1);
-      allitem.addEventListener("click",(markers) => { //하나밖에 안나오는 이유 예상 : db에 8개의 데이터가 들어갔는데 8개가 한번에 돌아서 다음 클릭 시 데이터가 없어서 안나오는 것 같음!!!
-        // console.log(markers);
+      allitem.addEventListener("click",(marker) => {
+        // console.log(marker.target.offsetParent.nextSibling.innerText);
         if (count12 === 0){
+          for(var i = 0; i < parkingsCount; i++){
+            console.log(parkings[i]);
+            for (var j =0; j < parkings[0].length; j++){
+              if(marker.target.offsetParent.nextSibling.innerText === parkings[j].ParkingName){
+                // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
 
-          for (var k = 0; k < parkingsCount; k++){
-            // console.log(footerPageTitle.innerHTML);
-            // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-            // infowindow.setContent('<div style="padding:5px;font-size:12px;">' + markerlocationname[k].ParkingName + '</div>');
-
-            // console.log(markerlocationname[k].ParkingName)
-            // if(place.ParkingName === markerlocationname[k].innerText){
-            //   console.log(markerlocationname[k].innerText);
-            // }
-            // console.log(markerlocationname[1].innerText); //parking1 값을 가져오는 방법을 찾아라!!
-            footerPageTitle.innerHTML = place.ParkingName;
-            footerPage.classList.add("open");
-            infowindow.open(map, markers);
-
-
-            let placeNameLength = place.ParkingName.length;
-            // console.log(placeNameLength);
-            footerPage.style.position = "absolute"
-            footerPage.style.top = "2px";
+                footerPageTitle.innerHTML = parkings[j].ParkingName;
+                footerPageGrade.innerHTML = parkings[j].ParkingGrade;
+                footerPagePrice.innerHTML = parkings[j].ParkingPrice;
+                footerPageAddress.innerHTML = parkings[j].ParkingAddress;
+                console.log(footerPagePrice.innerHTML);
+                break;
+              }
+            }
           }
+            // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+
+          footerPage.classList.add("open");
+          infowindow.open(map, marker);
+
+
+          let placeNameLength = place.ParkingName.length;
+          // console.log(placeNameLength);
+          footerPage.style.position = "absolute"
+          footerPage.style.top = "2px";
+
+          k++;
 
         }
         if(count12 >= 0){
@@ -421,10 +435,13 @@
         // footerPage.classList.remove("open"); // 클래스 삭제
         // footerPage.style.position = "fixed"
         // footerPage.style.top = "100%"
-        infowindow.close(map, markers);
+        infowindow.close(map, marker);
       }
     }
-
+    // 예약 버튼 클릭 시
+    reservationButton.addEventListener("click", (e) => {
+      window.location.href = "get-directions/payment-page.html";
+    })
     // console.log("hihihi5");
     // x 버튼 누를시 페이지 내려감
     xBtn.addEventListener("click", function () {
@@ -437,9 +454,6 @@
       }, 600);
       document.addEventListener("click", handleDocumentClick);
     })
-    // console.log("hihihi6");
-    // console.log("hihihi7");
-
   }
 
   // 주소로 장소 표시
@@ -451,10 +465,40 @@
   var Searchicon = document.querySelector("body > div > div.search-all > div.search-bx.sb-2 > button");
   // db내부 객체 값
   var parkings = [[${parkings}]];
+
+  // 로그인 쪽
+  const button = document.querySelector(".parkingmate-signInForm button");
+  const form = document.querySelector(".parkingmate-signInForm");
+  const inputs = document.querySelectorAll(".parkingmate-signInForm input");
+  const loginModal = document.querySelector("body > div > div.parkingmate-modal-container");
+
+  const loginCheck = [[${loginCheck}]];
+  button.addEventListener("click", (e) => {
+    for(inp of inputs){
+      if(!inp.value){
+        alert("아이디 또는 비밀번호를 입력해주세요.")
+        return;
+      }
+    }
+
+    if(loginCheck === false){
+      alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+    }
+    form.submit();
+
+    if(loginCheck !== false){ //로그인 후 페이지 이동한 다음 modal창이 사라지지 않음
+      loginModal.style.display = "none";
+    }
+  })
+
+
+
+
   // db내부 객체 총 수량
   var parkingsCount = [[${parkingsCount}]];
   // db내부 객체 총수량 카운트
   var c = 0;
+  // console.log(users);
   // console.log(parkingsCount);
   for (c; c < parkingsCount; c++){
     // Controller 에서 가져온 Object 값에서 필요 없는 부분 제거
@@ -476,6 +520,7 @@
     // String으로 형 변환하여 다시 ""안에 있는 부분을 key, value 값으로 분리 하기 위해 다시 split
     parkings[c] =  String(parkings[c]).split("=");
     parkings[c] =  String(parkings[c]).split(",");
+
     // key, value로 분리
     var j = 1;
     var i = 0;
@@ -494,36 +539,62 @@
     }
   } //여기까지가 key, value로 나눈 것!!
   var k = 0;
+  var k1 = 0;
+  // console.log(parkings);
   // 주소로 좌표를 검색합니다
   for (var i = 0; i<parkingsCount;) {
-    geocoder.addressSearch(parkings[i].ParkingAddress, function(result, status) {
+    const arrayParkingName = Array.from({length : parkingsCount}, (v,i) => parkings[i].ParkingName);
+    const arrayParkingsAddress = Array.from({length : parkingsCount}, (v,i) => parkings[i].ParkingAddress);
+
+    geocoder.addressSearch(arrayParkingsAddress[i], function(result, status) {
 
       // 정상적으로 검색이 완료됐으면
       if (status === kakao.maps.services.Status.OK) {
+        if(mapcount === 0){ //하나만 나오고 정확도 100%인데 mapcount를 8로 변경하면 8개가 나오는데 마커가 랜덤으로 다시 나옴...
+          // console.log("wls")
+          for (var i = 0; i < 1; i++){
 
-        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+            var coords = new kakao.maps.LatLng(result[i].y, result[i].x);
+            // console.log(coords);
+            // 결과값으로 받은 위치를 마커로 표시합니다
+            var marker = new kakao.maps.Marker({
+              map: map,
+              position: coords,
+            });
+          }
+          mapcount = 1;
 
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new kakao.maps.Marker({
-          map: map,
-          position: coords
-        });
-        const parkingName1 = parkings[k].ParkingName;
+        }
+        mapcount = 0;
+        // console.log(marker);
+        // 인덱스 만들어줌
+        // const arrayCoords = Array.from({length : parkingsCount}, (v,i) => coords);
+        // console.log(parkings[2], typeof parkings[2]);
+        const parkingName1 =parkings[k1].ParkingName;
+        // console.log(parkingName1);
         var infoclick = document.querySelector("#ParkingLocation1");
+
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao.maps.InfoWindow({
+          position: coords,
           content: ('<div id="ParkingLocation1"  style="width:150px;text-align:center;padding:6px 0;">' + parkingName1 + '</div>')
         });
+        // moveinfowindowinfo = infowindow;
+
+        // console.log(moveinfowindowinfo.Wf.innerText);
+        // console.log(parkings);
+        // footerPageTitle.innerHTML = parkings[k1].ParkingName;
 
         infowindow.open(map, marker);
 
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
       }
-      k++;
+      k1++;
     });
     i++;
+    k++;
   }
 
   Searchicon.addEventListener("click", (e) => {
