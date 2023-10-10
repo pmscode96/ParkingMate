@@ -7,6 +7,7 @@ import com.app.parkingmate.domain.VO.UserVO;
 import com.app.parkingmate.repository.UserDAO;
 import com.app.parkingmate.service.CouponService;
 import com.app.parkingmate.service.CouponlistService;
+import com.app.parkingmate.service.ParkingService;
 import com.app.parkingmate.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +42,8 @@ public class LoginController {
         Optional<UserVO> foundMember = userService.login(userVO);
         if(foundMember.isPresent()){
             session.setAttribute("user", foundMember.get());
-            return new RedirectView("/mypage/mypage-mobile");
+            attributes.addFlashAttribute("loginCheck", true);
+            return new RedirectView("/");
         }else{
             attributes.addFlashAttribute("loginCheck", false);
             return new RedirectView("/login/login");

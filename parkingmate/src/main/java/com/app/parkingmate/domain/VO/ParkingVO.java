@@ -36,7 +36,7 @@ public class ParkingVO {
     private  Integer ParkingUseCount;
 //    주차장 대여 금액(시간당)
 //    기본 값 : 1000
-    private Integer ParkingPrice;
+    private String ParkingPrice;
 //    주차 면수
 //    기본 값 : 5
 //    not null
