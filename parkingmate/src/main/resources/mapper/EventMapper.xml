@@ -25,7 +25,7 @@
     </update>
 
     <select id="selectAll" resultType="eventVO">
-        SELECT ID, EVENT_STATUS, EVENT_TITLE, EVENT_CONTENT, EVENT_START_DATE, EVENT_END_DATE, CREATE_DATE, UPDATE_DATE FROM
+        SELECT ROWNUM, ID, EVENT_STATUS, EVENT_TITLE, EVENT_CONTENT, EVENT_START_DATE, EVENT_END_DATE, CREATE_DATE, UPDATE_DATE FROM
             (
                 SELECT ROWNUM R, ID, EVENT_STATUS, EVENT_TITLE, EVENT_CONTENT, EVENT_START_DATE, EVENT_END_DATE, CREATE_DATE, UPDATE_DATE
                 FROM
@@ -35,14 +35,19 @@
                         ORDER BY ID DESC
                     ) P1
     <![CDATA[
-                WHERE ROWNUM <= #{endRow}
+                WHERE ROWNUM <= #{pagination.endRow}
+                  and EVENT_TITLE  LIKE '%' || #{keyword} || '%'
             ) P2
-        WHERE P2.R >= #{startRow}
+        WHERE P2.R >= #{pagination.startRow}
         ]]>
+
     </select>
 
-    <select id="selectTotal" resultType="int">
+    <select id="selectTotal" resultType="int" >
         SELECT COUNT(ID) FROM TBL_EVENT
+        <if test="keyword != null and !keyword.equals('')">
+            WHERE EVENT_TITLE LIKE '%' || #{keyword} || '%' OR EVENT_CONTENT LIKE '%' || #{keyword} || '%'
+        </if>
     </select>
 
     <select id="selectSearch" resultType="eventVO">
@@ -55,7 +60,15 @@
                 ORDER BY ID DESC
             )
         <![CDATA[
-        WHERE ROWNUM <= 5
+        WHERE ROWNUM <= 10
         ]]>
+    </select>
+
+    <select id="nextEvent" resultType="_int">
+        SELECT MIN(ID) AS NEXT_SEQUENCE FROM TBL_EVENT WHERE   ID > #{id}
+    </select>
+
+    <select id="prevEvent" resultType="_int">
+        SELECT MAX(ID) AS PREVIOUS_SEQUENCE FROM TBL_EVENT WHERE   #{id} > ID
     </select>
 </mapper>

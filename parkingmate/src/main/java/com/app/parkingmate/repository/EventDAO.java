@@ -7,6 +7,7 @@ import com.app.parkingmate.domain.VO.EventVO;
 import com.app.parkingmate.mapper.EventMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,10 +23,8 @@ public class EventDAO {
     public void save(EventVO eventVO){eventMapper.insert(eventVO);}
 
 //    이벤트 리스트
-    public List<EventVO> list(Pagination pagination){return eventMapper.selectAll(pagination);}
+    public List<EventVO> list( Pagination pagination,  EventSearch eventSearch, String keyword){return eventMapper.selectAll(pagination, eventSearch,keyword);}
 
-//    이벤트 리스트 카운트
-    public int selectTotal(EventSearch eventSearch){ return eventMapper.selectTotal(eventSearch);}
 
 //    이벤트 디테일
     public Optional<EventVO> selectByEventId(Integer id){return eventMapper.select(id);}
@@ -37,6 +36,13 @@ public class EventDAO {
 //    이벤트 status 수정
     public void updateStatus(EventVO eventVO){eventMapper.update(eventVO);}
 
+    //    이벤트 리스트 카운트
+    public int selectTotal(EventSearch eventSearch){ return eventMapper.selectTotal(eventSearch);}
+
 //    이벤트 검색
     public List<EventVO> selectSearch(EventSearch eventSearch){return eventMapper.selectSearch(eventSearch);}
+
+    public int nextEvent(int id){return eventMapper.nextEvent(id);};
+
+    public int prevEvent(int id){return eventMapper.prevEvent(id);};
 }

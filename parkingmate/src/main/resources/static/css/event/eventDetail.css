@@ -455,8 +455,8 @@ button:not(:disabled) {
 }
 
 .parkingmate_pboard-detail-bottom {
-  padding: 0 10px 30px;
-  background: #FAFAFA;
+  /*padding: 0 10px 30px;*/
+  /*background: #FAFAFA;*/
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
 }
@@ -513,7 +513,7 @@ button:not(:disabled) {
 }
 
 .parkingmate_pboard-detail-btn-wrap {
-  padding-bottom: 50px;
+  /*padding-bottom: 50px;*/
   text-align: center;
 }
 

@@ -5,6 +5,7 @@ import com.app.parkingmate.domain.Pagination;
 import com.app.parkingmate.domain.EventSearch;
 import com.app.parkingmate.domain.VO.EventVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +22,7 @@ public interface EventMapper {
     public void updateStatus(Integer id);
 
 //    이벤트 list
-    public List<EventVO> selectAll(Pagination pagination);
+    public List<EventVO> selectAll( @Param("pagination") Pagination pagination, @Param("eventSearch") EventSearch eventSearch, @Param("keyword") String keyword);
 
 //    이벤트 list 총 개수
     public int selectTotal(EventSearch eventSearch);
@@ -29,8 +30,12 @@ public interface EventMapper {
 //    이벤트 detail
     public Optional<EventVO> select(Integer id);
 
-    //    이벤트 검색
+    //    이벤트 검색 기존
     public List<EventVO> selectSearch(EventSearch eventSearch);
+
+    public int nextEvent(int id);
+
+    public int prevEvent(int id);
 
 
 }

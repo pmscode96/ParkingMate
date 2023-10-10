@@ -26,14 +26,19 @@
     <div class="parkingmate_board-main">
       <ul>
 <!--        th 블록-->
-        <th:block th:if="${#lists.size(events) != 0}">
-          <th:block th:each="event:${events}" th:object="${event}">
+
+        <th:block th:if="${#lists.size(events) != 0}" >
+<!--          <form class="goToEventDetail" th:action="@{/event/event}" method="post">-->
+<!--            <input type="hidden" name="id" class="realId" >-->
+<!--          </form>-->
+          <div id="result" style="padding-top: 16px">
+          <th:block th:each="event:${events}" th:object="${event}" >
           <li>
             <form class="goToEventDetail" th:action="@{/event/event}" method="post">
               <input type="hidden" name="id" th:value="*{id}" >
             </form>
-            <a  class="parkingmate_article"  onclick="eventSubmit()">
-              <em class="parkingmate_status closed">진행 중</em>
+            <a  class="parkingmate_article">
+              <em class="parkingmate_status closed" th:text="*{eventStatus}"></em>
               <div class="parkingmate_info">
                 <h3 class="parkingmate_title" th:text="*{eventTitle}"></h3>
                 <span class="parkingmate_author">ParkingMate</span>
@@ -42,7 +47,9 @@
             </a>
           </li>
           </th:block>
+          </div>
         </th:block>
+
 <!--        <th:block th:unless="${#lists.size(posts) != 0}">-->
 <!--          <h1>게시글이 없습니다.</h1>-->
 <!--        </th:block>-->
@@ -51,7 +58,8 @@
     </div>
     <div class="parkingmate_board-footer">
       <div class="parkingmate_pagination">
-        <button class="prev-page icon-chevron-left mobile-only" onclick="">
+        <button class="prev-page icon-chevron-left mobile-only" onclick="location.href='event?page='+$('#prev-button-input').val()+ '&keyword=' + $('#searchTextInBoard').val()">
+          <input type="hidden" name="page" th:value="${pagination.page} -1" id="prev-button-input">
           <span class="parkingmate_text-hidden">이전 목록</span>
         </button>
         <div class="parkingmate_page">
@@ -59,17 +67,18 @@
             <span class="parkingmate_current-count" th:text="${pagination.page}"></span>
             /
             <span class="parkingmate_total-count">
-              <span th:text="${pagination.endPage}"></span>
+              <span th:text="${pagination.endPage}" id="last-page"></span>
               페이지
             </span>
           </div>
         </div>
-        <button class="next-page icon-chevron-right mobile-only" onclick="">
+        <button class="next-page icon-chevron-right mobile-only" onclick="location.href='event?page='+$('#next-button-input').val() + '&keyword=' + $('#searchTextInBoard').val()">
+          <input type="hidden" name="page" th:value="${pagination.page} + 1" id="next-button-input">
           <span class="parkingmate_text-hidden">다음 목록</span>
         </button>
       </div>
       <div class="parkingmate_search">
-        <form method="post" id="parkingmate_news-board-eventSearch">
+        <form id="parkingmate_news-board-eventSearch">
           <div class="parkingmate_filter-container">
             <select id="parkingmate_searchSelectInBoard" class="filter" name="">
               <option value="tc">제목+내용</option>
@@ -77,13 +86,13 @@
               <option value="c">내용</option>
             </select>
           </div>
-          <div class="parkingmate_field">
+          <div class="parkingmate_field" style="display: flex">
             <label class="parkingmate_text-hidden">검색창</label>
-            <input id="searchTextInBoard" name="searchTextInBoard" class="parkingmate_search-form" type="text" value="">
-            <button class="parkingmate_btn-eventSearch dense" type="submit">검색</button>
+            <input id="searchTextInBoard" name="searchTextInBoard" class="parkingmate_search-form keyword" type="text" th:value="${keyword}">
+            <button class="parkingmate_btn-eventSearch dense" id="search" type="button" style="width: 15%">검색</button>
           </div>
         </form>
-        <form id="formSearch" name="formSearchBoard" action="/web/wboard/newsBoardList/2" method="post">
+        <form id="formSearch" name="formSearchBoard">
           <input id="searchText1" name="searchText1" type="hidden" value="">
           <input id="searchSelect1" name="searchSelect1" type="hidden" value="">
           <input id="searchSelect2" name="searchSelect2" type="hidden" value="">
@@ -98,7 +107,8 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="/js/event/event.js"></script>
-<script>
+<script th:inline="javascript">
+
   let ids = document.querySelectorAll('.goToEventDetail');
   let buttons = document.querySelectorAll('.parkingmate_article')
 
@@ -106,19 +116,100 @@
 
     let button = buttons.item(i);
     let id = ids.item(i);
-
     button.addEventListener("click", e =>{
       id.submit();
     })
   }
+  console.log($('.parkingmate_current-count').text());
+  console.log($('parkingmate_total-count > span').text());
+
+
+  function updatePageNumbers(totalPages) {
+    // 페이지 번호를 업데이트하는 코드를 여기에 작성하세요.
+    // 예를 들어, 페이지 번호를 표시하는 HTML 요소를 찾아서 텍스트를 변경할 수 있습니다.
+    document.querySelector(".parkingmate_current-count").textContent = "1";
+    document.querySelector(".parkingmate_total-count > span").textContent = totalPages;
+  }
+
+
+
+
+  document.getElementById("search").addEventListener("click", async () => {
+    const eventss = [[${events}]]
+    console.log(eventss)
+    const keyword = document.getElementById("searchTextInBoard").value;
+    const response = await fetch(`/results/search?keyword=${keyword}`);
+    const json = await response.json();
+    if(response.ok){
+      $("#next-button-input").val(2);
+      const events = [[${pagination}]];
+      console.log(events)
+      const freeEvents = json.freeEvents;
+      const freeEventsTotalCount = json.freeEventsTotalCount;
+      const totalPages = Math.ceil(freeEventsTotalCount / 10); // pageSize는 페이지당 항목 수입니다.
+      updatePageNumbers(totalPages);
+      let freeEventData = `검색 결과 ${freeEventsTotalCount}건`;
+      freeEvents.forEach(freeEvent => {
+        const eventDate = new Date(freeEvent.eventStartDate).toISOString().replace('T', '').slice(0, 10);
+        console.log(freeEvent.eventStartDate)
+        freeEventData += `<li>`
+        freeEventData += `<form class="goToEventDetail" action="/event/event" method="post">`
+        freeEventData += `<input type="hidden" name="id" value="${freeEvent.id}" >`
+        freeEventData += `</form>`
+        freeEventData += `<a  class ="parkingmate_article">`
+        freeEventData += `<em class="parkingmate_status closed">${freeEvent.eventStatus}</em>`
+        freeEventData += `<div class="parkingmate_info">`
+        freeEventData += `<h3 class="parkingmate_title">${freeEvent.eventTitle}</h3>`
+        freeEventData += `<span class="parkingmate_author">ParkingMate</span>`
+        freeEventData += `<span class="parkingmate_created-at">${eventDate}</span>`
+        freeEventData += `</div>`
+        freeEventData += `</a>`
+        freeEventData += `</li>`
+      });
+      document.getElementById("result").innerHTML = freeEventData;
+      $('.parkingmate_article').off();
+      $('.goToEventDetail').off();
+      // $('.parkingmate_status').text($('.parkingmate_status').text() == 0 ? "진행중" : "만료됨") ;
+      let ids = document.querySelectorAll('.goToEventDetail');
+      let buttons = document.querySelectorAll('.parkingmate_article')
+      $(function(){
+        $('.parkingmate_status').text($('.parkingmate_status').text() == 0 ? "진행중" : "만료됨") ;
+
+        if($('.parkingmate_current-count').text() == 1){
+          $('.prev-page').attr('disabled', true);
+        }else{
+          $('.prev-page').attr('disabled', false);
+        }
+        if($('.parkingmate_current-count').text() != $('#last-page').text()){
+          $('.next-page').attr('disabled', false);
+        }else{
+          $('.next-page').attr('disabled', true);
+        }
+      });
+
+      for (let i = 0; i < buttons.length; i++) {
+
+        let button = buttons.item(i);
+        let id = ids.item(i);
+
+        button.addEventListener("click", e =>{
+          id.submit();
+        })
+      }
+    }
+  });
+
 
   $(function(){
-    if($('.parkingmate_current-count').text() !== 1){
+    $('.parkingmate_status').text($('.parkingmate_status').text() == 0 ? "진행중" : "만료됨") ;
+
+
+    if($('.parkingmate_current-count').text() == 1){
       $('.prev-page').attr('disabled', true);
     }else{
       $('.prev-page').attr('disabled', false);
     }
-    if($('.parkingmate_current-count').text() !== $('parkingmate_total-count > span').text()){
+    if($('.parkingmate_current-count').text() != $('#last-page').text()){
       $('.next-page').attr('disabled', false);
     }else{
       $('.next-page').attr('disabled', true);
